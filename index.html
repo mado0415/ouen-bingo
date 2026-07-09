@@ -138,7 +138,7 @@
 <body>
 
 <div class="container">
-    <h1>🎧 マイ・スミンBINGO ✨</h1>
+    <h1>🎧 マイ応援BINGO ✨</h1>
     <p class="subtitle">今日の応援をタップしてチェック！<br>「マス目を編集」で自分専用に変えられます♡</p>
     
     <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目を編集する</button>
@@ -156,9 +156,9 @@
     
     // 最初に入っているデフォルトの文字（自由に変えても大丈夫です）
     const defaultTasks = [
-        "朝の\n1再生", "公式リスト\n1周完了", "通勤・通学\nに聴く",
-        "YouTube\nMV視聴", "SNSで\n曲を共有", "お風呂で\n1曲",
-        "ミュート\nにしない", "友達・家族に\n布教", "寝る前の\nスミン"
+        "朝の\n1再生", "SNSで\n曲を共有", "通勤・通学\nに聴く",
+        "YouTube\nMV視聴", "リスパ・ステへ\nで聴く", "お風呂で\n1曲",
+        "ミュート\nにしない", "友達・家族に\n布教", "寝る前の\n1曲"
     ];
 
     // ビンゴの初期化（画面の組み立てと保存データの読み込み）
@@ -257,7 +257,7 @@
             }
         }
         
-        const text = `🎧 本日の推し活スミンビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく推しを応援中✨\n\n#推しの名前 #スミンBINGO`;
+        const text = `🎧 本日の応援タスクビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく推しを応援中✨\n\n#推しの名前 #スミンBINGO`;
         const url = window.location.href;
         
         const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
