@@ -19,7 +19,7 @@
             /* JavaScriptで動的に変わる推し色（初期値は黄色） */
             --check-color: #ffb703;
             --check-text: #1a2b3c;
-            --border-color: rgba(255, 183, 3, 0.25); /* 👈 淡い枠線用の変数（初期値） */
+            --border-color: rgba(255, 183, 3, 0.25); 
         }
         body {
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
@@ -46,9 +46,9 @@
         /* 📸 画像化するカードエリア */
         #bingoCard {
             background: #ffffff;
-            padding: 24px 18px; /* 上下左右にしっかり綺麗な余白を確保 */
+            padding: 24px 18px; 
             border-radius: 20px; 
-            border: 6px solid var(--border-color); /* 👈 推し色をふんわり淡くした可愛い太枠 */
+            border: 6px solid var(--border-color); 
             margin-bottom: 20px; 
             transition: border-color 0.25s ease; 
         }
@@ -155,9 +155,26 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            margin-bottom: 20px;
+            margin-bottom: 6px; /* 下のリセットボタンとの間隔を調整 */
             transition: all 0.2s;
             width: 100%;
+        }
+
+        /* 🔄 リセットボタンのスタイル */
+        .reset-btn {
+            background: transparent;
+            color: var(--sub-text);
+            border: none;
+            padding: 4px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            text-decoration: underline;
+            opacity: 0.7;
+            transition: opacity 0.2s;
+        }
+        .reset-btn:hover {
+            opacity: 1;
         }
         
         /* 3x3 ビンゴデザイン */
@@ -320,7 +337,7 @@
 <div class="container">
     <div id="bingoCard">
         <h1 id="bingoTitle">❄️ マイ応援BINGO ❄️</h1>
-        <p class="subtitle">今日の応援をタップしてチェック！<br>マス目の文字やマスの色を変えられます♡</p>
+        <p class="subtitle">今日の応援をタップしてチェック！<br>マス目の文字やチェックスマスの色を変えられます♡</p>
         <div id="grid" class="grid"></div>
     </div>
     
@@ -344,6 +361,7 @@
     </div>
 
     <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
+    <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 マス目を初期設定に戻す</button>
 
     <button id="shareBtn" class="share-btn" onclick="shareOnX()">
         𝕏 で報告する
@@ -391,7 +409,6 @@
         currentEmoji = emoji;
         const textColor = getContrastColor(color);
         
-        // 🎨 16進数の推し色から、枠線用の淡いRGBAカラー(透明度25%)を自動計算
         const r = parseInt(color.substr(1, 2), 16);
         const g = parseInt(color.substr(3, 2), 16);
         const b = parseInt(color.substr(5, 2), 16);
@@ -399,7 +416,7 @@
         
         document.documentElement.style.setProperty('--check-color', color);
         document.documentElement.style.setProperty('--check-text', textColor);
-        document.documentElement.style.setProperty('--border-color', borderColor); // 👈 変数をセット
+        document.documentElement.style.setProperty('--border-color', borderColor); 
         
         localStorage.setItem('bingo_theme_color', color);
         localStorage.setItem('bingo_theme_emoji', emoji);
@@ -518,6 +535,35 @@
             }
             initBingo();
         }
+    }
+
+    // 🔄 マスの文字をデフォルトに戻す処理
+    function resetToDefault() {
+        if (!confirm("マスの文字をすべて初期設定（デフォルト）に戻しますか？\n（自分で入力した文字は消えてしまいます）")) {
+            return;
+        }
+        
+        // 保存されているマスのテキストデータを削除
+        for (let i = 0; i < 9; i++) {
+            localStorage.removeItem('sumin_task_' + i);
+        }
+        
+        // 編集モード中だった場合は強制解除する
+        if (isEditMode) {
+            isEditMode = false;
+            const grid = document.getElementById('grid');
+            const editBtn = document.getElementById('editBtn');
+            const shareBtn = document.getElementById('shareBtn');
+            
+            grid.classList.remove('edit-mode');
+            editBtn.innerText = '✏️ マス目・タイトルを編集する';
+            editBtn.style.background = '#ffffff';
+            editBtn.style.color = 'var(--sub-text)';
+            shareBtn.disabled = false;
+        }
+        
+        // 再描画
+        initBingo();
     }
 
     function shareOnX() {
