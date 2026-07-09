@@ -253,8 +253,8 @@
 
     const defaultTasks = [
         "朝の\n1再生", "SNSで\n曲を共有", "通勤・通学\nに聴く",
-        "YouTube\nMV視聴", "リスパ・ステへ\nで聴く", "お風呂で\n1曲",
-        "ミュート\nにしない", "友達・家族に\n布教", "寝る前の\n1曲"
+        "YouTube\nMV視聴", "ミュート\nにしない", "お風呂で\n1曲",
+        "SNSの共有\nURLから聴く", "友達・家族に\n布教", "寝る前の\n1曲"
     ];
 
     // 背景の明るさに応じて文字色を白か黒にする関数（黄色などを選んでも文字が見えるようにする対策）
@@ -401,7 +401,7 @@
             }
         }
         
-        const text = `🎧 本日の応援タスクビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく推しを応援中❄️✨\n\n#推しの名前 #応援タスクBINGO`;
+        const text = `🎧 本日の応援タスクビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\nマイビンゴで応援中⛄️\n\n#SnowMan #応援タスクBINGO`;
         const url = window.location.href;
         
         const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
