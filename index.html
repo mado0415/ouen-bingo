@@ -42,15 +42,18 @@
             border: 1px solid rgba(255,255,255,0.8);
         }
         
-        /* 📸 画像化するカードエリア */
+        /* 📸 画像化するカードエリア（余白と推し色の枠を追加してブラッシュアップ！） */
         #bingoCard {
             background: #ffffff;
-            padding: 10px 4px;
-            border-radius: 16px;
+            padding: 24px 18px; /* 上下左右にしっかり綺麗な余白を確保 */
+            border-radius: 20px; /* 角を少し丸く調整 */
+            border: 5px solid var(--check-color); /* 推し色と連動する可愛い太めの外枠 */
+            margin-bottom: 20px; /* カード下のパレットとの隙間を確保 */
+            transition: border-color 0.25s ease; /* 色が変わる瞬間のアニメーション */
         }
         h1 {
             font-size: 22px;
-            margin: 0 0 4px 0;
+            margin: 0 0 6px 0;
             color: #2b4c6f;
             font-weight: bold;
             letter-spacing: 0.5px;
@@ -71,9 +74,9 @@
             font-family: inherit;
         }
         p.subtitle {
-            font-size: 12px;
+            font-size: 11.5px;
             color: var(--sub-text);
-            margin: 0 0 15px 0;
+            margin: 0 0 18px 0;
             line-height: 1.4;
         }
         
@@ -161,17 +164,16 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
-            margin-bottom: 25px;
         }
         .cell {
             aspect-ratio: 1;
             background: #ffffff;
             border: 2px solid #e2e8f0;
-            border-radius: 16px;
+            border-radius: 14px;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: bold;
             color: var(--main-text);
             cursor: pointer;
@@ -200,7 +202,7 @@
             height: 100%;
             border: none;
             background: transparent;
-            font-size: 12px;
+            font-size: 11.5px;
             font-weight: bold;
             color: var(--main-text);
             text-align: center;
@@ -292,7 +294,7 @@
         }
         .preview-img {
             width: 100%;
-            max-height: 260px;
+            max-height: 280px;
             object-fit: contain;
             border-radius: 16px;
             border: 2px solid #eef6fc;
@@ -343,7 +345,7 @@
     <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
 
     <button id="shareBtn" class="share-btn" onclick="shareOnX()">
-        𝕏 で達成を報告する
+        𝕏 で報告する
     </button>
 
     <div class="credit">
@@ -418,12 +420,10 @@
         applyTheme(color, '✨'); 
     }
 
-    // ビンゴの初期化（タイトルとマスの読み込み）
     function initBingo() {
         const grid = document.getElementById('grid');
         grid.innerHTML = '';
         
-        // 保存されたタイトルの読み込み（初期値：❄️ マイ応援BINGO ❄️）
         const savedTitle = localStorage.getItem('bingo_title') || "❄️ マイ応援BINGO ❄️";
         document.getElementById('bingoTitle').innerText = savedTitle;
         
@@ -449,7 +449,6 @@
         }
     }
 
-    // 編集モード切り替え（タイトルも同時に対象化）
     function toggleEditMode() {
         const grid = document.getElementById('grid');
         const editBtn = document.getElementById('editBtn');
@@ -464,7 +463,6 @@
             editBtn.style.color = 'white';
             shareBtn.disabled = true;
             
-            // タイトルを入力欄に切り替え
             const currentTitle = titleEl.innerText;
             const titleInput = document.createElement('input');
             titleInput.type = 'text';
@@ -493,7 +491,6 @@
             editBtn.style.color = 'var(--sub-text)';
             shareBtn.disabled = false;
             
-            // 編集したタイトルを保存
             const titleInput = document.getElementById('titleInput');
             let newTitle = titleInput.value.trim();
             if (newTitle === '') {
@@ -515,7 +512,6 @@
         }
     }
 
-    // 𝕏へのシェア機能（絵文字の盤面テキストを完全に削除）
     function shareOnX() {
         if (isEditMode) return;
         
@@ -536,10 +532,8 @@
                 }
             }
             
-            // 現在設定されているビンゴのタイトルを取得してツイート文に乗せる
             const currentTitle = localStorage.getItem('bingo_title') || "マイ応援BINGO";
             
-            // 𝕏投稿用のテキスト（絵文字盤面を削除して、すっきり読みやすく変更）
             const text = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO`;
             const url = window.location.href;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
