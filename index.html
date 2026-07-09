@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>推し応援！スミンBINGO</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #e6e6fa 100%);
+            color: #4a148c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(25px, 255, 255, 0.95);
+            background: white;
+            padding: 25px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(147, 112, 219, 0.2);
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            font-size: 22px;
+            margin: 0 0 8px 0;
+            color: #ff69b4;
+            font-weight: bold;
+            letter-spacing: 0.5px;
+        }
+        p.subtitle {
+            font-size: 13px;
+            color: #6a5acd;
+            margin: 0 0 20px 0;
+            line-height: 1.4;
+        }
+        /* 3x3 ビンゴデザイン */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        .cell {
+            aspect-ratio: 1;
+            background: #f8f8ff;
+            border: 2px solid #e6e6fa;
+            border-radius: 16px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 12px;
+            font-weight: bold;
+            color: #4b0082;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 8px;
+            user-select: none;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            line-height: 1.3;
+        }
+        /* タップしてチェックがついた時の見た目 */
+        .cell.checked {
+            background: linear-gradient(135deg, #ff69b4 0%, #da70d6 100%);
+            border-color: transparent;
+            color: white;
+            transform: scale(0.96);
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.15), 0 4px 10px rgba(255, 105, 180, 0.3);
+        }
+        /* 𝕏ボタンのデザイン */
+        .share-btn {
+            background: #000000;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        .share-btn:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎧 スミンBINGO ✨</h1>
+    <p class="subtitle">今日の応援をタップしてチェック！<br>楽しく毎日継続しよう♡</p>
+    
+    <div class="grid">
+        <div class="cell" onclick="toggleCell(this)">朝の<br>1再生</div>
+        <div class="cell" onclick="toggleCell(this)">公式リスト<br>1周完了</div>
+        <div class="cell" onclick="toggleCell(this)">通勤・通学<br>に聴く</div>
+        
+        <div class="cell" onclick="toggleCell(this)">YouTube<br>MV視聴</div>
+        <div class="cell" onclick="toggleCell(this)">SNSで<br>曲を共有</div>
+        <div class="cell" onclick="toggleCell(this)">お風呂で<br>1曲</div>
+        
+        <div class="cell" onclick="toggleCell(this)">ミュート<br>にしない</div>
+        <div class="cell" onclick="toggleCell(this)">友達・家族に<br>布教</div>
+        <div class="cell" onclick="toggleCell(this)">寝る前の<br>スミン</div>
+    </div>
+
+    <button class="share-btn" onclick="shareOnX()">
+        <span>𝕏 でスミン達成を報告する</span>
+    </button>
+</div>
+
+<script>
+    function toggleCell(element) {
+        element.classList.toggle('checked');
+    }
+
+    function shareOnX() {
+        const cells = document.querySelectorAll('.cell');
+        let gridText = '';
+        let checkedCount = 0;
+        
+        // チェック状況に応じて絵文字のミニビンゴを組み立てる
+        cells.forEach((cell, index) => {
+            if (cell.classList.contains('checked')) {
+                gridText += '🟩 ';
+                checkedCount++;
+            } else {
+                gridText += '⬜ ';
+            }
+            // 3マスごとに改行
+            if ((index + 1) % 3 === 0) {
+                gridText += '\n';
+            }
+        });
+        
+        // 𝕏に送るテキスト（「#推しの名前」は実際のアーティスト名に変えてくださいね！）
+        const text = `🎧 本日の推し活スミンビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\n今日も楽しく推しを応援中✨\n\n#推しの名前 #スミンBINGO`;
+        const url = window.location.href;
+        
+        const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
+        window.open(twitterUrl, '_blank');
+    }
+</script>
+
+</body>
+</html>
