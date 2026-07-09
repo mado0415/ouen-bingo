@@ -8,10 +8,22 @@
         * {
             box-sizing: border-box;
         }
+        :root {
+            /* 雪をイメージしたベースデザインの色味 */
+            --bg-start: #eef6fc;
+            --bg-end: #ffffff;
+            --main-text: #1a2b3c;
+            --sub-text: #5a7b9c;
+            --shadow-color: rgba(78, 168, 222, 0.15);
+            
+            /* JavaScriptで動的に変わる推し色（初期値はスノーブルー） */
+            --check-color: #4ea8de;
+            --check-text: #ffffff;
+        }
         body {
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
-            background: linear-gradient(135deg, #fff0f5 0%, #e6e6fa 100%);
-            color: #4a148c;
+            background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
+            color: var(--main-text);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -23,29 +35,95 @@
             background: white;
             padding: 25px;
             border-radius: 24px;
-            box-shadow: 0 15px 35px rgba(147, 112, 219, 0.2);
+            box-shadow: 0 15px 35px var(--shadow-color);
             max-width: 380px;
             width: 100%;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.8);
         }
         h1 {
             font-size: 22px;
             margin: 0 0 4px 0;
-            color: #ff69b4;
+            color: #2b4c6f;
             font-weight: bold;
             letter-spacing: 0.5px;
         }
         p.subtitle {
             font-size: 12px;
-            color: #6a5acd;
+            color: var(--sub-text);
             margin: 0 0 15px 0;
             line-height: 1.4;
         }
-        /* 編集ボタンのスタイル */
+        
+        /* 🎨 カラーパレットセクション */
+        .color-selector {
+            background: #f4f7f9;
+            padding: 10px;
+            border-radius: 16px;
+            margin-bottom: 15px;
+        }
+        .color-label {
+            font-size: 11px;
+            color: var(--sub-text);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        .color-dots-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .color-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .color-dot.active {
+            transform: scale(1.2);
+            border-color: #1a2b3c;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        /* 自由色（カラーピッカー）の丸ボタン */
+        .picker-wrapper {
+            position: relative;
+            width: 24px;
+            height: 24px;
+        }
+        .picker-btn {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff4500, #ff8c00, #ffd700, #32cd32, #1e90ff, #9370db);
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 10px;
+            color: white;
+            font-weight: bold;
+        }
+        .picker-wrapper input[type="color"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* ✏️ 編集ボタン */
         .edit-btn {
-            background: #f8f8ff;
-            color: #6a5acd;
-            border: 2px solid #e6e6fa;
+            background: #ffffff;
+            color: var(--sub-text);
+            border: 1px solid #e2e8f0;
             padding: 8px 16px;
             font-size: 13px;
             font-weight: bold;
@@ -55,6 +133,7 @@
             transition: all 0.2s;
             width: 100%;
         }
+        
         /* 3x3 ビンゴデザイン */
         .grid {
             display: grid;
@@ -64,39 +143,38 @@
         }
         .cell {
             aspect-ratio: 1;
-            background: #f8f8ff;
-            border: 2px solid #e6e6fa;
+            background: #ffffff;
+            border: 2px solid #e2e8f0;
             border-radius: 16px;
             display: flex;
             justify-content: center;
             align-items: center;
             font-size: 12px;
             font-weight: bold;
-            color: #4b0082;
+            color: var(--main-text);
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             padding: 6px;
             user-select: none;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.01);
             line-height: 1.3;
             word-break: break-all;
             overflow: hidden;
         }
-        /* チェックがついた時 */
+        /* チェックがついた時（選択された推し色に染まる） */
         .cell.checked {
-            background: linear-gradient(135deg, #ff69b4 0%, #da70d6 100%);
+            background: var(--check-color);
             border-color: transparent;
-            color: white;
+            color: var(--check-text);
             transform: scale(0.96);
-            box-shadow: inset 0 4px 6px rgba(0,0,0,0.15), 0 4px 10px rgba(255, 105, 180, 0.3);
+            box-shadow: inset 0 4px 6px rgba(0,0,0,0.15), 0 4px 10px var(--shadow-color);
         }
-        /* 編集モード中のマスのスタイル */
+        /* 編集モード中 */
         .grid.edit-mode .cell {
             background: #ffffff;
-            border: 2px dashed #ff69b4;
+            border: 2px dashed var(--check-color);
             cursor: default;
         }
-        /* 編集中の入力エリア */
         .cell textarea {
             width: 100%;
             height: 100%;
@@ -104,7 +182,7 @@
             background: transparent;
             font-size: 12px;
             font-weight: bold;
-            color: #4b0082;
+            color: var(--main-text);
             text-align: center;
             resize: none;
             outline: none;
@@ -114,6 +192,7 @@
             align-items: center;
             justify-content: center;
         }
+        
         /* 𝕏ボタン */
         .share-btn {
             background: #000000;
@@ -138,36 +217,108 @@
 <body>
 
 <div class="container">
-    <h1>🎧 マイ応援BINGO ✨</h1>
-    <p class="subtitle">今日の応援をタップしてチェック！<br>「マス目を編集」で自分専用に変えられます♡</p>
+    <h1>❄️ マイ応援BINGO ❄️</h1>
+    <p class="subtitle">今日の応援をタップしてチェック！<br>マス目の文字やチェックスマスの色を変えられます♡</p>
     
+    <div class="color-selector">
+        <div class="color-label">❄️ チェックスマスの色（推し色）を選ぶ</div>
+        <div class="color-dots-container">
+            <div class="color-dot" style="background: #4ea8de;" onclick="changeTheme('#4ea8de', '🟦', this)"></div>
+            <div class="color-dot" style="background: #ff69b4;" onclick="changeTheme('#ff69b4', '🟪', this)"></div>
+            <div class="color-dot" style="background: #e63946;" onclick="changeTheme('#e63946', '🟥', this)"></div>
+            <div class="color-dot" style="background: #ffb703;" onclick="changeTheme('#ffb703', '🟨', this)"></div>
+            <div class="color-dot" style="background: #2a9d8f;" onclick="changeTheme('#2a9d8f', '🟩', this)"></div>
+            <div class="color-dot" style="background: #7209b7;" onclick="changeTheme('#7209b7', '🟪', this)"></div>
+            <div class="color-dot" style="background: #212529;" onclick="changeTheme('#212529', '⬛', this)"></div>
+            <div class="picker-wrapper" id="customColorWrapper">
+                <div class="picker-btn">🎨</div>
+                <input type="color" id="colorPicker" onchange="customTheme(this.value)">
+            </div>
+        </div>
+    </div>
+
     <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目を編集する</button>
 
-    <div id="grid" class="grid">
-        </div>
+    <div id="grid" class="grid"></div>
 
     <button id="shareBtn" class="share-btn" onclick="shareOnX()">
-        𝕏 でスミン達成を報告する
+        𝕏 で達成を報告する
     </button>
 </div>
 
 <script>
     let isEditMode = false;
-    
-    // 最初に入っているデフォルトの文字（自由に変えても大丈夫です）
+    let currentColor = '#4ea8de'; // 現在の色
+    let currentEmoji = '🟦';       // 𝕏シェア用の絵文字
+
     const defaultTasks = [
         "朝の\n1再生", "SNSで\n曲を共有", "通勤・通学\nに聴く",
         "YouTube\nMV視聴", "リスパ・ステへ\nで聴く", "お風呂で\n1曲",
         "ミュート\nにしない", "友達・家族に\n布教", "寝る前の\n1曲"
     ];
 
-    // ビンゴの初期化（画面の組み立てと保存データの読み込み）
+    // 背景の明るさに応じて文字色を白か黒にする関数（黄色などを選んでも文字が見えるようにする対策）
+    function getContrastColor(hexColor) {
+        const r = parseInt(hexColor.substr(1, 2), 16);
+        const g = parseInt(hexColor.substr(3, 2), 16);
+        const b = parseInt(hexColor.substr(5, 2), 16);
+        const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+        return (yiq >= 140) ? '#1a2b3c' : '#ffffff';
+    }
+
+    // テーマ色を切り替える
+    function applyTheme(color, emoji) {
+        currentColor = color;
+        currentEmoji = emoji;
+        const textColor = getContrastColor(color);
+        
+        document.documentElement.style.setProperty('--check-color', color);
+        document.documentElement.style.setProperty('--check-text', textColor);
+        
+        localStorage.setItem('bingo_theme_color', color);
+        localStorage.setItem('bingo_theme_emoji', emoji);
+    }
+
+    // プリセットボタンを押した時
+    function changeTheme(color, emoji, element) {
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        document.getElementById('customColorWrapper').classList.remove('active');
+        if(element) element.classList.add('active');
+        applyTheme(color, emoji);
+    }
+
+    // カラーピッカーで自由な色を選んだ時
+    function customTheme(color) {
+        document.querySelectorAll('.color-dot').forEach(d => d.classList.remove('active'));
+        document.getElementById('customColorWrapper').classList.add('active');
+        // カスタム色の時は、𝕏のミニビンゴをキラキラ絵文字「✨」にする
+        applyTheme(color, '✨'); 
+    }
+
+    // ビンゴの初期化
     function initBingo() {
         const grid = document.getElementById('grid');
         grid.innerHTML = '';
         
+        // 保存されたテーマ色の読み込み
+        const savedColor = localStorage.getItem('bingo_theme_color');
+        const savedEmoji = localStorage.getItem('bingo_theme_emoji');
+        if (savedColor && savedEmoji) {
+            currentColor = savedColor;
+            currentEmoji = savedEmoji;
+            applyTheme(savedColor, savedEmoji);
+            
+            // アクティブなボタンの見た目を復元
+            let found = false;
+            document.querySelectorAll('.color-dot').forEach(d => {
+                // rgb形式に変換される対策として簡易比較
+                if (d.style.backgroundColor && savedColor) {
+                    d.classList.remove('active');
+                }
+            });
+        }
+
         for (let i = 0; i < 9; i++) {
-            // スマホに保存された文字があればそれを読み込み、無ければデフォルトを表示
             const savedText = localStorage.getItem('sumin_task_' + i);
             const text = savedText !== null ? savedText : defaultTasks[i];
             
@@ -176,7 +327,6 @@
             cell.id = 'cell-' + i;
             cell.innerText = text;
             
-            // 通常モードの時だけ、タップでチェックがつくようにする
             cell.onclick = function() {
                 if (isEditMode) return;
                 this.classList.toggle('checked');
@@ -186,60 +336,54 @@
         }
     }
 
-    // 編集モードと通常モードの切り替え
+    // 編集モード切り替え
     function toggleEditMode() {
         const grid = document.getElementById('grid');
         const editBtn = document.getElementById('editBtn');
         const shareBtn = document.getElementById('shareBtn');
         
         if (!isEditMode) {
-            // 【編集モード開始】
             isEditMode = true;
             grid.classList.add('edit-mode');
             editBtn.innerText = '💾 変更を保存する';
-            editBtn.style.background = '#ff69b4';
+            editBtn.style.background = '#4ea8de';
             editBtn.style.color = 'white';
-            shareBtn.disabled = true; // 編集中のシェアはできないようにする
+            shareBtn.disabled = true;
             
-            // マス目を入力欄（textarea）に書き換える
             for (let i = 0; i < 9; i++) {
                 const cell = document.getElementById('cell-' + i);
                 const currentText = cell.innerText;
-                cell.classList.remove('checked'); // 編集時は一旦チェックを外す
+                cell.classList.remove('checked');
                 
                 const textarea = document.createElement('textarea');
                 textarea.value = currentText;
-                textarea.maxLength = 20; // 枠からはみ出さないように最大20文字制限
+                textarea.maxLength = 20;
                 cell.innerHTML = '';
                 cell.appendChild(textarea);
             }
         } else {
-            // 【編集モード終了・保存】
             isEditMode = false;
             grid.classList.remove('edit-mode');
             editBtn.innerText = '✏️ マス目を編集する';
-            editBtn.style.background = '#f8f8ff';
-            editBtn.style.color = '#6a5acd';
+            editBtn.style.background = '#ffffff';
+            editBtn.style.color = 'var(--sub-text)';
             shareBtn.disabled = false;
             
-            // 入力された文字を回収してスマホ（localStorage）に保存
             for (let i = 0; i < 9; i++) {
                 const cell = document.getElementById('cell-' + i);
                 const textarea = cell.querySelector('textarea');
                 let newText = textarea.value.trim();
                 
                 if (newText === '') {
-                    newText = defaultTasks[i]; // 空っぽにされたらデフォルトに戻す
+                    newText = defaultTasks[i];
                 }
                 localStorage.setItem('sumin_task_' + i, newText);
             }
-            
-            // 通常のビンゴ画面に戻す
             initBingo();
         }
     }
 
-    // 𝕏へのシェア機能
+    // 𝕏へのシェア機能（選んだ色によって絵文字が自動連動します！）
     function shareOnX() {
         let gridText = '';
         let checkedCount = 0;
@@ -247,24 +391,23 @@
         for (let i = 0; i < 9; i++) {
             const cell = document.getElementById('cell-' + i);
             if (cell.classList.contains('checked')) {
-                gridText += '🟩 ';
+                gridText += currentEmoji + ' '; // 選んだ色の絵文字が入る
                 checkedCount++;
             } else {
-                gridText += '⬜ ';
+                gridText += '⬜ '; // 未チェックは雪イメージに合わせて白四角
             }
             if ((i + 1) % 3 === 0) {
                 gridText += '\n';
             }
         }
         
-        const text = `🎧 本日の応援タスクビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく推しを応援中✨\n\n#推しの名前 #スミンBINGO`;
+        const text = `🎧 本日の応援タスクビンゴ 🎧\n\n${gridText}\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく推しを応援中❄️✨\n\n#推しの名前 #応援タスクBINGO`;
         const url = window.location.href;
         
         const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
         window.open(twitterUrl, '_blank');
     }
 
-    // 最初にページを開いた時にビンゴを動かす
     initBingo();
 </script>
 
