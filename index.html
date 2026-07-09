@@ -19,6 +19,7 @@
             /* JavaScriptで動的に変わる推し色（初期値は黄色） */
             --check-color: #ffb703;
             --check-text: #1a2b3c;
+            --border-color: rgba(255, 183, 3, 0.25); /* 👈 淡い枠線用の変数（初期値） */
         }
         body {
             font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', Meiryo, sans-serif;
@@ -42,14 +43,14 @@
             border: 1px solid rgba(255,255,255,0.8);
         }
         
-        /* 📸 画像化するカードエリア（余白と推し色の枠を追加してブラッシュアップ！） */
+        /* 📸 画像化するカードエリア */
         #bingoCard {
             background: #ffffff;
             padding: 24px 18px; /* 上下左右にしっかり綺麗な余白を確保 */
-            border-radius: 20px; /* 角を少し丸く調整 */
-            border: 5px solid var(--check-color); /* 推し色と連動する可愛い太めの外枠 */
-            margin-bottom: 20px; /* カード下のパレットとの隙間を確保 */
-            transition: border-color 0.25s ease; /* 色が変わる瞬間のアニメーション */
+            border-radius: 20px; 
+            border: 6px solid var(--border-color); /* 👈 推し色をふんわり淡くした可愛い太枠 */
+            margin-bottom: 20px; 
+            transition: border-color 0.25s ease; 
         }
         h1 {
             font-size: 22px;
@@ -390,8 +391,15 @@
         currentEmoji = emoji;
         const textColor = getContrastColor(color);
         
+        // 🎨 16進数の推し色から、枠線用の淡いRGBAカラー(透明度25%)を自動計算
+        const r = parseInt(color.substr(1, 2), 16);
+        const g = parseInt(color.substr(3, 2), 16);
+        const b = parseInt(color.substr(5, 2), 16);
+        const borderColor = `rgba(${r}, ${g}, ${b}, 0.25)`;
+        
         document.documentElement.style.setProperty('--check-color', color);
         document.documentElement.style.setProperty('--check-text', textColor);
+        document.documentElement.style.setProperty('--border-color', borderColor); // 👈 変数をセット
         
         localStorage.setItem('bingo_theme_color', color);
         localStorage.setItem('bingo_theme_emoji', emoji);
