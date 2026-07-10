@@ -155,20 +155,19 @@
             font-weight: bold;
             border-radius: 12px;
             cursor: pointer;
-            margin-bottom: 6px; /* 下のリセットボタンとの間隔を調整 */
+            margin-bottom: 8px; 
             transition: all 0.2s;
             width: 100%;
         }
 
-        /* 🔄 リセットボタンのスタイル */
+        /* 🔄 リセットボタンの共通スタイル */
         .reset-btn {
             background: transparent;
             color: var(--sub-text);
             border: none;
-            padding: 4px 10px;
-            font-size: 12px;
+            padding: 4px 6px;
+            font-size: 11.5px;
             cursor: pointer;
-            margin-bottom: 15px;
             text-decoration: underline;
             opacity: 0.7;
             transition: opacity 0.2s;
@@ -337,7 +336,7 @@
 <div class="container">
     <div id="bingoCard">
         <h1 id="bingoTitle">❄️ マイ応援BINGO ❄️</h1>
-        <p class="subtitle">今日したことをタップしてチェック！<br>マス目の文字やマスの色を変えられます♡</p>
+        <p class="subtitle">今日の応援をタップしてチェック！<br>マス目の文字やマスの色を変えられます♡</p>
         <div id="grid" class="grid"></div>
     </div>
     
@@ -361,7 +360,11 @@
     </div>
 
     <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
-    <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 マス目を初期設定に戻す</button>
+    
+    <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 15px;">
+        <button id="clearChecksBtn" class="reset-btn" onclick="clearAllChecks()">🧹 色（チェック）をリセット</button>
+        <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 文字を初期設定に戻す</button>
+    </div>
 
     <button id="shareBtn" class="share-btn" onclick="shareOnX()">
         𝕏 で報告する
@@ -465,9 +468,17 @@
             cell.id = 'cell-' + i;
             cell.innerText = text;
             
+            // 💾 閉じる前のチェック状態（色）を復元
+            const isChecked = localStorage.getItem('bingo_checked_' + i) === 'true';
+            if (isChecked) {
+                cell.classList.add('checked');
+            }
+            
             cell.onclick = function() {
                 if (isEditMode) return;
                 this.classList.toggle('checked');
+                // 💾 タップした瞬間に状態を保存
+                localStorage.setItem('bingo_checked_' + i, this.classList.contains('checked'));
             };
             
             grid.appendChild(cell);
@@ -537,18 +548,34 @@
         }
     }
 
-    // 🔄 マスの文字をデフォルトに戻す処理
-    function resetToDefault() {
-        if (!confirm("マスの文字をすべて初期設定（デフォルト）に戻しますか？\n（自分で入力した文字は消えてしまいます）")) {
+    // 🧹 色（チェック状態）だけをすべて消す処理
+    function clearAllChecks() {
+        if (isEditMode) return; 
+        
+        if (!confirm("すべてのマスのチェック（色）を消してリセットしますか？")) {
             return;
         }
         
-        // 保存されているマスのテキストデータを削除
         for (let i = 0; i < 9; i++) {
-            localStorage.removeItem('sumin_task_' + i);
+            localStorage.setItem('bingo_checked_' + i, 'false');
+            const cell = document.getElementById('cell-' + i);
+            if (cell) {
+                cell.classList.remove('checked');
+            }
+        }
+    }
+
+    // 🔄 文字をデフォルトに戻す処理（同時にチェックもリセット）
+    function resetToDefault() {
+        if (!confirm("マスの文字をすべて初期設定（デフォルト）に戻しますか？\n（自分で入力した文字やチェックも消えてしまいます）")) {
+            return;
         }
         
-        // 編集モード中だった場合は強制解除する
+        for (let i = 0; i < 9; i++) {
+            localStorage.removeItem('sumin_task_' + i);
+            localStorage.removeItem('bingo_checked_' + i);
+        }
+        
         if (isEditMode) {
             isEditMode = false;
             const grid = document.getElementById('grid');
@@ -562,7 +589,6 @@
             shareBtn.disabled = false;
         }
         
-        // 再描画
         initBingo();
     }
 
