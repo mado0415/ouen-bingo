@@ -305,7 +305,8 @@
         }
         .modal-guide {
             font-size: 12px;
-            color: var(--sub-text);
+            color: #d90429; /* 💡 案内テキストのみ赤色で強調表示 */
+            font-weight: bold;
             margin: 0 0 15px 0;
             line-height: 1.4;
         }
@@ -379,7 +380,7 @@
 <div id="shareModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-title">📸 シェア用画像ができました！</div>
-        <div class="modal-guide">下の画像を【長押しして保存】し、<br>𝕏に添付して投稿してください♡</div>
+        <div class="modal-guide">⚠️下の画像を【長押しして保存】し、<br>次の画面で添付してください！</div>
         <img id="modalImage" class="preview-img" src="" alt="BINGOカード">
         <button id="modalShareBtn" class="share-btn">𝕏 を開いて投稿する</button>
         <button class="modal-close-btn" onclick="closeModal()">戻る</button>
@@ -468,7 +469,6 @@
             cell.id = 'cell-' + i;
             cell.innerText = text;
             
-            // 💾 閉じる前のチェック状態（色）を復元
             const isChecked = localStorage.getItem('bingo_checked_' + i) === 'true';
             if (isChecked) {
                 cell.classList.add('checked');
@@ -477,7 +477,6 @@
             cell.onclick = function() {
                 if (isEditMode) return;
                 this.classList.toggle('checked');
-                // 💾 タップした瞬間に状態を保存
                 localStorage.setItem('bingo_checked_' + i, this.classList.contains('checked'));
             };
             
@@ -548,7 +547,6 @@
         }
     }
 
-    // 🧹 色（チェック状態）だけをすべて消す処理
     function clearAllChecks() {
         if (isEditMode) return; 
         
@@ -565,7 +563,6 @@
         }
     }
 
-    // 🔄 文字をデフォルトに戻す処理（同時にチェックもリセット）
     function resetToDefault() {
         if (!confirm("マスの文字をすべて初期設定（デフォルト）に戻しますか？\n（自分で入力した文字やチェックも消えてしまいます）")) {
             return;
@@ -614,10 +611,12 @@
             
             const currentTitle = localStorage.getItem('bingo_title') || "マイ応援BINGO";
             
+            // 💡 投稿文は元のシンプルな内容をキープ
             const text = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO`;
             const url = window.location.href;
             const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
             
+            // 💡 確認用ポップアップを挟まず、クリックで直接𝕏の投稿画面を開きます
             document.getElementById('modalShareBtn').onclick = function() {
                 window.open(twitterUrl, '_blank');
             };
