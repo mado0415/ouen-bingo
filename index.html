@@ -31,6 +31,10 @@
             min-height: 100vh;
             margin: 0;
             padding: 20px;
+            
+            /* 💡 対策①：スマホのテキスト拡大機能によるレイアウト崩れを防止 */
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
         }
         .container {
             background: white;
@@ -312,7 +316,7 @@
         }
         .preview-img {
             width: 100%;
-            max-height: 250px; /* ボタンが2つ並ぶため高さをほんの少し調整 */
+            max-height: 250px; 
             object-fit: contain;
             border-radius: 16px;
             border: 2px solid #eef6fc;
@@ -597,9 +601,26 @@
         
         const card = document.getElementById('bingoCard');
         
+        // 💡 対策②：画像化するとき、スクロールや画面ズームの影響をシャットアウトする設定
         html2canvas(card, {
             backgroundColor: '#ffffff',
-            scale: 2 
+            scale: 2,
+            scrollX: 0,
+            scrollY: 0,
+            onclone: (clonedDoc) => {
+                // 画像を生成する「仮想の世界」の中だけで、カードの横幅をきれいに保つ（330px固定）
+                const clonedCard = clonedDoc.getElementById('bingoCard');
+                if (clonedCard) {
+                    clonedCard.style.width = '330px';
+                    clonedCard.style.margin = '0 auto';
+                }
+                // 各マスの文字サイズも、拡大の影響を無視して本来の「11.5px」に強制リセット
+                const clonedCells = clonedDoc.querySelectorAll('.cell');
+                clonedCells.forEach(cell => {
+                    cell.style.fontSize = '11.5px';
+                    cell.style.lineHeight = '1.3';
+                });
+            }
         }).then(canvas => {
             const imgData = canvas.toDataURL('image/png');
             document.getElementById('modalImage').src = imgData;
@@ -623,7 +644,7 @@
                 window.open(twitterUrl, '_blank');
             };
             
-            // 2. 💡 Threads 用のテキスト（Threadsはテキスト内にURLを混ぜて送ります）
+            // 2. Threads 用のテキスト
             const threadsText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO\n${url}`;
             const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
             
