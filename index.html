@@ -232,7 +232,7 @@
             justify-content: center;
         }
         
-        /* 𝕏ボタン */
+        /* 𝕏・Threadsボタンのベース */
         .share-btn {
             background: #000000;
             color: white;
@@ -305,14 +305,14 @@
         }
         .modal-guide {
             font-size: 12px;
-            color: #d90429; /* 💡 案内テキストのみ赤色で強調表示 */
+            color: #d90429; 
             font-weight: bold;
             margin: 0 0 15px 0;
             line-height: 1.4;
         }
         .preview-img {
             width: 100%;
-            max-height: 280px;
+            max-height: 250px; /* ボタンが2つ並ぶため高さをほんの少し調整 */
             object-fit: contain;
             border-radius: 16px;
             border: 2px solid #eef6fc;
@@ -368,7 +368,7 @@
     </div>
 
     <button id="shareBtn" class="share-btn" onclick="shareOnX()">
-        𝕏 で報告する
+        報告・シェアする
     </button>
 
     <div class="credit">
@@ -380,9 +380,12 @@
 <div id="shareModal" class="modal-overlay">
     <div class="modal-content">
         <div class="modal-title">📸 シェア用画像ができました！</div>
-        <div class="modal-guide">⚠️下の画像を【長押しして保存】し、<br>次の画面で添付してください！</div>
+        <div class="modal-guide">⚠️下の画像を【長押しして保存】し、<br>次の画面で必ず添付してください！</div>
         <img id="modalImage" class="preview-img" src="" alt="BINGOカード">
+        
         <button id="modalShareBtn" class="share-btn">𝕏 を開いて投稿する</button>
+        <button id="modalShareThreadsBtn" class="share-btn" style="margin-top: 10px; background: #000000; border: 1px solid #333;">Threads を開いて投稿する</button>
+        
         <button class="modal-close-btn" onclick="closeModal()">戻る</button>
     </div>
 </div>
@@ -610,15 +613,22 @@
             }
             
             const currentTitle = localStorage.getItem('bingo_title') || "マイ応援BINGO";
-            
-            // 💡 投稿文は元のシンプルな内容をキープ
-            const text = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO`;
             const url = window.location.href;
-            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`;
             
-            // 💡 確認用ポップアップを挟まず、クリックで直接𝕏の投稿画面を開きます
+            // 1. 𝕏 用のテキストとURLリンク
+            const xText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO`;
+            const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}&url=${encodeURIComponent(url)}`;
+            
             document.getElementById('modalShareBtn').onclick = function() {
                 window.open(twitterUrl, '_blank');
+            };
+            
+            // 2. 💡 Threads 用のテキスト（Threadsはテキスト内にURLを混ぜて送ります）
+            const threadsText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO\n${url}`;
+            const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
+            
+            document.getElementById('modalShareThreadsBtn').onclick = function() {
+                window.open(threadsUrl, '_blank');
             };
             
             document.getElementById('shareModal').style.display = 'flex';
