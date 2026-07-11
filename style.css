@@ -42,12 +42,14 @@ body {
     line-height: 1.5;
 }
 #bingoCard {
+    position: relative;
     background: #ffffff;
     padding: 24px 18px 20px 18px; 
     border-radius: 20px; 
     border: 6px solid var(--border-color); 
     margin-bottom: 20px; 
     transition: border-color 0.25s ease; 
+    overflow: hidden; /* 画像生成時の紙吹雪のはみ出し防止 */
 }
 h1 {
     font-size: 22px;
@@ -107,12 +109,6 @@ h1 {
     border-radius: 16px;
     margin-bottom: 15px;
     margin-top: 5px;
-}
-.color-label {
-    font-size: 11px;
-    color: var(--sub-text);
-    margin-bottom: 8px;
-    font-weight: bold;
 }
 .color-dots-container {
     display: flex;
@@ -238,6 +234,30 @@ h1 {
     align-items: center;
     justify-content: center;
 }
+
+/* 🎉 紙吹雪トグルスイッチのスタイル */
+.confetti-toggle-wrapper {
+    margin: 8px 0 15px 0;
+    display: flex;
+    justify-content: center;
+}
+.toggle-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--sub-text);
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+}
+.toggle-label input[type="checkbox"] {
+    width: 15px;
+    height: 15px;
+    cursor: pointer;
+    accent-color: #4ea8de;
+}
+
 .share-btn {
     background: #000000;
     color: white;
@@ -324,4 +344,16 @@ h1 {
     margin-top: 10px;
     cursor: pointer;
     text-decoration: underline;
+}
+
+/* 🎨 画像生成専用の、疑似的な紙吹雪スタンプ用スタイル */
+.fake-confetti {
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 2px;
+    opacity: 0.85;
+}
+.fake-confetti.circle {
+    border-radius: 50%;
 }
