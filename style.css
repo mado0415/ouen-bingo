@@ -41,23 +41,6 @@ body {
     font-weight: 500;
     line-height: 1.5;
 }
-/* 🎖️ スタンプカードの見た目 */
-.clear-count-box {
-    background: #f4f7f9;
-    padding: 8px 16px;
-    border-radius: 12px;
-    font-size: 13px;
-    font-weight: bold;
-    color: #2b4c6f;
-    margin-bottom: 12px;
-    display: inline-block;
-    border: 1px dashed #4ea8de;
-}
-#clearCount {
-    color: #ffb703;
-    font-size: 16px;
-    margin: 0 2px;
-}
 #bingoCard {
     background: #ffffff;
     padding: 24px 18px 20px 18px; 
