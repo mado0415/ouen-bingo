@@ -53,12 +53,6 @@ function customTheme(color) {
     applyTheme(color, '✨'); 
 }
 
-// 🎖️ 通算カウントの表示更新
-function updateClearCountDisplay() {
-    const count = parseInt(localStorage.getItem('bingo_clear_count') || '0', 10);
-    document.getElementById('clearCount').innerText = count;
-}
-
 // 🎉 全マスチェック時の紙吹雪演出（常にSnow Manのメンカラ9色）
 function checkAllComplete() {
     let checkedCount = 0;
@@ -71,10 +65,9 @@ function checkAllComplete() {
     if (checkedCount === 9) {
         if (typeof confetti === 'function') {
             confetti({
-                particleCount: 180, // 少し量を増やして華やかに
+                particleCount: 180, 
                 spread: 100,
                 origin: { y: 0.6 },
-                // ⛄️ Snow Man 9人のメンバーカラー
                 colors: [
                     '#ffb703', // 岩本照くん (黄)
                     '#7209b7', // 深澤辰哉くん (紫)
@@ -94,8 +87,6 @@ function checkAllComplete() {
 function initBingo() {
     const grid = document.getElementById('grid');
     grid.innerHTML = '';
-    
-    updateClearCountDisplay();
     
     const savedTitle = localStorage.getItem('bingo_title') || "❄️ マイ応援BINGO ❄️";
     document.getElementById('bingoTitle').innerText = savedTitle;
@@ -268,36 +259,17 @@ function toggleEditMode() {
 function clearAllChecks() {
     if (isEditMode) return; 
     
-    let checkedCount = 0;
-    for (let i = 0; i < 9; i++) {
-        if (localStorage.getItem('bingo_checked_' + i) === 'true') {
-            checkedCount++;
-        }
-    }
-    
-    let confirmMsg = "すべてのマスのチェックを消してリセットしますか？";
-    if (checkedCount === 9) {
-        confirmMsg = "🎉コンプリートおめでとうございます！🎉\n通算クリア回数を+1して、チェックをリセットしますか？";
-    }
-    
-    if (!confirm(confirmMsg)) return;
-    
-    if (checkedCount === 9) {
-        const currentCount = parseInt(localStorage.getItem('bingo_clear_count') || '0', 10);
-        localStorage.setItem('bingo_clear_count', currentCount + 1);
-    }
+    if (!confirm("すべてのマスのチェックを消してリセットしますか？")) return;
     
     for (let i = 0; i < 9; i++) {
         localStorage.setItem('bingo_checked_' + i, 'false');
         const cell = document.getElementById('cell-' + i);
         if (cell) cell.classList.remove('checked');
     }
-    
-    updateClearCountDisplay();
 }
 
 function resetToDefault() {
-    if (!confirm("すべて初期状態に戻しますか？\n（入力した文字・スタンプのクリア回数・チェックもすべて消去されます）")) return;
+    if (!confirm("すべて初期状態に戻しますか？\n（入力した文字・チェックもすべて消去されます）")) return;
     
     localStorage.removeItem('bingo_title');
     localStorage.removeItem('bingo_date');
@@ -364,17 +336,16 @@ function shareOnX() {
         }
         
         const currentTitle = localStorage.getItem('bingo_title') || "マイ応援BINGO";
-        const totalClears = localStorage.getItem('bingo_clear_count') || '0';
         const url = window.location.href;
         
-        const xText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\n🎖️ 通算コンプリート: ${totalClears}回\n\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO`;
+        const xText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\n\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO`;
         const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(xText)}&url=${encodeURIComponent(url)}`;
         
         document.getElementById('modalShareBtn').onclick = function() {
             window.open(twitterUrl, '_blank');
         };
         
-        const threadsText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\n🎖️ 通算コンプリート: ${totalClears}回\n\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO\n${url}`;
+        const threadsText = `🎧 ${currentTitle} 🎧\n\n【${checkedCount}/9 クリア！】\n\nマイビンゴで楽しく応援中⛄️✨\n\n#SnowMan #応援タスクBINGO\n${url}`;
         const threadsUrl = `https://www.threads.net/intent/post?text=${encodeURIComponent(threadsText)}`;
         
         document.getElementById('modalShareThreadsBtn').onclick = function() {
