@@ -49,9 +49,17 @@
 
         <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
         
-        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 15px;">
+        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 5px;">
             <button id="clearChecksBtn" class="reset-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
             <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
+        </div>
+
+        <!-- ⚙️ 画像への紙吹雪オンオフスイッチ（文言を変更しました！） -->
+        <div class="confetti-toggle-wrapper">
+            <label class="toggle-label">
+                <input type="checkbox" id="includeConfettiCheck" checked onchange="saveToggleState()">
+                <span>🎉 画像に紙吹雪を乗せる (全マス埋まった時のみ)</span>
+            </label>
         </div>
 
         <button id="shareBtn" class="share-btn" onclick="shareOnX()">
@@ -71,7 +79,7 @@
             <img id="modalImage" class="preview-img" src="" alt="BINGOカード">
             
             <button id="modalShareBtn" class="share-btn">𝕏 を開いて投稿する</button>
-            <button id="modalShareThreadsBtn" class="share-btn" style="margin-top: 10px; background: #000000; border: 1px solid #333;">Threads を open して投稿する</button>
+            <button id="modalShareThreadsBtn" class="share-btn" style="margin-top: 10px; background: #000000; border: 1px solid #333;">Threads を開いて投稿する</button>
             
             <button class="modal-close-btn" onclick="closeModal()">戻る</button>
         </div>
@@ -81,8 +89,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- ⚡ 別ファイルのJSを読み込むリンク（外部ライブラリより下に書くのがポイントです） -->
-        <script src="script.js?v=2"></script>
-
+    <!-- ⚡ 別ファイルのJSを読み込むリンク -->
+    <script src="script.js?v=3"></script>
 </body>
 </html>
