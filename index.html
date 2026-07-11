@@ -4,90 +4,84 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>応援タスクBINGO</title>
-    <!-- 👇 CSSファイルを読み込む繋ぎのパーツ -->
+    <!-- 🎨 別ファイルのCSSを読み込むリンク -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="container">
-    <p class="app-guide">
-        タップでチェック！<br>
-        編集ボタンでマスの文字や色を変えられます♡<br>
-        日付・名前・コメントも編集可能（空欄でカード内から非表示）
-    </p>
+    <div class="container">
+        <p class="app-guide">
+            タップでチェック！<br>
+            編集ボタンでマスの文字や色を変えられます♡<br>
+            日付・名前・コメントも編集可能（空欄でカード内から非表示）
+        </p>
 
-    <!-- 🎖️ スタンプカード（通算クリア表示） -->
-    <div class="clear-count-box">
-        🎖️ 通算コンプリート: <span id="clearCount">0</span>回
-    </div>
-
-    <div id="bingoCard">
-        <h1 id="bingoTitle">❄️ マイ応援BINGO ❄️</h1>
-        
-        <div class="card-meta">
-            <span id="metaDate"></span>
-            <span id="metaName"></span>
+        <div id="bingoCard">
+            <h1 id="bingoTitle">❄️ マイ応援BINGO ❄️</h1>
+            
+            <div class="card-meta">
+                <span id="metaDate"></span>
+                <span id="metaName"></span>
+            </div>
+            <div id="metaComment" class="card-comment"></div>
+            
+            <div id="grid" class="grid"></div>
         </div>
-        <div id="metaComment" class="card-comment"></div>
         
-        <div id="grid" class="grid"></div>
-    </div>
-    
-    <div class="color-selector">
-        <div class="color-label">❄️ チェックスマスの色を選ぶ</div>
-        <div class="color-dots-container">
-            <div class="color-dot" data-color="#ffb703" style="background: #ffb703;" onclick="changeTheme('#ffb703', '💪💛')"></div>
-            <div class="color-dot" data-color="#7209b7" style="background: #7209b7;" onclick="changeTheme('#7209b7', '🎮💜')"></div>
-            <div class="color-dot" data-color="#e2e8f0" style="background: #e2e8f0;" onclick="changeTheme('#e2e8f0', '🦖🤍')"></div>
-            <div class="color-dot" data-color="#4ea8de" style="background: #4ea8de;" onclick="changeTheme('#4ea8de', '🎤💙')"></div>
-            <div class="color-dot" data-color="#f97316" style="background: #f97316;" onclick="changeTheme('#f97316', '📸🧡')"></div>
-            <div class="color-dot" data-color="#2a9d8f" style="background: #2a9d8f;" onclick="changeTheme('#2a9d8f', '📝💚')"></div>
-            <div class="color-dot" data-color="#212529" style="background: #212529;" onclick="changeTheme('#212529', '🦞🖤')"></div>
-            <div class="color-dot" data-color="#e63946" style="background: #e63946;" onclick="changeTheme('#e63946', '🌹❤️')"></div>
-            <div class="color-dot" data-color="#ff69b4" style="background: #ff69b4;" onclick="changeTheme('#ff69b4', '🐱💗')"></div>
-            <div class="picker-wrapper" id="customColorWrapper">
-                <div class="picker-btn">🎨</div>
-                <input type="color" id="colorPicker" onchange="customTheme(this.value)">
+        <div class="color-selector">
+            <div class="color-label">❄️ チェックスマスの色を選ぶ</div>
+            <div class="color-dots-container">
+                <div class="color-dot" data-color="#ffb703" style="background: #ffb703;" onclick="changeTheme('#ffb703', '💪💛')"></div>
+                <div class="color-dot" data-color="#7209b7" style="background: #7209b7;" onclick="changeTheme('#7209b7', '🎮💜')"></div>
+                <div class="color-dot" data-color="#e2e8f0" style="background: #e2e8f0;" onclick="changeTheme('#e2e8f0', '🦖🤍')"></div>
+                <div class="color-dot" data-color="#4ea8de" style="background: #4ea8de;" onclick="changeTheme('#4ea8de', '🎤💙')"></div>
+                <div class="color-dot" data-color="#f97316" style="background: #f97316;" onclick="changeTheme('#f97316', '📸🧡')"></div>
+                <div class="color-dot" data-color="#2a9d8f" style="background: #2a9d8f;" onclick="changeTheme('#2a9d8f', '📝💚')"></div>
+                <div class="color-dot" data-color="#212529" style="background: #212529;" onclick="changeTheme('#212529', '🦞🖤')"></div>
+                <div class="color-dot" data-color="#e63946" style="background: #e63946;" onclick="changeTheme('#e63946', '🌹❤️')"></div>
+                <div class="color-dot" data-color="#ff69b4" style="background: #ff69b4;" onclick="changeTheme('#ff69b4', '🐱💗')"></div>
+                <div class="picker-wrapper" id="customColorWrapper">
+                    <div class="picker-btn">🎨</div>
+                    <input type="color" id="colorPicker" onchange="customTheme(this.value)">
+                </div>
             </div>
         </div>
-    </div>
 
-    <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
-    
-    <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 15px;">
-        <button id="clearChecksBtn" class="reset-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
-        <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
-    </div>
-
-    <button id="shareBtn" class="share-btn" onclick="shareOnX()">
-        報告・シェアする
-    </button>
-
-    <div class="credit">
-        <span class="app-name">応援タスクBINGO</span><br>
-        created by <a href="https://x.com/mado_no_yuki" target="_blank">@mado_no_yuki</a>
-    </div>
-</div>
-
-<div id="shareModal" class="modal-overlay">
-    <div class="modal-content">
-        <div class="modal-title">📸 シェア用画像ができました！</div>
-        <div class="modal-guide">⚠️下の画像を【長押しして保存】し、<br>次の画面で添付してください！</div>
-        <img id="modalImage" class="preview-img" src="" alt="BINGOカード">
+        <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
         
-        <button id="modalShareBtn" class="share-btn">𝕏 を開いて投稿する</button>
-        <button id="modalShareThreadsBtn" class="share-btn" style="margin-top: 10px; background: #000000; border: 1px solid #333;">Threads を開いて投稿する</button>
-        
-        <button class="modal-close-btn" onclick="closeModal()">戻る</button>
+        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 15px;">
+            <button id="clearChecksBtn" class="reset-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
+            <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
+        </div>
+
+        <button id="shareBtn" class="share-btn" onclick="shareOnX()">
+            報告・シェアする
+        </button>
+
+        <div class="credit">
+            <span class="app-name">応援タスクBINGO</span><br>
+            created by <a href="https://x.com/mado_no_yuki" target="_blank">@mado_no_yuki</a>
+        </div>
     </div>
-</div>
 
-<!-- 外部ライブラリの読み込み -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <div id="shareModal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-title">📸 シェア用画像ができました！</div>
+            <div class="modal-guide">⚠️下の画像を【長押しして保存】し、<br>次の画面で添付してください！</div>
+            <img id="modalImage" class="preview-img" src="" alt="BINGOカード">
+            
+            <button id="modalShareBtn" class="share-btn">𝕏 を開いて投稿する</button>
+            <button id="modalShareThreadsBtn" class="share-btn" style="margin-top: 10px; background: #000000; border: 1px solid #333;">Threads を open して投稿する</button>
+            
+            <button class="modal-close-btn" onclick="closeModal()">戻る</button>
+        </div>
+    </div>
 
+    <!-- 📦 画像化と紙吹雪に必要な外部ライブラリ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-    <!-- 👇 JSファイルを読み込む繋ぎのパーツ -->
+    <!-- ⚡ 別ファイルのJSを読み込むリンク（外部ライブラリより下に書くのがポイントです） -->
     <script src="script.js"></script>
 </body>
 </html>
