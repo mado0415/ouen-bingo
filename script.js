@@ -8,6 +8,9 @@ const defaultTasks = [
     "SNSの共有\nURLから聴く", "友達・家族に\n布教", "寝る前の\n1曲"
 ];
 
+// Snow Man メンバーカラー9色リスト
+const snowmanColors = ['#ffb703', '#7209b7', '#ffffff', '#4ea8de', '#f97316', '#2a9d8f', '#212529', '#e63946', '#ff69b4'];
+
 function getContrastColor(hexColor) {
     const r = parseInt(hexColor.substr(1, 2), 16);
     const g = parseInt(hexColor.substr(3, 2), 16);
@@ -53,7 +56,7 @@ function customTheme(color) {
     applyTheme(color, '✨'); 
 }
 
-// 🎉 全マスチェック時の紙吹雪演出（常にSnow Manのメンカラ9色）
+// 🎉 画面上のリアルタイム紙吹雪演出
 function checkAllComplete() {
     let checkedCount = 0;
     for (let i = 0; i < 9; i++) {
@@ -68,20 +71,16 @@ function checkAllComplete() {
                 particleCount: 180, 
                 spread: 100,
                 origin: { y: 0.6 },
-                colors: [
-                    '#ffb703', // 岩本照くん (黄)
-                    '#7209b7', // 深澤辰哉くん (紫)
-                    '#ffffff', // ラウールくん (白)
-                    '#4ea8de', // 渡辺翔太くん (青)
-                    '#f97316', // 向井康二くん (オレンジ)
-                    '#2a9d8f', // 阿部亮平くん (緑)
-                    '#212529', // 目黒蓮くん (黒)
-                    '#e63946', // 宮舘涼太くん (赤)
-                    '#ff69b4'  // 佐久間大介くん (ピンク)
-                ]
+                colors: snowmanColors
             });
         }
     }
+}
+
+// スイッチの状態をブラウザに保存する関数
+function saveToggleState() {
+    const isChecked = document.getElementById('includeConfettiCheck').checked;
+    localStorage.setItem('bingo_include_confetti', isChecked);
 }
 
 function initBingo() {
@@ -131,6 +130,12 @@ function initBingo() {
     const savedColor = localStorage.getItem('bingo_theme_color') || '#ffb703';
     const savedEmoji = localStorage.getItem('bingo_theme_emoji') || '💪💛';
     applyTheme(savedColor, savedEmoji);
+
+    // 紙吹雪オンオフスイッチの状態を復元
+    const savedToggle = localStorage.getItem('bingo_include_confetti');
+    if (savedToggle !== null) {
+        document.getElementById('includeConfettiCheck').checked = (savedToggle === 'true');
+    }
 
     for (let i = 0; i < 9; i++) {
         const savedText = localStorage.getItem('sumin_task_' + i);
@@ -258,7 +263,6 @@ function toggleEditMode() {
 
 function clearAllChecks() {
     if (isEditMode) return; 
-    
     if (!confirm("すべてのマスのチェックを消してリセットしますか？")) return;
     
     for (let i = 0; i < 9; i++) {
@@ -277,7 +281,7 @@ function resetToDefault() {
     localStorage.removeItem('bingo_comment');
     localStorage.removeItem('bingo_theme_color');
     localStorage.removeItem('bingo_theme_emoji');
-    localStorage.removeItem('bingo_clear_count');
+    localStorage.removeItem('bingo_include_confetti');
     for (let i = 0; i < 9; i++) {
         localStorage.removeItem('sumin_task_' + i);
         localStorage.removeItem('bingo_checked_' + i);
@@ -302,6 +306,17 @@ function shareOnX() {
     if (isEditMode) return;
     const card = document.getElementById('bingoCard');
     
+    // 現在のチェック数をカウント
+    let checkedCount = 0;
+    for (let i = 0; i < 9; i++) {
+        const cell = document.getElementById('cell-' + i);
+        if (cell && cell.classList.contains('checked')) {
+            checkedCount++;
+        }
+    }
+
+    const includeConfetti = document.getElementById('includeConfettiCheck').checked;
+
     html2canvas(card, {
         backgroundColor: '#ffffff',
         scale: 2,
@@ -312,6 +327,34 @@ function shareOnX() {
             if (clonedCard) {
                 clonedCard.style.width = '330px';
                 clonedCard.style.margin = '0 auto';
+
+                // ✨ 【条件クリア時】撮影用の裏画面にメンカラ紙吹雪のスタンプを散りばめる
+                if (checkedCount === 9 && includeConfetti) {
+                    for (let k = 0; k < 65; k++) {
+                        const fakeItem = clonedDoc.createElement('div');
+                        fakeItem.className = 'fake-confetti';
+                        
+                        // 9色からランダムに色を選択
+                        fakeItem.style.backgroundColor = snowmanColors[Math.floor(Math.random() * snowmanColors.length)];
+                        
+                        // 位置をランダムに配置
+                        fakeItem.style.left = (Math.random() * 92 + 4) + '%';
+                        fakeItem.style.top = (Math.random() * 92 + 4) + '%';
+                        
+                        // サイズや形、傾きをランダムにする
+                        const size = (Math.random() * 6 + 5) + 'px';
+                        fakeItem.style.width = size;
+                        fakeItem.style.height = size;
+                        
+                        if (Math.random() > 0.5) {
+                            fakeItem.classList.add('circle'); // 丸い紙吹雪
+                        } else {
+                            fakeItem.style.transform = `rotate(${Math.random() * 360}deg)`; // 四角い紙吹雪（回転）
+                        }
+                        
+                        clonedCard.appendChild(fakeItem);
+                    }
+                }
             }
             const clonedCells = clonedDoc.querySelectorAll('.cell');
             clonedCells.forEach(cell => {
@@ -326,14 +369,6 @@ function shareOnX() {
     }).then(canvas => {
         const imgData = canvas.toDataURL('image/png');
         document.getElementById('modalImage').src = imgData;
-        
-        let checkedCount = 0;
-        for (let i = 0; i < 9; i++) {
-            const cell = document.getElementById('cell-' + i);
-            if (cell.classList.contains('checked')) {
-                checkedCount++;
-            }
-        }
         
         const currentTitle = localStorage.getItem('bingo_title') || "マイ応援BINGO";
         const url = window.location.href;
