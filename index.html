@@ -4,92 +4,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>応援タスクBINGO</title>
-    <!-- 🎨 別ファイルのCSSを読み込むリンク -->
-    <link rel="stylesheet" href="style.css">
+    <!-- ライブラリの読み込み元 -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 </head>
 <body>
 
-    <div class="container">
-        <p class="app-guide">
-            タップでチェック！<br>
-            編集ボタンでマスの文字や色を変えられます♡<br>
-            日付・名前・コメントも編集可能（空欄でカード内から非表示）
-        </p>
+<div class="container">
+    <div class="top-instruction">
+        タップでチェック！<br>
+        編集ボタンでマスの文字や色を変えられます♡<br>
+        日付・名前・コメントも編集可能（空欄でカード内から非表示）
+    </div>
 
-        <div id="bingoCard">
-            <h1 id="bingoTitle">❄️ マイ応援BINGO ❄️</h1>
-            
-            <div class="card-meta">
-                <span id="metaDate"></span>
-                <span id="metaName"></span>
-            </div>
-            <div id="metaComment" class="card-comment"></div>
-            
-            <div id="grid" class="grid"></div>
-        </div>
+    <!-- ビンゴカード本体 -->
+    <div id="bingoCard" class="card-container">
+        <h2 id="bingoTitle">❄️ マイ応援BINGO ❄️</h2>
         
-        <div class="color-selector">
-            <div class="color-label">❄️ チェックスマスの色を選ぶ</div>
-            <div class="color-dots-container">
-                <div class="color-dot" data-color="#ffb703" style="background: #ffb703;" onclick="changeTheme('#ffb703', '💪💛')"></div>
-                <div class="color-dot" data-color="#7209b7" style="background: #7209b7;" onclick="changeTheme('#7209b7', '🎮💜')"></div>
-                <div class="color-dot" data-color="#e2e8f0" style="background: #e2e8f0;" onclick="changeTheme('#e2e8f0', '🦖🤍')"></div>
-                <div class="color-dot" data-color="#4ea8de" style="background: #4ea8de;" onclick="changeTheme('#4ea8de', '🎤💙')"></div>
-                <div class="color-dot" data-color="#f97316" style="background: #f97316;" onclick="changeTheme('#f97316', '📸🧡')"></div>
-                <div class="color-dot" data-color="#2a9d8f" style="background: #2a9d8f;" onclick="changeTheme('#2a9d8f', '📝💚')"></div>
-                <div class="color-dot" data-color="#212529" style="background: #212529;" onclick="changeTheme('#212529', '🦞🖤')"></div>
-                <div class="color-dot" data-color="#e63946" style="background: #e63946;" onclick="changeTheme('#e63946', '🌹❤️')"></div>
-                <div class="color-dot" data-color="#ff69b4" style="background: #ff69b4;" onclick="changeTheme('#ff69b4', '🐱💗')"></div>
-                <div class="picker-wrapper" id="customColorWrapper">
-                    <div class="picker-btn">🎨</div>
-                    <input type="color" id="colorPicker" onchange="customTheme(this.value)">
-                </div>
+        <div class="card-meta">
+            <span id="metaDate"></span>
+            <span id="metaName"></span>
+        </div>
+        <div id="metaComment" class="card-comment"></div>
+
+        <div id="grid" class="bingo-grid"></div>
+    </div>
+
+    <!-- コントロールパネル -->
+    <div class="controls">
+        <p class="section-title">❄️ チェックスマスの色を選ぶ</p>
+        <div class="color-picker">
+            <div class="color-dot active" data-color="#ffb703" onclick="changeTheme('#ffb703','💪💛')" style="background:#ffb703;"></div>
+            <div class="color-dot" data-color="#7209b7" onclick="changeTheme('#7209b7','💜')" style="background:#7209b7;"></div>
+            <div class="color-dot" data-color="#ffffff" onclick="changeTheme('#ffffff','🤍')" style="background:#ffffff; border:1px solid #ccc;"></div>
+            <div class="color-dot" data-color="#4ea8de" onclick="changeTheme('#4ea8de','💙')" style="background:#4ea8de;"></div>
+            <div class="color-dot" data-color="#f97316" onclick="changeTheme('#f97316','🧡')" style="background:#f97316;"></div>
+            <div class="color-dot" data-color="#2a9d8f" onclick="changeTheme('#2a9d8f','💚')" style="background:#2a9d8f;"></div>
+            <div class="color-dot" data-color="#212529" onclick="changeTheme('#212529','🖤')" style="background:#212529;"></div>
+            <div class="color-dot" data-color="#e63946" onclick="changeTheme('#e63946','❤️')" style="background:#e63946;"></div>
+            <div class="color-dot" data-color="#ff69b4" onclick="changeTheme('#ff69b4','💗')" style="background:#ff69b4;"></div>
+            
+            <div id="customColorWrapper" class="custom-color-wrapper">
+                <input type="color" id="customColorPicker" oninput="customTheme(this.value)">
+                <span class="rainbow-icon">🌈</span>
             </div>
         </div>
 
-        <button id="editBtn" class="edit-btn" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
-        
-        <div style="display: flex; justify-content: center; gap: 12px; margin-bottom: 5px;">
-            <button id="clearChecksBtn" class="reset-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
-            <button id="resetBtn" class="reset-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
+        <button id="editBtn" class="btn btn-main" onclick="toggleEditMode()">✏️ マス目・タイトルを編集する</button>
+
+        <div id="templateArea" class="template-area" style="display: none;">
+            <p class="section-title">📋 テンプレートから文字を一括セット</p>
+            <div class="template-presets">
+                <button type="button" class="btn btn-sub" onclick="loadPreset('default')">通常期のタスク</button>
+                <button type="button" class="btn btn-sub" onclick="loadPreset('release')">リリース期のタスク</button>
+            </div>
+
+            <p class="section-title" style="margin-top:15px;">💾 マイテンプレート（5枠まで保存可能）</p>
+            <table class="tmpl-table">
+                <tr>
+                    <td><input type="text" id="tmplName1" placeholder="カード1の名前" onchange="saveSlotName(1)" maxLength="8"></td>
+                    <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(1)">保存</button></td>
+                    <td><button type="button" id="loadBtn1" class="btn btn-tmpl load" onclick="loadMyTemplate(1)">呼出</button></td>
+                    <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(1)">削除</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="tmplName2" placeholder="カード2の名前" onchange="saveSlotName(2)" maxLength="8"></td>
+                    <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(2)">保存</button></td>
+                    <td><button type="button" id="loadBtn2" class="btn btn-tmpl load" onclick="loadMyTemplate(2)">呼出</button></td>
+                    <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(2)">削除</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="tmplName3" placeholder="カード3の名前" onchange="saveSlotName(3)" maxLength="8"></td>
+                    <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(3)">保存</button></td>
+                    <td><button type="button" id="loadBtn3" class="btn btn-tmpl load" onclick="loadMyTemplate(3)">呼出</button></td>
+                    <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(3)">削除</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="tmplName4" placeholder="カード4の名前" onchange="saveSlotName(4)" maxLength="8"></td>
+                    <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(4)">保存</button></td>
+                    <td><button type="button" id="loadBtn4" class="btn btn-tmpl load" onclick="loadMyTemplate(4)">呼出</button></td>
+                    <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(4)">削除</button></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="tmplName5" placeholder="カード5の名前" onchange="saveSlotName(5)" maxLength="8"></td>
+                    <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(5)">保存</button></td>
+                    <td><button type="button" id="loadBtn5" class="btn btn-tmpl load" onclick="loadMyTemplate(5)">呼出</button></td>
+                    <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(5)">削除</button></td>
+                </tr>
+            </table>
         </div>
 
-        <!-- ⚙️ 画像への紙吹雪オンオフスイッチ（文言を変更しました！） -->
-        <div class="confetti-toggle-wrapper">
+        <div class="footer-links">
+            <button class="link-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
+            <button class="link-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
+        </div>
+
+        <div class="toggle-container">
             <label class="toggle-label">
                 <input type="checkbox" id="includeConfettiCheck" checked onchange="saveToggleState()">
-                <span>🎉 画像に紙吹雪を乗せる (全マス埋まった時のみ)</span>
+                🎉 画像に紙吹雪を乗せる (全マス埋まった時のみ)
             </label>
         </div>
 
-        <button id="shareBtn" class="share-btn" onclick="shareOnX()">
-            報告・シェアする
-        </button>
+        <button id="shareBtn" class="btn btn-share" onclick="shareOnX()">報告・シェアする</button>
+    </div>
+</div>
 
-        <div class="credit">
-            <span class="app-name">応援タスクBINGO</span><br>
-            created by <a href="https://x.com/mado_no_yuki" target="_blank">@mado_no_yuki</a>
+<div id="shareModal" class="modal" onclick="closeModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <h3>長押し or 右クリックで画像を保存してね！</h3>
+        <div class="modal-image-wrapper">
+            <img id="modalImage" src="" alt="BINGOカード画像">
+        </div>
+        <p style="font-size: 11px; color: #ef4444; margin-top: 6px; text-align: center; font-weight: bold; padding: 0 4px;">⚠️画像は自動添付されません。保存した画像を自分で添付して投稿してください。</p>
+        <div class="modal-buttons">
+            <button id="modalShareBtn" class="btn btn-modal-x">𝕏 にポストする</button>
+            <button id="modalShareThreadsBtn" class="btn btn-modal-threads">Threadsに投稿</button>
+            <button class="btn btn-modal-close" onclick="closeModal()">閉じる</button>
         </div>
     </div>
+</div>
 
-    <div id="shareModal" class="modal-overlay">
-        <div class="modal-content">
-            <div class="modal-title">📸 シェア用画像ができました！</div>
-            <div class="modal-guide">⚠️下の画像を【長押しして保存】し、<br>次の画面で添付してください！</div>
-            <img id="modalImage" class="preview-img" src="" alt="BINGOカード">
-            
-            <button id="modalShareBtn" class="share-btn">𝕏 を開いて投稿する</button>
-            <button id="modalShareThreadsBtn" class="share-btn" style="margin-top: 10px; background: #000000; border: 1px solid #333;">Threads を開いて投稿する</button>
-            
-            <button class="modal-close-btn" onclick="closeModal()">戻る</button>
-        </div>
-    </div>
-
-    <!-- 📦 画像化と紙吹雪に必要な外部ライブラリ -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-    <!-- ⚡ 別ファイルのJSを読み込むリンク -->
-    <script src="script.js?v=3"></script>
 </body>
 </html>
