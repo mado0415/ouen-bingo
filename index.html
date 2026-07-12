@@ -201,7 +201,7 @@ let isEditMode = false;
 let currentColor = '#ffb703'; 
 let currentEmoji = '💪💛';       
 
-// 💡 リリース期の文言と改行位置をご指定通りに変更しました！
+// 💡 修正した新しいテキストです
 const templates = {
     default: [
         "朝の\n1再生", "SNSで\n曲を共有", "通勤・通学\nに聴く",
@@ -276,7 +276,13 @@ function updateCustomTmplButtons() {
 
 function loadPreset(key) {
     const data = templates[key] || templates['default'];
-    for (let i = 0; i < 9; i++) { const t = document.querySelector(`#cell-${i} textarea`); if (t) t.value = data[i]; }
+    // 💡 呼び出し時に古い内部データを上書き強制クリアするように修正しました
+    for (let i = 0; i < 9; i++) {
+        localStorage.setItem('bingo_cell_text_' + i, data[i]);
+        const t = document.querySelector(`#cell-${i} textarea`);
+        if (t) t.value = data[i];
+    }
+    initBingo();
 }
 
 function saveMyTemplate(slot) {
@@ -292,7 +298,12 @@ function loadMyTemplate(slot) {
     const saved = localStorage.getItem(`bingo_my_tmpl_${slot}`);
     if (!saved) return;
     const data = JSON.parse(saved);
-    for (let i = 0; i < 9; i++) { const t = document.querySelector(`#cell-${i} textarea`); if (t && data[i] !== undefined) t.value = data[i]; }
+    for (let i = 0; i < 9; i++) {
+        localStorage.setItem('bingo_cell_text_' + i, data[i]);
+        const t = document.querySelector(`#cell-${i} textarea`);
+        if (t && data[i] !== undefined) t.value = data[i];
+    }
+    initBingo();
 }
 
 function deleteMyTemplate(slot) {
