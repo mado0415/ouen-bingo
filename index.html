@@ -165,8 +165,7 @@
                 </tr>
             </table>
         </div>
-
-          <div class="footer-links">
+        <div class="footer-links">
             <button class="link-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
             <button class="link-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
         </div>
@@ -202,6 +201,7 @@ let isEditMode = false;
 let currentColor = '#ffb703'; 
 let currentEmoji = '💪💛';       
 
+// 💡 リリース期の文言と改行位置をご指定通りに変更しました！
 const templates = {
     default: [
         "朝の\n1再生", "SNSで\n曲を共有", "通勤・通学\nに聴く",
@@ -209,9 +209,15 @@ const templates = {
         "SNSの共有\nURLから聴\nく", "友達・家族\nに\n布教", "寝る前の\n1曲"
     ],
     release: [
-        "Shazamで\n検索＆共有\n3回", "各種配信\nサイトで\nDL購入！", "TikTok\n公式音源動画\n投稿\norいいね5回", 
-        "新曲入り\nリストを\nストリーミング", "今日も楽しく\n応援した！", "身近な人や\nSNSで\n本日も1布教", 
-        "公式タグで\n本日\n3ポスト", "他動画も\n挟みながら\nMV再生3回", "全マス\n埋めた！"
+        "Shazamで\n検索＆共有\n3回", 
+        "各種配信\nサイトで\nDL購入！", 
+        "TikTok\n公式音源動画\n投稿\norいいね5回", 
+        "新曲入り\nリストを\nストリーミング\n再生", 
+        "今日も楽しく\n応援した！", 
+        "身近な人や\nSNSで\n本日も1布教", 
+        "SNSで曲を\n共有＆\n共有された\nURLから聴く", 
+        "他動画も\n挟みながら\nMV再生3回", 
+        "全マス\n埋めた！"
     ]
 };
 
@@ -423,4 +429,3 @@ initBingo();
 </script>
 </body>
 </html>
-  
