@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>応援タスクBINGO</title>
+    <!-- ライブラリの読み込み -->
     <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
@@ -17,63 +18,314 @@
           --check-color: #ffb703;
           --check-text: #1a2b3c;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
         body {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-          background-color: var(--bg-color); color: #333333; padding: 20px 14px;
-          display: flex; justify-content: center; align-items: flex-start; min-height: 100vh;
+          background-color: var(--bg-color);
+          color: #333333;
+          padding: 20px 14px;
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+          min-height: 100vh;
         }
-        .container { width: 100%; max-width: 350px; display: flex; flex-direction: column; gap: 16px; }
-        .top-instruction { font-size: 11.5px; color: #7fa0c0; text-align: center; line-height: 1.5; font-weight: 500; padding: 0 10px; }
+
+        .container {
+          width: 100%;
+          max-width: 350px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        }
+
+        .top-instruction {
+          font-size: 11.5px;
+          color: #7fa0c0;
+          text-align: center;
+          line-height: 1.5;
+          font-weight: 500;
+          padding: 0 10px;
+        }
+
         .card-container {
-          background: var(--card-bg); padding: 24px 20px; border-radius: 28px;
-          border: 5px solid var(--border-color); text-align: center;
-          box-shadow: 0 6px 16px rgba(146, 187, 222, 0.15); position: relative; overflow: hidden;
+          background: var(--card-bg);
+          padding: 24px 20px;
+          border-radius: 28px;
+          border: 5px solid var(--border-color); 
+          text-align: center;
+          box-shadow: 0 6px 16px rgba(146, 187, 222, 0.15);
+          position: relative;
+          overflow: hidden;
         }
-        h2 { font-size: 21px; font-weight: 800; color: #2b4260; letter-spacing: -0.5px; margin-bottom: 6px; }
-        h2 input { width: 95%; font-size: 18px; font-weight: 800; text-align: center; border: 1px dashed #7fa0c0; border-radius: 6px; padding: 2px; color: #2b4260; }
-        .card-meta { display: flex; justify-content: center; gap: 10px; font-size: 11px; color: #9cbcd9; margin-bottom: 8px; font-weight: 600; }
-        .card-meta input { font-size: 11px; padding: 1px 4px; border: 1px dashed #cbd5e1; border-radius: 4px; }
-        .card-comment { font-size: 11px; color: #607d9b; margin-bottom: 12px; font-weight: 500; padding: 0 8px; word-break: break-all; }
-        .card-comment input { font-size: 11px; padding: 2px 4px; border: 1px dashed #cbd5e1; border-radius: 4px; }
-        .bingo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 6px; }
+
+        h2 {
+          font-size: 21px;
+          font-weight: 800;
+          color: #2b4260; 
+          letter-spacing: -0.5px;
+          margin-bottom: 6px;
+        }
+
+        h2 input {
+          width: 95%;
+          font-size: 18px;
+          font-weight: 800;
+          text-align: center;
+          border: 1px dashed #7fa0c0;
+          border-radius: 6px;
+          padding: 2px;
+          color: #2b4260;
+        }
+
+        .card-meta {
+          display: flex;
+          justify-content: center;
+          gap: 10px;
+          font-size: 11px;
+          color: #9cbcd9;
+          margin-bottom: 8px;
+          font-weight: 600;
+        }
+
+        .card-meta input {
+          font-size: 11px;
+          padding: 1px 4px;
+          border: 1px dashed #cbd5e1;
+          border-radius: 4px;
+        }
+
+        .card-comment {
+          font-size: 11px;
+          color: #607d9b;
+          margin-bottom: 12px;
+          font-weight: 500;
+          padding: 0 8px;
+          word-break: break-all;
+        }
+
+        .card-comment input {
+          font-size: 11px;
+          padding: 2px 4px;
+          border: 1px dashed #cbd5e1;
+          border-radius: 4px;
+        }
+
+        .bingo-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 10px;
+          margin-top: 6px;
+        }
+
         .cell {
-          background: #ffffff; border: 1px solid #eef4f9; width: 100%; height: 94px; border-radius: 16px;
-          display: flex; align-items: center; justify-content: center; font-size: 10.5px; font-weight: 700;
-          line-height: 1.4; padding: 6px; cursor: pointer; user-select: none; transition: all 0.2s ease;
-          white-space: pre-line; word-break: break-all; color: #2b4260; box-shadow: 0 3px 8px rgba(165, 195, 221, 0.2); overflow: hidden;
+          background: #ffffff;
+          border: 1px solid #eef4f9;
+          width: 100%;
+          height: 94px; 
+          border-radius: 16px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 10.5px;
+          font-weight: 700;
+          line-height: 1.4;
+          padding: 6px;
+          cursor: pointer;
+          user-select: none;
+          transition: all 0.2s ease;
+          white-space: pre-line;
+          word-break: break-all;
+          color: #2b4260;
+          box-shadow: 0 3px 8px rgba(165, 195, 221, 0.2);
+          overflow: hidden;
         }
-        .cell.checked { background-color: var(--check-color) !important; color: var(--check-text) !important; border: 1px solid transparent !important; font-weight: 800; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
-        .edit-mode .cell { background: #ffffff; border: 1px dashed #94a3b8; box-shadow: none; }
-        .cell textarea { width: 100%; height: 100%; border: none; resize: none; font-size: 10px; font-weight: 700; text-align: center; font-family: inherit; background: transparent; outline: none; color: #2b4260; }
-        .controls { background: transparent; padding: 0; }
-        .section-title { font-size: 13px; font-weight: 700; color: #333333; margin-bottom: 8px; text-align: center; }
-        .color-picker { display: flex; justify-content: center; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; background: #f1f5f9; padding: 12px; border-radius: 16px; }
-        .color-dot { width: 22px; height: 22px; border-radius: 50%; cursor: pointer; transition: transform 0.1s; box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); }
-        .color-dot.active { transform: scale(1.15); outline: 2px solid #2b4260; outline-offset: 1px; }
-        .custom-color-wrapper { position: relative; width: 22px; height: 22px; border-radius: 50%; overflow: hidden; background: linear-gradient(45deg, red, orange, yellow, green, blue, purple); cursor: pointer; }
-        .custom-color-wrapper input[type="color"] { position: absolute; top: -5px; left: -5px; width: 32px; height: 32px; opacity: 0; cursor: pointer; }
-        .custom-color-wrapper .rainbow-icon { position: absolute; font-size: 11px; top: 50%; left: 50%; transform: translate(-50%, -50%); pointer-events: none; }
-        .btn { width: 100%; border-radius: 18px; font-size: 12.5px; font-weight: 700; cursor: pointer; border: none; transition: all 0.2s; }
-        .btn-main { background: #ffffff; border: 1px solid #e2e8f0; color: #5b799e; padding: 11px; margin-bottom: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.02); }
-        .btn-share { background: #000000; color: #ffffff; padding: 14px; font-size: 14px; font-weight: 700; margin-top: 14px; letter-spacing: 0.5px; border-radius: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+
+        .cell.checked {
+          background-color: var(--check-color) !important;
+          color: var(--check-text) !important;
+          border: 1px solid transparent !important;
+          font-weight: 800;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        }
+
+        .edit-mode .cell {
+          background: #ffffff;
+          border: 1px dashed #94a3b8;
+          box-shadow: none;
+        }
+
+        .cell textarea {
+          width: 100%;
+          height: 100%;
+          border: none;
+          resize: none;
+          font-size: 10px;
+          font-weight: 700;
+          text-align: center;
+          font-family: inherit;
+          background: transparent;
+          outline: none;
+          color: #2b4260;
+        }
+
+        .controls {
+          background: transparent;
+          padding: 0;
+        }
+
+        .section-title {
+          font-size: 13px;
+          font-weight: 700;
+          color: #333333;
+          margin-bottom: 8px;
+          text-align: center;
+        }
+
+        .color-picker {
+          display: flex;
+          justify-content: center;
+          gap: 8px;
+          margin-bottom: 16px;
+          flex-wrap: wrap;
+          background: #f1f5f9;
+          padding: 12px;
+          border-radius: 16px;
+        }
+
+        .color-dot {
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          cursor: pointer;
+          transition: transform 0.1s;
+          box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .color-dot.active {
+          transform: scale(1.15);
+          outline: 2px solid #2b4260;
+          outline-offset: 1px;
+        }
+
+        .custom-color-wrapper {
+          position: relative;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          overflow: hidden;
+          background: linear-gradient(45deg, red, orange, yellow, green, blue, purple);
+          cursor: pointer;
+        }
+
+        .custom-color-wrapper input[type="color"] {
+          position: absolute;
+          top: -5px; left: -5px; width: 32px; height: 32px;
+          opacity: 0; cursor: pointer;
+        }
+
+        .custom-color-wrapper .rainbow-icon {
+          position: absolute;
+          font-size: 11px; top: 50%; left: 50%;
+          transform: translate(-50%, -50%);
+          pointer-events: none;
+        }
+
+        .btn {
+          width: 100%;
+          border-radius: 18px;
+          font-size: 12.5px;
+          font-weight: 700;
+          cursor: pointer;
+          border: none;
+          transition: all 0.2s;
+        }
+
+        .btn-main {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          color: #5b799e;
+          padding: 11px;
+          margin-bottom: 12px;
+          box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+
+        .btn-share {
+          background: #000000;
+          color: #ffffff;
+          padding: 14px;
+          font-size: 14px;
+          font-weight: 700;
+          margin-top: 14px;
+          letter-spacing: 0.5px;
+          border-radius: 24px;
+          box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
         .btn-sub { padding: 6px; font-size: 11px; background: #e2e8f0; color: #475569;}
-        .template-area { background: #ffffff; padding: 12px; border-radius: 16px; margin-bottom: 12px; border: 1px solid #e2e8f0; }
+
+        .template-area {
+          background: #ffffff;
+          padding: 12px;
+          border-radius: 16px;
+          margin-bottom: 12px;
+          border: 1px solid #e2e8f0;
+        }
+
         .template-presets { display: flex; gap: 6px; margin-bottom: 8px; }
+
         .tmpl-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
         .tmpl-table td { padding: 3px 2px; vertical-align: middle; }
-        .tmpl-table input { width: 100%; font-size: 11px; padding: 5px; border: 1px solid #cbd5e1; border-radius: 6px; }
+        .tmpl-table input {
+          width: 100%; font-size: 11px; padding: 5px;
+          border: 1px solid #cbd5e1; border-radius: 6px;
+        }
+
         .btn-tmpl { padding: 4px 6px; font-size: 10.5px; border-radius: 6px; }
         .btn-tmpl.save { background: #f1f5f9; color: #334155; }
         .btn-tmpl.load { background: #22c55e; color: white; width: 100%; }
         .btn-tmpl.load:disabled { background: #cbd5e1; color: #94a3b8; }
         .btn-tmpl.delete { background: #ef4444; color: white; }
-        .footer-links { display: flex; justify-content: center; gap: 20px; margin: 10px 0; }
-        .link-btn { background: none; border: none; color: #9cbcd9; font-size: 11px; text-decoration: underline; cursor: pointer; font-weight: 600; }
+
+        .footer-links {
+          display: flex;
+          justify-content: center;
+          gap: 20px;
+          margin: 10px 0;
+        }
+        .link-btn {
+          background: none;
+          border: none;
+          color: #9cbcd9;
+          font-size: 11px;
+          text-decoration: underline;
+          cursor: pointer;
+          font-weight: 600;
+        }
+
         .toggle-container { text-align: center; margin-top: 6px; }
-        .toggle-label { font-size: 11px; color: #7fa0c0; cursor: pointer; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; }
-        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 16px; }
-        .modal-content { background: white; padding: 16px; border-radius: 20px; width: 100%; max-width: 330px; text-align: center; }
+        .toggle-label {
+          font-size: 11px;
+          color: #7fa0c0;
+          cursor: pointer;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
+        }
+
+        .modal {
+          display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+          background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center; padding: 16px;
+        }
+        .modal-content {
+          background: white; padding: 16px; border-radius: 20px; width: 100%; max-width: 330px; text-align: center;
+        }
         .modal-content h3 { font-size: 13px; margin-bottom: 8px; color: #1f2937;}
         .modal-image-wrapper { background: #f1f5f9; border-radius: 12px; padding: 4px; width: 100%; }
         .modal-image-wrapper img { width: 100%; max-height: 60vh; object-fit: contain; border-radius: 10px; display: block;}
@@ -81,6 +333,7 @@
         .btn-modal-x { background: #0f1419; color: white; font-size: 12px; padding: 9px; border-radius: 12px;}
         .btn-modal-threads { background: #000000; color: white; font-size: 12px; padding: 9px; border-radius: 12px;}
         .btn-modal-close { background: #e2e8f0; color: #475569; font-size: 12px; padding: 7px; border-radius: 12px;}
+
         .fake-confetti { position: absolute; width: 7px; height: 7px; z-index: 10; opacity: 0.85; border-radius: 1px; }
         .fake-confetti.circle { border-radius: 50%; }
     </style>
@@ -94,16 +347,20 @@
         日付・名前・コメントも編集可能（空欄でカード内から非表示）
     </div>
 
+    <!-- ビンゴカード本体 -->
     <div id="bingoCard" class="card-container">
         <h2 id="bingoTitle">❄️ マイ応援BINGO ❄️</h2>
+        
         <div class="card-meta">
             <span id="metaDate"></span>
             <span id="metaName"></span>
         </div>
         <div id="metaComment" class="card-comment"></div>
+
         <div id="grid" class="bingo-grid"></div>
     </div>
 
+    <!-- コントロールパネル -->
     <div class="controls">
         <p class="section-title">❄️ チェックスマスの色を選ぶ</p>
         <div class="color-picker">
@@ -116,6 +373,7 @@
             <div class="color-dot" data-color="#212529" onclick="changeTheme('#212529','🖤')" style="background:#212529;"></div>
             <div class="color-dot" data-color="#e63946" onclick="changeTheme('#e63946','❤️')" style="background:#e63946;"></div>
             <div class="color-dot" data-color="#ff69b4" onclick="changeTheme('#ff69b4','💗')" style="background:#ff69b4;"></div>
+            
             <div id="customColorWrapper" class="custom-color-wrapper">
                 <input type="color" id="customColorPicker" oninput="customTheme(this.value)">
                 <span class="rainbow-icon">🌈</span>
@@ -201,7 +459,6 @@ let isEditMode = false;
 let currentColor = '#ffb703'; 
 let currentEmoji = '💪💛';       
 
-// 💡 修正した新しいテキストです
 const templates = {
     default: [
         "朝の\n1再生", "SNSで\n曲を共有", "通勤・通学\nに聴く",
@@ -276,7 +533,6 @@ function updateCustomTmplButtons() {
 
 function loadPreset(key) {
     const data = templates[key] || templates['default'];
-    // 💡 呼び出し時に古い内部データを上書き強制クリアするように修正しました
     for (let i = 0; i < 9; i++) {
         localStorage.setItem('bingo_cell_text_' + i, data[i]);
         const t = document.querySelector(`#cell-${i} textarea`);
@@ -313,15 +569,29 @@ function deleteMyTemplate(slot) {
     updateCustomTmplButtons();
 }
 
+function getTodayString() {
+    const d = new Date();
+    return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+}
+
 function initBingo() {
     const grid = document.getElementById('grid'); grid.innerHTML = '';
     document.getElementById('bingoTitle').innerText = localStorage.getItem('bingo_title') || "❄️ マイ応援BINGO ❄️";
     
     let date = localStorage.getItem('bingo_date');
-    if (date === null) {
-        const d = new Date(); date = `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+    const isAutoUpdate = localStorage.getItem('bingo_date_is_auto') === 'true';
+    
+    // 💡 毎日自動更新の判定ロジックを修正
+    if (isAutoUpdate) {
+        date = getTodayString();
         localStorage.setItem('bingo_date', date);
+    } else if (date === null) {
+        // 初めてページに来た時のみ自動更新モードで初期化
+        date = getTodayString();
+        localStorage.setItem('bingo_date', date);
+        localStorage.setItem('bingo_date_is_auto', 'true');
     }
+    
     const name = localStorage.getItem('bingo_name') || "", comment = localStorage.getItem('bingo_comment') || "";
     const dateEl = document.getElementById('metaDate'), nameEl = document.getElementById('metaName'), commentEl = document.getElementById('metaComment'), metaContainer = document.querySelector('.card-meta');
     
@@ -361,8 +631,10 @@ function toggleEditMode() {
         titleEl.innerHTML = `<input type="text" id="titleInput" value="${titleEl.innerText}" maxLength="25">`;
         metaContainer.style.display = 'flex'; commentEl.style.display = 'block';
         
-        const today = new Date(), todayStr = `${today.getFullYear()}/${String(today.getMonth() + 1).padStart(2, '0')}/${String(today.getDate()).padStart(2, '0')}`;
-        document.getElementById('metaDate').innerHTML = `<div style="display: inline-flex; align-items: center; gap: 3px;"><input type="text" id="dateInput" class="meta-input" value="${localStorage.getItem('bingo_date') || ""}" maxLength="12" placeholder="日付" style="width: 78px;"><button type="button" onclick="document.getElementById('dateInput').value='${todayStr}'" style="font-size:10px;padding:2px 5px;">今日</button></div>`;
+        const todayStr = getTodayString();
+        const currentSavedDate = localStorage.getItem('bingo_date_is_auto') === 'true' ? todayStr : (localStorage.getItem('bingo_date') || "");
+
+        document.getElementById('metaDate').innerHTML = `<div style="display: inline-flex; align-items: center; gap: 3px;"><input type="text" id="dateInput" class="meta-input" value="${currentSavedDate}" maxLength="12" placeholder="日付" style="width: 78px;"><button type="button" id="todayMarkBtn" onclick="document.getElementById('dateInput').value='${todayStr}'; this.setAttribute('data-clicked', 'true');" style="font-size:10px;padding:2px 5px;">今日</button></div>`;
         document.getElementById('metaName').innerHTML = `<input type="text" id="nameInput" class="meta-input" value="${localStorage.getItem('bingo_name') || ""}" maxLength="15" placeholder="名前">`;
         commentEl.innerHTML = `<input type="text" id="commentInput" class="meta-input" value="${localStorage.getItem('bingo_comment') || ""}" maxLength="35" placeholder="一言コメント（任意）" style="width: 100%; text-align: center;">`;
         
@@ -377,7 +649,22 @@ function toggleEditMode() {
         shareBtn.disabled = false; templateArea.style.display = 'none'; 
         
         localStorage.setItem('bingo_title', document.getElementById('titleInput').value.trim() || "❄️ マイ応援BINGO ❄️");
-        localStorage.setItem('bingo_date', document.getElementById('dateInput').value.trim());
+        
+        const dateInputVal = document.getElementById('dateInput').value.trim();
+        const todayMarkBtn = document.getElementById('todayMarkBtn');
+        const wasTodayClicked = todayMarkBtn.getAttribute('data-clicked') === 'true';
+        
+        localStorage.setItem('bingo_date', dateInputVal);
+        
+        // 💡 条件別の自動更新ON/OFFロジック
+        if (wasTodayClicked) {
+            // 「今日」ボタンを押した場合は自動更新をONにする
+            localStorage.setItem('bingo_date_is_auto', 'true');
+        } else {
+            // 空欄の時、または手入力した時は自動更新をOFF（固定）にする
+            localStorage.setItem('bingo_date_is_auto', 'false');
+        }
+        
         localStorage.setItem('bingo_name', document.getElementById('nameInput').value.trim());
         localStorage.setItem('bingo_comment', document.getElementById('commentInput').value.trim());
         
@@ -396,7 +683,7 @@ function clearAllChecks() {
 
 function resetToDefault() {
     if (!confirm("初期状態に戻しますか？(マイテンプレートは消えません)")) return;
-    localStorage.removeItem('bingo_title'); localStorage.removeItem('bingo_date'); localStorage.removeItem('bingo_name'); localStorage.removeItem('bingo_comment'); localStorage.removeItem('bingo_theme_color'); localStorage.removeItem('bingo_theme_emoji'); localStorage.removeItem('bingo_include_confetti');
+    localStorage.removeItem('bingo_title'); localStorage.removeItem('bingo_date'); localStorage.removeItem('bingo_date_is_auto'); localStorage.removeItem('bingo_name'); localStorage.removeItem('bingo_comment'); localStorage.removeItem('bingo_theme_color'); localStorage.removeItem('bingo_theme_emoji'); localStorage.removeItem('bingo_include_confetti');
     for (let i = 0; i < 9; i++) { localStorage.removeItem('bingo_cell_text_' + i); localStorage.removeItem('bingo_checked_' + i); }
     isEditMode = false; initBingo();
 }
