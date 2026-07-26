@@ -19,11 +19,7 @@
       --check-text: #1a2b3c;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -215,10 +211,7 @@
       color: #2563eb;
     }
 
-    .controls {
-      background: transparent;
-      padding: 0;
-    }
+    .controls { background: transparent; padding: 0; }
 
     .section-title {
       font-size: 13px;
@@ -357,10 +350,7 @@
       margin-top: 4px;
     }
 
-    .tmpl-table td {
-      padding: 3px 2px;
-      vertical-align: middle;
-    }
+    .tmpl-table td { padding: 3px 2px; vertical-align: middle; }
 
     .tmpl-table input {
       width: 100%;
@@ -370,32 +360,11 @@
       border-radius: 6px;
     }
 
-    .btn-tmpl {
-      padding: 4px 6px;
-      font-size: 10.5px;
-      border-radius: 6px;
-    }
-
-    .btn-tmpl.save {
-      background: #f1f5f9;
-      color: #334155;
-    }
-
-    .btn-tmpl.load {
-      background: #22c55e;
-      color: white;
-      width: 100%;
-    }
-
-    .btn-tmpl.load:disabled {
-      background: #cbd5e1;
-      color: #94a3b8;
-    }
-
-    .btn-tmpl.delete {
-      background: #ef4444;
-      color: white;
-    }
+    .btn-tmpl { padding: 4px 6px; font-size: 10.5px; border-radius: 6px; }
+    .btn-tmpl.save { background: #f1f5f9; color: #334155; }
+    .btn-tmpl.load { background: #22c55e; color: white; width: 100%; }
+    .btn-tmpl.load:disabled { background: #cbd5e1; color: #94a3b8; }
+    .btn-tmpl.delete { background: #ef4444; color: white; }
 
     .footer-links {
       display: flex;
@@ -414,10 +383,7 @@
       font-weight: 600;
     }
 
-    .toggle-container {
-      text-align: center;
-      margin-top: 6px;
-    }
+    .toggle-container { text-align: center; margin-top: 6px; }
 
     .toggle-label {
       font-size: 11px;
@@ -506,16 +472,12 @@
       border-radius: 1px;
     }
 
-    .fake-confetti.circle {
-      border-radius: 50%;
-    }
+    .fake-confetti.circle { border-radius: 50%; }
   </style>
 </head>
 
 <body>
-
 <div class="container">
-
   <div class="top-instruction">
     タップでチェック！<br>
     編集ボタンでマスの文字や色を変えられます♡<br>
@@ -523,10 +485,7 @@
   </div>
 
   <div id="bingoCard" class="card-container">
-
-    <h2 id="bingoTitle">
-      ❄️ マイ応援BINGO ❄️
-    </h2>
+    <h2 id="bingoTitle">❄️ マイ応援BINGO ❄️</h2>
 
     <div class="card-meta">
       <span id="metaDate"></span>
@@ -534,2947 +493,896 @@
     </div>
 
     <div id="metaComment" class="card-comment"></div>
-
     <div id="grid" class="bingo-grid"></div>
-
   </div>
 
   <div class="controls">
-
-    <p class="section-title">
-      ❄️ チェックスマスの色を選ぶ
-    </p>
+    <p class="section-title">❄️ チェックスマスの色を選ぶ</p>
 
     <div class="color-picker">
-
-      <div class="color-dot active"
-        data-color="#ffb703"
-        onclick="changeTheme('#ffb703','💪💛')"
-        style="background:#ffb703;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#7209b7"
-        onclick="changeTheme('#7209b7','💜')"
-        style="background:#7209b7;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#ffffff"
-        onclick="changeTheme('#ffffff','🤍')"
-        style="background:#ffffff;border:1px solid #ccc;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#4ea8de"
-        onclick="changeTheme('#4ea8de','💙')"
-        style="background:#4ea8de;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#f97316"
-        onclick="changeTheme('#f97316','🧡')"
-        style="background:#f97316;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#2a9d8f"
-        onclick="changeTheme('#2a9d8f','💚')"
-        style="background:#2a9d8f;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#212529"
-        onclick="changeTheme('#212529','🖤')"
-        style="background:#212529;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#e63946"
-        onclick="changeTheme('#e63946','❤️')"
-        style="background:#e63946;">
-      </div>
-
-      <div class="color-dot"
-        data-color="#ff69b4"
-        onclick="changeTheme('#ff69b4','💗')"
-        style="background:#ff69b4;">
-      </div>
+      <div class="color-dot active" data-color="#ffb703" onclick="changeTheme('#ffb703','💪💛')" style="background:#ffb703;"></div>
+      <div class="color-dot" data-color="#7209b7" onclick="changeTheme('#7209b7','💜')" style="background:#7209b7;"></div>
+      <div class="color-dot" data-color="#ffffff" onclick="changeTheme('#ffffff','🤍')" style="background:#ffffff; border:1px solid #ccc;"></div>
+      <div class="color-dot" data-color="#4ea8de" onclick="changeTheme('#4ea8de','💙')" style="background:#4ea8de;"></div>
+      <div class="color-dot" data-color="#f97316" onclick="changeTheme('#f97316','🧡')" style="background:#f97316;"></div>
+      <div class="color-dot" data-color="#2a9d8f" onclick="changeTheme('#2a9d8f','💚')" style="background:#2a9d8f;"></div>
+      <div class="color-dot" data-color="#212529" onclick="changeTheme('#212529','🖤')" style="background:#212529;"></div>
+      <div class="color-dot" data-color="#e63946" onclick="changeTheme('#e63946','❤️')" style="background:#e63946;"></div>
+      <div class="color-dot" data-color="#ff69b4" onclick="changeTheme('#ff69b4','💗')" style="background:#ff69b4;"></div>
 
       <div id="customColorWrapper" class="custom-color-wrapper">
-        <input
-          type="color"
-          id="customColorPicker"
-          oninput="customTheme(this.value)"
-        >
+        <input type="color" id="customColorPicker" oninput="customTheme(this.value)">
         <span class="rainbow-icon">🌈</span>
       </div>
-
     </div>
 
-    <button
-      id="editBtn"
-      class="btn btn-main"
-      onclick="toggleEditMode()"
-    >
+    <button id="editBtn" class="btn btn-main" onclick="toggleEditMode()">
       ✏️ マス目・タイトルを編集する
     </button>
 
-    <div
-      id="templateArea"
-      class="template-area"
-      style="display:none;"
-    >
-
+    <div id="templateArea" class="template-area" style="display:none;">
       <p class="edit-help">
         各マスの 🎲 でその1マスだけランダム変更<br>
         🔗 でそのマスから開くURLを設定できます
       </p>
 
-      <p class="section-title">
-        📋 テンプレートから文字を一括セット
-      </p>
+      <p class="section-title">📋 テンプレートから文字を一括セット</p>
 
       <div class="template-presets">
-
-        <button
-          type="button"
-          class="btn btn-sub"
-          onclick="loadPreset('default')"
-        >
-          通常期のタスク
-        </button>
-
-        <button
-          type="button"
-          class="btn btn-sub"
-          onclick="loadPreset('release')"
-        >
-          リリース期のタスク
-        </button>
-
+        <button type="button" class="btn btn-sub" onclick="loadPreset('default')">通常期のタスク</button>
+        <button type="button" class="btn btn-sub" onclick="loadPreset('release')">リリース期のタスク</button>
       </div>
 
-      <p
-        class="section-title"
-        style="margin-top:15px;"
-      >
-        💾 マイテンプレート（5枠まで保存可能）
-      </p>
+      <p class="section-title" style="margin-top:15px;">💾 マイテンプレート（5枠まで保存可能）</p>
 
       <table class="tmpl-table">
-
         <tr>
-          <td>
-            <input
-              type="text"
-              id="tmplName1"
-              placeholder="カード1の名前"
-              onchange="saveSlotName(1)"
-              maxlength="8"
-            >
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl save"
-              onclick="saveMyTemplate(1)"
-            >
-              保存
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              id="loadBtn1"
-              class="btn btn-tmpl load"
-              onclick="loadMyTemplate(1)"
-            >
-              呼出
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl delete"
-              onclick="deleteMyTemplate(1)"
-            >
-              削除
-            </button>
-          </td>
+          <td><input type="text" id="tmplName1" placeholder="カード1の名前" onchange="saveSlotName(1)" maxlength="8"></td>
+          <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(1)">保存</button></td>
+          <td><button type="button" id="loadBtn1" class="btn btn-tmpl load" onclick="loadMyTemplate(1)">呼出</button></td>
+          <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(1)">削除</button></td>
         </tr>
-
         <tr>
-          <td>
-            <input
-              type="text"
-              id="tmplName2"
-              placeholder="カード2の名前"
-              onchange="saveSlotName(2)"
-              maxlength="8"
-            >
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl save"
-              onclick="saveMyTemplate(2)"
-            >
-              保存
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              id="loadBtn2"
-              class="btn btn-tmpl load"
-              onclick="loadMyTemplate(2)"
-            >
-              呼出
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl delete"
-              onclick="deleteMyTemplate(2)"
-            >
-              削除
-            </button>
-          </td>
+          <td><input type="text" id="tmplName2" placeholder="カード2の名前" onchange="saveSlotName(2)" maxlength="8"></td>
+          <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(2)">保存</button></td>
+          <td><button type="button" id="loadBtn2" class="btn btn-tmpl load" onclick="loadMyTemplate(2)">呼出</button></td>
+          <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(2)">削除</button></td>
         </tr>
-
         <tr>
-          <td>
-            <input
-              type="text"
-              id="tmplName3"
-              placeholder="カード3の名前"
-              onchange="saveSlotName(3)"
-              maxlength="8"
-            >
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl save"
-              onclick="saveMyTemplate(3)"
-            >
-              保存
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              id="loadBtn3"
-              class="btn btn-tmpl load"
-              onclick="loadMyTemplate(3)"
-            >
-              呼出
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl delete"
-              onclick="deleteMyTemplate(3)"
-            >
-              削除
-            </button>
-          </td>
+          <td><input type="text" id="tmplName3" placeholder="カード3の名前" onchange="saveSlotName(3)" maxlength="8"></td>
+          <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(3)">保存</button></td>
+          <td><button type="button" id="loadBtn3" class="btn btn-tmpl load" onclick="loadMyTemplate(3)">呼出</button></td>
+          <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(3)">削除</button></td>
         </tr>
-
         <tr>
-          <td>
-            <input
-              type="text"
-              id="tmplName4"
-              placeholder="カード4の名前"
-              onchange="saveSlotName(4)"
-              maxlength="8"
-            >
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl save"
-              onclick="saveMyTemplate(4)"
-            >
-              保存
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              id="loadBtn4"
-              class="btn btn-tmpl load"
-              onclick="loadMyTemplate(4)"
-            >
-              呼出
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl delete"
-              onclick="deleteMyTemplate(4)"
-            >
-              削除
-            </button>
-          </td>
+          <td><input type="text" id="tmplName4" placeholder="カード4の名前" onchange="saveSlotName(4)" maxlength="8"></td>
+          <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(4)">保存</button></td>
+          <td><button type="button" id="loadBtn4" class="btn btn-tmpl load" onclick="loadMyTemplate(4)">呼出</button></td>
+          <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(4)">削除</button></td>
         </tr>
-
         <tr>
-          <td>
-            <input
-              type="text"
-              id="tmplName5"
-              placeholder="カード5の名前"
-              onchange="saveSlotName(5)"
-              maxlength="8"
-            >
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl save"
-              onclick="saveMyTemplate(5)"
-            >
-              保存
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              id="loadBtn5"
-              class="btn btn-tmpl load"
-              onclick="loadMyTemplate(5)"
-            >
-              呼出
-            </button>
-          </td>
-          <td>
-            <button
-              type="button"
-              class="btn btn-tmpl delete"
-              onclick="deleteMyTemplate(5)"
-            >
-              削除
-            </button>
-          </td>
+          <td><input type="text" id="tmplName5" placeholder="カード5の名前" onchange="saveSlotName(5)" maxlength="8"></td>
+          <td><button type="button" class="btn btn-tmpl save" onclick="saveMyTemplate(5)">保存</button></td>
+          <td><button type="button" id="loadBtn5" class="btn btn-tmpl load" onclick="loadMyTemplate(5)">呼出</button></td>
+          <td><button type="button" class="btn btn-tmpl delete" onclick="deleteMyTemplate(5)">削除</button></td>
         </tr>
-
       </table>
-
     </div>
 
     <div class="footer-links">
-
-      <button
-        class="link-btn"
-        onclick="clearAllChecks()"
-      >
-        🧹 チェックをリセット
-      </button>
-
-      <button
-        class="link-btn"
-        onclick="resetToDefault()"
-      >
-        🔄 初期設定に戻す
-      </button>
-
+      <button class="link-btn" onclick="clearAllChecks()">🧹 チェックをリセット</button>
+      <button class="link-btn" onclick="resetToDefault()">🔄 初期設定に戻す</button>
     </div>
 
     <div class="toggle-container">
-
       <label class="toggle-label">
-
-        <input
-          type="checkbox"
-          id="includeConfettiCheck"
-          checked
-          onchange="saveToggleState()"
-        >
-
+        <input type="checkbox" id="includeConfettiCheck" checked onchange="saveToggleState()">
         🎉 画像に紙吹雪を乗せる (全マス埋まった時のみ)
-
       </label>
-
     </div>
 
-    <button
-      id="shareBtn"
-      class="btn btn-share"
-      onclick="shareOnX()"
-    >
-      報告・シェアする
-    </button>
-
-    <button
-      id="boardShareBtn"
-      class="btn btn-board-share"
-      onclick="shareBoard()"
-    >
-      🔗 この盤面を共有する
-    </button>
-
+    <button id="shareBtn" class="btn btn-share" onclick="shareOnX()">報告・シェアする</button>
+    <button id="boardShareBtn" class="btn btn-board-share" onclick="shareBoard()">🔗 この盤面を共有する</button>
   </div>
-
 </div>
 
+<div id="shareModal" class="modal" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <h3>報告・シェア</h3>
 
-<div
-  id="shareModal"
-  class="modal"
-  onclick="closeModal()"
->
-
-  <div
-    class="modal-content"
-    onclick="event.stopPropagation()"
-  >
-
-    <h3>
-      長押し or 右クリックで画像を保存してね！
-    </h3>
+    <p style="font-size:11px;color:#607d9b;line-height:1.6;margin:4px 4px 10px;">
+      画像を保存して投稿することもできます♡
+    </p>
 
     <div class="modal-image-wrapper">
-
-      <img
-        id="modalImage"
-        src=""
-        alt="BINGOカード画像"
-      >
-
+      <img id="modalImage" src="" alt="BINGOカード画像">
     </div>
 
-    <p
-      style="
-        font-size:11px;
-        color:#ef4444;
-        margin-top:6px;
-        text-align:center;
-        font-weight:bold;
-        padding:0 4px;
-      "
-    >
-      ⚠️画像は自動添付されません。保存した画像を自分で添付して投稿してください。
+    <p style="font-size:10.5px;color:#7fa0c0;margin-top:6px;text-align:center;line-height:1.5;padding:0 4px;">
+      画像は長押しで保存できます
     </p>
 
     <div class="modal-buttons">
-
-      <button
-        id="modalShareBtn"
-        class="btn btn-modal-x"
-      >
-        𝕏 にポストする
-      </button>
-
-      <button
-        id="modalShareThreadsBtn"
-        class="btn btn-modal-threads"
-      >
-        Threadsに投稿
-      </button>
-
-      <button
-        class="btn btn-modal-close"
-        onclick="closeModal()"
-      >
-        閉じる
-      </button>
-
+      <button id="modalShareBtn" class="btn btn-modal-x">𝕏 に投稿する</button>
+      <button id="modalShareThreadsBtn" class="btn btn-modal-threads">Threadsに投稿</button>
+      <button id="modalNativeShareBtn" class="btn btn-main" style="margin:0;">その他のアプリで共有</button>
+      <button id="modalCopyUrlBtn" class="btn btn-main" style="margin:0;">🔗 URLをコピー</button>
+      <button class="btn btn-modal-close" onclick="closeModal()">閉じる</button>
     </div>
-
   </div>
-
 </div>
 
-
 <script>
-
 let isEditMode = false;
 let currentColor = '#ffb703';
 let currentEmoji = '💪💛';
 let dateRefreshTimer = null;
 
-
 const templates = {
-
   default: [
-
     "朝の\n1再生",
-
     "SNSで\n曲を共有",
-
     "通勤・通学\nに聴く",
-
     "YouTube\nMV視聴",
-
     "ミュート\nにしない",
-
     "お風呂で\n1曲",
-
     "SNSの共有\nURLから聴\nく",
-
     "友達・家族\nに\n布教",
-
     "寝る前の\n1曲"
-
   ],
-
-
   release: [
-
     "Shazamで\n検索＆共有\n3回",
-
     "各種配信\nサイトで\nDL購入！",
-
     "TikTok\n公式音源動画\n投稿\norいいね5回",
-
     "新曲入り\nリストを\nストリーミング\n再生",
-
     "今日も楽しく\n応援した！",
-
     "身近な人や\nSNSで\n本日も1布教",
-
     "SNSで曲を\n共有＆\n共有された\nURLから聴く",
-
     "他動画も\n挟みながら\nMV再生3回",
-
     "全マス\n埋めた！"
-
   ]
-
 };
 
-
 const snowmanColors = [
-
-  '#ffb703',
-
-  '#7209b7',
-
-  '#ffffff',
-
-  '#4ea8de',
-
-  '#f97316',
-
-  '#2a9d8f',
-
-  '#212529',
-
-  '#e63946',
-
-  '#ff69b4'
-
+  '#ffb703','#7209b7','#ffffff','#4ea8de','#f97316',
+  '#2a9d8f','#212529','#e63946','#ff69b4'
 ];
 
-
-function getContrastColor(
-  hexColor
-) {
-
-  const r =
-    parseInt(
-      hexColor.substr(
-        1,
-        2
-      ),
-      16
-    );
-
-  const g =
-    parseInt(
-      hexColor.substr(
-        3,
-        2
-      ),
-      16
-    );
-
-  const b =
-    parseInt(
-      hexColor.substr(
-        5,
-        2
-      ),
-      16
-    );
-
-  const yiq =
-    (
-      (r * 299) +
-      (g * 587) +
-      (b * 114)
-    ) / 1000;
-
-  return yiq >= 140
-    ? '#1a2b3c'
-    : '#ffffff';
-
+function getContrastColor(hexColor) {
+  const r = parseInt(hexColor.substr(1, 2), 16);
+  const g = parseInt(hexColor.substr(3, 2), 16);
+  const b = parseInt(hexColor.substr(5, 2), 16);
+  const yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
+  return yiq >= 140 ? '#1a2b3c' : '#ffffff';
 }
 
+function applyTheme(color, emoji) {
+  currentColor = color;
+  currentEmoji = emoji;
 
-function applyTheme(
-  color,
-  emoji
-) {
+  const textColor = getContrastColor(color);
+  const r = parseInt(color.substr(1, 2), 16);
+  const g = parseInt(color.substr(3, 2), 16);
+  const b = parseInt(color.substr(5, 2), 16);
 
-  currentColor =
-    color;
+  document.documentElement.style.setProperty('--border-color', `rgba(${r}, ${g}, ${b}, 0.35)`);
+  document.documentElement.style.setProperty('--check-color', color);
+  document.documentElement.style.setProperty('--check-text', textColor);
 
-  currentEmoji =
-    emoji;
+  document.querySelectorAll('.color-dot').forEach(dot => {
+    dot.classList.toggle('active', dot.getAttribute('data-color') === color);
+  });
 
-  const textColor =
-    getContrastColor(
-      color
-    );
-
-  const r =
-    parseInt(
-      color.substr(
-        1,
-        2
-      ),
-      16
-    );
-
-  const g =
-    parseInt(
-      color.substr(
-        3,
-        2
-      ),
-      16
-    );
-
-  const b =
-    parseInt(
-      color.substr(
-        5,
-        2
-      ),
-      16
-    );
-
-  document.documentElement
-    .style
-    .setProperty(
-      '--border-color',
-      `rgba(${r}, ${g}, ${b}, 0.35)`
-    );
-
-  document.documentElement
-    .style
-    .setProperty(
-      '--check-color',
-      color
-    );
-
-  document.documentElement
-    .style
-    .setProperty(
-      '--check-text',
-      textColor
-    );
-
-  document
-    .querySelectorAll(
-      '.color-dot'
-    )
-    .forEach(
-      dot => {
-
-        dot.classList.toggle(
-          'active',
-
-          dot.getAttribute(
-            'data-color'
-          ) === color
-        );
-
-      }
-    );
-
-  document
-    .getElementById(
-      'customColorWrapper'
-    )
-    .classList.toggle(
-      'active',
-
-      !snowmanColors.includes(
-        color
-      )
-    );
-
+  document.getElementById('customColorWrapper')
+    .classList.toggle('active', !snowmanColors.includes(color));
 }
 
-
-function changeTheme(
-  color,
-  emoji
-) {
-
-  applyTheme(
-    color,
-    emoji
-  );
-
-  localStorage.setItem(
-    'bingo_theme_color',
-    color
-  );
-
-  localStorage.setItem(
-    'bingo_theme_emoji',
-    emoji
-  );
-
+function changeTheme(color, emoji) {
+  applyTheme(color, emoji);
+  localStorage.setItem('bingo_theme_color', color);
+  localStorage.setItem('bingo_theme_emoji', emoji);
 }
 
-
-function customTheme(
-  color
-) {
-
-  applyTheme(
-    color,
-    '✨'
-  );
-
-  localStorage.setItem(
-    'bingo_theme_color',
-    color
-  );
-
-  localStorage.setItem(
-    'bingo_theme_emoji',
-    '✨'
-  );
-
+function customTheme(color) {
+  applyTheme(color, '✨');
+  localStorage.setItem('bingo_theme_color', color);
+  localStorage.setItem('bingo_theme_emoji', '✨');
 }
-
 
 function checkAllComplete() {
-
-  let checkedCount =
-    0;
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    if (
-      localStorage.getItem(
-        'bingo_checked_' + i
-      ) === 'true'
-    ) {
-
-      checkedCount++;
-
-    }
-
+  let checkedCount = 0;
+  for (let i = 0; i < 9; i++) {
+    if (localStorage.getItem('bingo_checked_' + i) === 'true') checkedCount++;
   }
 
-  if (
-    checkedCount === 9
-  ) {
-
+  if (checkedCount === 9) {
     try {
-
-      const f =
-        window.confetti ||
-        confetti;
-
-      if (
-        typeof f ===
-        'function'
-      ) {
-
+      const f = window.confetti || confetti;
+      if (typeof f === 'function') {
         f({
-
           particleCount: 150,
-
           spread: 80,
-
-          origin: {
-            y: 0.6
-          },
-
-          colors:
-            snowmanColors
-
+          origin: { y: 0.6 },
+          colors: snowmanColors
         });
-
       }
-
     } catch (error) {
-
-      console.error(
-        error
-      );
-
+      console.error(error);
     }
-
   }
-
 }
-
 
 function saveToggleState() {
-
   localStorage.setItem(
-
     'bingo_include_confetti',
-
-    document
-      .getElementById(
-        'includeConfettiCheck'
-      )
-      .checked
-
+    document.getElementById('includeConfettiCheck').checked
   );
-
 }
 
-
-function saveSlotName(
-  slot
-) {
-
+function saveSlotName(slot) {
   localStorage.setItem(
-
     `bingo_my_tmpl_name_${slot}`,
-
-    document
-      .getElementById(
-        `tmplName${slot}`
-      )
-      .value
-      .trim()
-
+    document.getElementById(`tmplName${slot}`).value.trim()
   );
-
 }
-
 
 function updateCustomTmplButtons() {
+  for (let i = 1; i <= 5; i++) {
+    const btn = document.getElementById(`loadBtn${i}`);
+    const input = document.getElementById(`tmplName${i}`);
+    if (!btn || !input) continue;
 
-  for (
-    let i = 1;
-    i <= 5;
-    i++
-  ) {
+    const name = localStorage.getItem(`bingo_my_tmpl_name_${i}`) || '';
+    const template = localStorage.getItem(`bingo_my_tmpl_${i}`);
 
-    const btn =
-      document.getElementById(
-        `loadBtn${i}`
-      );
-
-    const input =
-      document.getElementById(
-        `tmplName${i}`
-      );
-
-    if (
-      !btn ||
-      !input
-    ) {
-
-      continue;
-
-    }
-
-    const name =
-      localStorage.getItem(
-        `bingo_my_tmpl_name_${i}`
-      ) || '';
-
-    const template =
-      localStorage.getItem(
-        `bingo_my_tmpl_${i}`
-      );
-
-    input.value =
-      name;
-
-    btn.innerText =
-      template
-        ? `呼出 (${name || '枠' + i})`
-        : '空き';
-
-    btn.disabled =
-      !template;
-
+    input.value = name;
+    btn.innerText = template ? `呼出 (${name || '枠' + i})` : '空き';
+    btn.disabled = !template;
   }
-
 }
 
-
-function getCellLink(
-  index
-) {
-
-  return (
-    localStorage.getItem(
-      `bingo_cell_link_${index}`
-    ) || ''
-  );
-
+function getCellLink(index) {
+  return localStorage.getItem(`bingo_cell_link_${index}`) || '';
 }
 
-
-function normalizeUrl(
-  value
-) {
-
-  const url =
-    (
-      value || ''
-    ).trim();
-
-  if (
-    !url
-  ) {
-
-    return '';
-
-  }
+function normalizeUrl(value) {
+  const url = (value || '').trim();
+  if (!url) return '';
 
   try {
-
-    const parsed =
-      new URL(
-        url
-      );
-
-    if (
-      parsed.protocol !==
-        'http:' &&
-      parsed.protocol !==
-        'https:'
-    ) {
-
-      throw new Error(
-        'unsupported protocol'
-      );
-
+    const parsed = new URL(url);
+    if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+      throw new Error('unsupported protocol');
     }
-
     return parsed.href;
-
   } catch {
-
     return null;
-
   }
-
 }
 
+function editCellLink(index) {
+  const current = getCellLink(index);
+  const value = prompt(
+    'このマスから開くURLを入力してください。\n空欄でリンクを削除できます。',
+    current
+  );
 
-function editCellLink(
-  index
-) {
+  if (value === null) return;
 
-  const current =
-    getCellLink(
-      index
-    );
+  const normalized = normalizeUrl(value);
 
-  const value =
-    prompt(
-
-      'このマスから開くURLを入力してください。\n空欄でリンクを削除できます。',
-
-      current
-
-    );
-
-  if (
-    value === null
-  ) {
-
+  if (normalized === null) {
+    alert('http:// または https:// から始まるURLを入力してください。');
     return;
-
   }
 
-  const normalized =
-    normalizeUrl(
-      value
-    );
-
-  if (
-    normalized === null
-  ) {
-
-    alert(
-      'http:// または https:// から始まるURLを入力してください。'
-    );
-
-    return;
-
-  }
-
-  if (
-    normalized
-  ) {
-
-    localStorage.setItem(
-
-      `bingo_cell_link_${index}`,
-
-      normalized
-
-    );
-
+  if (normalized) {
+    localStorage.setItem(`bingo_cell_link_${index}`, normalized);
   } else {
-
-    localStorage.removeItem(
-      `bingo_cell_link_${index}`
-    );
-
+    localStorage.removeItem(`bingo_cell_link_${index}`);
   }
 
-  if (
-    isEditMode
-  ) {
-
-    const btn =
-      document.querySelector(
-        `#cell-${index} .link-edit-btn`
-      );
-
-    if (
-      btn
-    ) {
-
-      btn.classList.toggle(
-        'has-link',
-        !!normalized
-      );
-
-    }
-
+  if (isEditMode) {
+    const btn = document.querySelector(`#cell-${index} .link-edit-btn`);
+    if (btn) btn.classList.toggle('has-link', !!normalized);
   } else {
-
     initBingo();
-
   }
-
 }
-
 
 function getRandomTaskPool() {
+  const pool = [...templates.default, ...templates.release];
 
-  const pool = [
-
-    ...templates.default,
-
-    ...templates.release
-
-  ];
-
-  for (
-    let slot = 1;
-    slot <= 5;
-    slot++
-  ) {
-
-    const saved =
-      localStorage.getItem(
-        `bingo_my_tmpl_${slot}`
-      );
-
-    if (
-      !saved
-    ) {
-
-      continue;
-
-    }
+  for (let slot = 1; slot <= 5; slot++) {
+    const saved = localStorage.getItem(`bingo_my_tmpl_${slot}`);
+    if (!saved) continue;
 
     try {
+      const parsed = JSON.parse(saved);
 
-      const parsed =
-        JSON.parse(
-          saved
-        );
-
-      if (
-        Array.isArray(
-          parsed
-        )
-      ) {
-
-        pool.push(
-          ...parsed
-        );
-
-      } else if (
-        parsed &&
-        Array.isArray(
-          parsed.texts
-        )
-      ) {
-
-        pool.push(
-          ...parsed.texts
-        );
-
+      if (Array.isArray(parsed)) {
+        pool.push(...parsed);
+      } else if (parsed && Array.isArray(parsed.texts)) {
+        pool.push(...parsed.texts);
       }
-
-    } catch (
-      error
-    ) {
-
-      console.warn(
-
-        'テンプレート読込エラー',
-
-        error
-
-      );
-
+    } catch (error) {
+      console.warn('テンプレート読込エラー', error);
     }
-
   }
 
-  return [
-
-    ...new Set(
-
-      pool
-
-        .map(
-          v =>
-            typeof v ===
-              'string'
-              ? v.trim()
-              : ''
-        )
-
-        .filter(
-          Boolean
-        )
-
-    )
-
-  ];
-
+  return [...new Set(
+    pool.map(v => typeof v === 'string' ? v.trim() : '')
+        .filter(Boolean)
+  )];
 }
 
+function randomizeCell(index) {
+  const cell = document.getElementById(`cell-${index}`);
+  if (!cell) return;
 
-function randomizeCell(
-  index
-) {
+  const textarea = cell.querySelector('textarea');
+  if (!textarea) return;
 
-  const cell =
-    document.getElementById(
-      `cell-${index}`
-    );
+  const pool = getRandomTaskPool()
+    .filter(task => task !== textarea.value.trim());
 
-  if (
-    !cell
-  ) {
-
+  if (pool.length === 0) {
+    alert('ランダムに選べるタスクがありません。');
     return;
-
   }
 
-  const textarea =
-    cell.querySelector(
-      'textarea'
-    );
-
-  if (
-    !textarea
-  ) {
-
-    return;
-
-  }
-
-  const pool =
-    getRandomTaskPool()
-      .filter(
-
-        task =>
-          task !==
-          textarea.value.trim()
-
-      );
-
-  if (
-    pool.length === 0
-  ) {
-
-    alert(
-      'ランダムに選べるタスクがありません。'
-    );
-
-    return;
-
-  }
-
-  const picked =
-    pool[
-      Math.floor(
-        Math.random() *
-        pool.length
-      )
-    ];
-
-  textarea.value =
-    picked;
-
+  const picked = pool[Math.floor(Math.random() * pool.length)];
+  textarea.value = picked;
 }
 
+function loadPreset(key) {
+  const data = templates[key] || templates.default;
 
-function loadPreset(
-  key
-) {
+  for (let i = 0; i < 9; i++) {
+    localStorage.setItem('bingo_cell_text_' + i, data[i]);
 
-  const data =
-    templates[key] ||
-    templates.default;
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    localStorage.setItem(
-
-      'bingo_cell_text_' + i,
-
-      data[i]
-
-    );
-
-    const textarea =
-      document.querySelector(
-        `#cell-${i} textarea`
-      );
-
-    if (
-      textarea
-    ) {
-
-      textarea.value =
-        data[i];
-
-    }
-
+    const textarea = document.querySelector(`#cell-${i} textarea`);
+    if (textarea) textarea.value = data[i];
   }
 
   initBingo();
 
-  if (
-    isEditMode
-  ) {
-
-    isEditMode =
-      false;
-
+  if (isEditMode) {
+    isEditMode = false;
     toggleEditMode();
-
   }
-
 }
 
-
-function saveMyTemplate(
-  slot
-) {
-
+function saveMyTemplate(slot) {
   const texts = [];
   const links = [];
 
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    const textarea =
-      document.querySelector(
-        `#cell-${i} textarea`
-      );
-
+  for (let i = 0; i < 9; i++) {
+    const textarea = document.querySelector(`#cell-${i} textarea`);
     texts.push(
-
       textarea
         ? textarea.value.trim()
-        : (
-            localStorage.getItem(
-              `bingo_cell_text_${i}`
-            ) || ''
-          )
-
+        : (localStorage.getItem(`bingo_cell_text_${i}`) || '')
     );
-
-    links.push(
-      getCellLink(
-        i
-      )
-    );
-
+    links.push(getCellLink(i));
   }
 
   localStorage.setItem(
-
     `bingo_my_tmpl_${slot}`,
-
-    JSON.stringify({
-
-      version: 2,
-
-      texts,
-
-      links
-
-    })
-
+    JSON.stringify({ version: 2, texts, links })
   );
 
-  saveSlotName(
-    slot
-  );
-
-  alert(
-    '保存しました！'
-  );
-
+  saveSlotName(slot);
+  alert('保存しました！');
   updateCustomTmplButtons();
-
 }
 
-
-function loadMyTemplate(
-  slot
-) {
-
-  const saved =
-    localStorage.getItem(
-      `bingo_my_tmpl_${slot}`
-    );
-
-  if (
-    !saved
-  ) {
-
-    return;
-
-  }
+function loadMyTemplate(slot) {
+  const saved = localStorage.getItem(`bingo_my_tmpl_${slot}`);
+  if (!saved) return;
 
   try {
+    const parsed = JSON.parse(saved);
+    const texts = Array.isArray(parsed) ? parsed : (parsed.texts || []);
+    const links = Array.isArray(parsed) ? [] : (parsed.links || []);
 
-    const parsed =
-      JSON.parse(
-        saved
-      );
+    for (let i = 0; i < 9; i++) {
+      const text = texts[i] !== undefined ? texts[i] : '';
+      localStorage.setItem(`bingo_cell_text_${i}`, text);
 
-    const texts =
-      Array.isArray(
-        parsed
-      )
-        ? parsed
-        : (
-            parsed.texts ||
-            []
-          );
-
-    const links =
-      Array.isArray(
-        parsed
-      )
-        ? []
-        : (
-            parsed.links ||
-            []
-          );
-
-    for (
-      let i = 0;
-      i < 9;
-      i++
-    ) {
-
-      const text =
-        texts[i] !==
-          undefined
-          ? texts[i]
-          : '';
-
-      localStorage.setItem(
-
-        `bingo_cell_text_${i}`,
-
-        text
-
-      );
-
-      if (
-        links[i]
-      ) {
-
-        localStorage.setItem(
-
-          `bingo_cell_link_${i}`,
-
-          links[i]
-
-        );
-
+      if (links[i]) {
+        localStorage.setItem(`bingo_cell_link_${i}`, links[i]);
       } else {
-
-        localStorage.removeItem(
-          `bingo_cell_link_${i}`
-        );
-
+        localStorage.removeItem(`bingo_cell_link_${i}`);
       }
-
     }
 
     initBingo();
 
-    if (
-      isEditMode
-    ) {
-
-      isEditMode =
-        false;
-
+    if (isEditMode) {
+      isEditMode = false;
       toggleEditMode();
-
     }
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
-    alert(
-      'テンプレートを読み込めませんでした。'
-    );
-
+  } catch (error) {
+    console.error(error);
+    alert('テンプレートを読み込めませんでした。');
   }
-
 }
 
+function deleteMyTemplate(slot) {
+  if (!confirm('削除してもよろしいですか？')) return;
 
-function deleteMyTemplate(
-  slot
-) {
+  localStorage.removeItem(`bingo_my_tmpl_${slot}`);
+  localStorage.removeItem(`bingo_my_tmpl_name_${slot}`);
 
-  if (
-    !confirm(
-      '削除してもよろしいですか？'
-    )
-  ) {
-
-    return;
-
-  }
-
-  localStorage.removeItem(
-    `bingo_my_tmpl_${slot}`
-  );
-
-  localStorage.removeItem(
-    `bingo_my_tmpl_name_${slot}`
-  );
-
-  const input =
-    document.getElementById(
-      `tmplName${slot}`
-    );
-
-  if (
-    input
-  ) {
-
-    input.value =
-      '';
-
-  }
+  const input = document.getElementById(`tmplName${slot}`);
+  if (input) input.value = '';
 
   updateCustomTmplButtons();
-
 }
-
 
 function getTodayString() {
-
-  const date =
-    new Date();
-
-  return `${date.getFullYear()}/${String(
-    date.getMonth() + 1
-  ).padStart(2, '0')}/${String(
-    date.getDate()
-  ).padStart(2, '0')}`;
-
+  const date = new Date();
+  return `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}/${String(date.getDate()).padStart(2, '0')}`;
 }
-
 
 function getDateMode() {
+  const savedMode = localStorage.getItem('bingo_date_mode');
 
-  const savedMode =
-    localStorage.getItem(
-      'bingo_date_mode'
-    );
+  if (['auto','fixed','blank'].includes(savedMode)) return savedMode;
 
-  if (
-    savedMode ===
-      'auto' ||
-    savedMode ===
-      'fixed' ||
-    savedMode ===
-      'blank'
-  ) {
+  const oldAuto = localStorage.getItem('bingo_date_is_auto');
+  const oldDate = localStorage.getItem('bingo_date');
 
-    return savedMode;
-
-  }
-
-  const oldAuto =
-    localStorage.getItem(
-      'bingo_date_is_auto'
-    );
-
-  const oldDate =
-    localStorage.getItem(
-      'bingo_date'
-    );
-
-  if (
-    oldAuto ===
-      'true'
-  ) {
-
-    return 'auto';
-
-  }
-
-  if (
-    oldDate ===
-      ''
-  ) {
-
-    return 'blank';
-
-  }
-
-  if (
-    oldDate !==
-      null
-  ) {
-
-    return 'fixed';
-
-  }
-
+  if (oldAuto === 'true') return 'auto';
+  if (oldDate === '') return 'blank';
+  if (oldDate !== null) return 'fixed';
   return 'auto';
-
 }
-
 
 function getDisplayedDate() {
+  const mode = getDateMode();
 
-  const mode =
-    getDateMode();
-
-  if (
-    mode ===
-      'auto'
-  ) {
-
-    const today =
-      getTodayString();
-
-    localStorage.setItem(
-      'bingo_date',
-      today
-    );
-
-    localStorage.setItem(
-      'bingo_date_mode',
-      'auto'
-    );
-
+  if (mode === 'auto') {
+    const today = getTodayString();
+    localStorage.setItem('bingo_date', today);
+    localStorage.setItem('bingo_date_mode', 'auto');
     return today;
-
   }
 
-  if (
-    mode ===
-      'blank'
-  ) {
-
-    localStorage.setItem(
-      'bingo_date',
-      ''
-    );
-
-    localStorage.setItem(
-      'bingo_date_mode',
-      'blank'
-    );
-
+  if (mode === 'blank') {
+    localStorage.setItem('bingo_date', '');
+    localStorage.setItem('bingo_date_mode', 'blank');
     return '';
-
   }
 
-  return (
-    localStorage.getItem(
-      'bingo_date'
-    ) || ''
-  );
-
+  return localStorage.getItem('bingo_date') || '';
 }
-
 
 function refreshAutoDate() {
+  if (isEditMode || getDateMode() !== 'auto') return;
 
-  if (
-    isEditMode
-  ) {
+  const today = getTodayString();
+  const savedDate = localStorage.getItem('bingo_date');
 
-    return;
+  if (savedDate === today) return;
 
+  localStorage.setItem('bingo_date', today);
+
+  const dateElement = document.getElementById('metaDate');
+  if (dateElement) dateElement.innerText = today;
+
+  const name = localStorage.getItem('bingo_name') || '';
+  const comment = localStorage.getItem('bingo_comment') || '';
+  const metaContainer = document.querySelector('.card-meta');
+  const title = document.getElementById('bingoTitle');
+
+  if (metaContainer) {
+    metaContainer.style.display = today === '' && name === '' ? 'none' : 'flex';
   }
 
-  if (
-    getDateMode() !==
-      'auto'
-  ) {
-
-    return;
-
+  if (title) {
+    title.style.marginBottom = today === '' && name === '' && comment === '' ? '16px' : '4px';
   }
-
-  const today =
-    getTodayString();
-
-  const savedDate =
-    localStorage.getItem(
-      'bingo_date'
-    );
-
-  if (
-    savedDate ===
-      today
-  ) {
-
-    return;
-
-  }
-
-  localStorage.setItem(
-    'bingo_date',
-    today
-  );
-
-  const dateElement =
-    document.getElementById(
-      'metaDate'
-    );
-
-  if (
-    dateElement
-  ) {
-
-    dateElement.innerText =
-      today;
-
-  }
-
-  const name =
-    localStorage.getItem(
-      'bingo_name'
-    ) || '';
-
-  const comment =
-    localStorage.getItem(
-      'bingo_comment'
-    ) || '';
-
-  const metaContainer =
-    document.querySelector(
-      '.card-meta'
-    );
-
-  const title =
-    document.getElementById(
-      'bingoTitle'
-    );
-
-  if (
-    metaContainer
-  ) {
-
-    metaContainer.style.display =
-      today === '' &&
-      name === ''
-        ? 'none'
-        : 'flex';
-
-  }
-
-  if (
-    title
-  ) {
-
-    title.style.marginBottom =
-      today === '' &&
-      name === '' &&
-      comment === ''
-        ? '16px'
-        : '4px';
-
-  }
-
 }
-
 
 function scheduleMidnightRefresh() {
+  if (dateRefreshTimer !== null) clearTimeout(dateRefreshTimer);
 
-  if (
-    dateRefreshTimer !==
-      null
-  ) {
-
-    clearTimeout(
-      dateRefreshTimer
-    );
-
-  }
-
-  const now =
-    new Date();
-
-  const nextMidnight =
-    new Date(
-
-      now.getFullYear(),
-
-      now.getMonth(),
-
-      now.getDate() + 1,
-
-      0,
-      0,
-      1
-
-    );
-
-  const delay =
-    nextMidnight.getTime() -
-    now.getTime();
-
-  dateRefreshTimer =
-    setTimeout(
-
-      () => {
-
-        refreshAutoDate();
-
-        scheduleMidnightRefresh();
-
-      },
-
-      delay
-
-    );
-
-}
-
-
-document.addEventListener(
-
-  'visibilitychange',
-
-  () => {
-
-    if (
-      !document.hidden
-    ) {
-
-      refreshAutoDate();
-
-      scheduleMidnightRefresh();
-
-    }
-
-  }
-
-);
-
-
-window.addEventListener(
-
-  'focus',
-
-  () => {
-
-    refreshAutoDate();
-
-    scheduleMidnightRefresh();
-
-  }
-
-);
-
-
-function createNormalCell(
-  index,
-  text
-) {
-
-  const cell =
-    document.createElement(
-      'div'
-    );
-
-  cell.className =
-    'cell';
-
-  cell.id =
-    'cell-' +
-    index;
-
-  cell.innerText =
-    text;
-
-  cell.classList.toggle(
-
-    'checked',
-
-    localStorage.getItem(
-      'bingo_checked_' + index
-    ) === 'true'
-
+  const now = new Date();
+  const nextMidnight = new Date(
+    now.getFullYear(), now.getMonth(), now.getDate() + 1, 0, 0, 1
   );
 
-  cell.onclick =
-    function () {
+  dateRefreshTimer = setTimeout(() => {
+    refreshAutoDate();
+    scheduleMidnightRefresh();
+  }, nextMidnight.getTime() - now.getTime());
+}
 
-      if (
-        isEditMode
-      ) {
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) {
+    refreshAutoDate();
+    scheduleMidnightRefresh();
+  }
+});
 
-        return;
+window.addEventListener('focus', () => {
+  refreshAutoDate();
+  scheduleMidnightRefresh();
+});
 
-      }
+function createNormalCell(index, text) {
+  const cell = document.createElement('div');
+  cell.className = 'cell';
+  cell.id = 'cell-' + index;
+  cell.innerText = text;
 
-      this.classList.toggle(
-        'checked'
-      );
+  cell.classList.toggle(
+    'checked',
+    localStorage.getItem('bingo_checked_' + index) === 'true'
+  );
 
-      localStorage.setItem(
+  cell.onclick = function () {
+    if (isEditMode) return;
 
-        'bingo_checked_' +
-        index,
+    this.classList.toggle('checked');
 
-        this.classList.contains(
-          'checked'
-        )
+    localStorage.setItem(
+      'bingo_checked_' + index,
+      this.classList.contains('checked')
+    );
 
-      );
+    if (this.classList.contains('checked')) checkAllComplete();
+  };
 
-      if (
-        this.classList.contains(
-          'checked'
-        )
-      ) {
+  const link = getCellLink(index);
 
-        checkAllComplete();
-
-      }
-
+  if (link) {
+    const linkBtn = document.createElement('button');
+    linkBtn.type = 'button';
+    linkBtn.className = 'cell-link-btn';
+    linkBtn.textContent = '🔗';
+    linkBtn.setAttribute('aria-label', 'リンクを開く');
+    linkBtn.onclick = event => {
+      event.stopPropagation();
+      window.open(link, '_blank', 'noopener,noreferrer');
     };
-
-  const link =
-    getCellLink(
-      index
-    );
-
-  if (
-    link
-  ) {
-
-    const linkBtn =
-      document.createElement(
-        'button'
-      );
-
-    linkBtn.type =
-      'button';
-
-    linkBtn.className =
-      'cell-link-btn';
-
-    linkBtn.textContent =
-      '🔗';
-
-    linkBtn.setAttribute(
-      'aria-label',
-      'リンクを開く'
-    );
-
-    linkBtn.onclick =
-      event => {
-
-        event.stopPropagation();
-
-        window.open(
-          link,
-          '_blank',
-          'noopener,noreferrer'
-        );
-
-      };
-
-    cell.appendChild(
-      linkBtn
-    );
-
+    cell.appendChild(linkBtn);
   }
 
   return cell;
-
 }
 
-
-function makeCellEditable(
-  index
-) {
-
-  const cell =
-    document.getElementById(
-      `cell-${index}`
-    );
-
-  if (
-    !cell
-  ) {
-
-    return;
-
-  }
+function makeCellEditable(index) {
+  const cell = document.getElementById(`cell-${index}`);
+  if (!cell) return;
 
   const currentText =
-    localStorage.getItem(
-      `bingo_cell_text_${index}`
-    ) ??
+    localStorage.getItem(`bingo_cell_text_${index}`) ??
     templates.default[index];
 
-  cell.classList.remove(
-    'checked'
-  );
+  cell.classList.remove('checked');
+  cell.innerHTML = '';
 
-  cell.innerHTML =
-    '';
+  const textarea = document.createElement('textarea');
+  textarea.value = currentText;
+  textarea.maxLength = 25;
+  cell.appendChild(textarea);
 
-  const textarea =
-    document.createElement(
-      'textarea'
-    );
+  const actions = document.createElement('div');
+  actions.className = 'cell-edit-actions';
 
-  textarea.value =
-    currentText;
+  const randomBtn = document.createElement('button');
+  randomBtn.type = 'button';
+  randomBtn.className = 'cell-mini-btn';
+  randomBtn.textContent = '🎲';
+  randomBtn.title = 'この1マスだけランダム';
+  randomBtn.onclick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    randomizeCell(index);
+  };
 
-  textarea.maxLength =
-    25;
+  const linkBtn = document.createElement('button');
+  linkBtn.type = 'button';
+  linkBtn.className = 'cell-mini-btn link-edit-btn';
+  linkBtn.textContent = '🔗';
+  linkBtn.title = 'リンクを設定';
+  linkBtn.classList.toggle('has-link', !!getCellLink(index));
+  linkBtn.onclick = event => {
+    event.preventDefault();
+    event.stopPropagation();
+    editCellLink(index);
+  };
 
-  cell.appendChild(
-    textarea
-  );
-
-  const actions =
-    document.createElement(
-      'div'
-    );
-
-  actions.className =
-    'cell-edit-actions';
-
-  const randomBtn =
-    document.createElement(
-      'button'
-    );
-
-  randomBtn.type =
-    'button';
-
-  randomBtn.className =
-    'cell-mini-btn';
-
-  randomBtn.textContent =
-    '🎲';
-
-  randomBtn.title =
-    'この1マスだけランダム';
-
-  randomBtn.onclick =
-    event => {
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-      randomizeCell(
-        index
-      );
-
-    };
-
-  const linkBtn =
-    document.createElement(
-      'button'
-    );
-
-  linkBtn.type =
-    'button';
-
-  linkBtn.className =
-    'cell-mini-btn link-edit-btn';
-
-  linkBtn.textContent =
-    '🔗';
-
-  linkBtn.title =
-    'リンクを設定';
-
-  linkBtn.classList.toggle(
-
-    'has-link',
-
-    !!getCellLink(
-      index
-    )
-
-  );
-
-  linkBtn.onclick =
-    event => {
-
-      event.preventDefault();
-
-      event.stopPropagation();
-
-      editCellLink(
-        index
-      );
-
-    };
-
-  actions.appendChild(
-    randomBtn
-  );
-
-  actions.appendChild(
-    linkBtn
-  );
-
-  cell.appendChild(
-    actions
-  );
-
+  actions.appendChild(randomBtn);
+  actions.appendChild(linkBtn);
+  cell.appendChild(actions);
 }
 
-
 function initBingo() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
 
-  const grid =
-    document.getElementById(
-      'grid'
-    );
+  document.getElementById('bingoTitle').innerText =
+    localStorage.getItem('bingo_title') || '❄️ マイ応援BINGO ❄️';
 
-  grid.innerHTML =
-    '';
+  const date = getDisplayedDate();
+  const name = localStorage.getItem('bingo_name') || '';
+  const comment = localStorage.getItem('bingo_comment') || '';
 
-  document.getElementById(
-    'bingoTitle'
-  ).innerText =
-    localStorage.getItem(
-      'bingo_title'
-    ) ||
-    '❄️ マイ応援BINGO ❄️';
+  const dateElement = document.getElementById('metaDate');
+  const nameElement = document.getElementById('metaName');
+  const commentElement = document.getElementById('metaComment');
+  const metaContainer = document.querySelector('.card-meta');
 
-  const date =
-    getDisplayedDate();
+  dateElement.innerText = date;
+  nameElement.innerText = name;
+  commentElement.innerText = comment;
 
-  const name =
-    localStorage.getItem(
-      'bingo_name'
-    ) || '';
+  metaContainer.style.display = date === '' && name === '' ? 'none' : 'flex';
+  commentElement.style.display = comment === '' ? 'none' : 'block';
 
-  const comment =
-    localStorage.getItem(
-      'bingo_comment'
-    ) || '';
-
-  const dateElement =
-    document.getElementById(
-      'metaDate'
-    );
-
-  const nameElement =
-    document.getElementById(
-      'metaName'
-    );
-
-  const commentElement =
-    document.getElementById(
-      'metaComment'
-    );
-
-  const metaContainer =
-    document.querySelector(
-      '.card-meta'
-    );
-
-  dateElement.innerText =
-    date;
-
-  nameElement.innerText =
-    name;
-
-  commentElement.innerText =
-    comment;
-
-  metaContainer.style.display =
-    date === '' &&
-    name === ''
-      ? 'none'
-      : 'flex';
-
-  commentElement.style.display =
-    comment === ''
-      ? 'none'
-      : 'block';
-
-  document.getElementById(
-    'bingoTitle'
-  ).style.marginBottom =
-    date === '' &&
-    name === '' &&
-    comment === ''
-      ? '16px'
-      : '4px';
+  document.getElementById('bingoTitle').style.marginBottom =
+    date === '' && name === '' && comment === '' ? '16px' : '4px';
 
   applyTheme(
-
-    localStorage.getItem(
-      'bingo_theme_color'
-    ) ||
-    '#ffb703',
-
-    localStorage.getItem(
-      'bingo_theme_emoji'
-    ) ||
-    '💪💛'
-
+    localStorage.getItem('bingo_theme_color') || '#ffb703',
+    localStorage.getItem('bingo_theme_emoji') || '💪💛'
   );
 
-  if (
-    localStorage.getItem(
-      'bingo_include_confetti'
-    ) !== null
-  ) {
-
-    document.getElementById(
-      'includeConfettiCheck'
-    ).checked =
-      localStorage.getItem(
-        'bingo_include_confetti'
-      ) === 'true';
-
+  if (localStorage.getItem('bingo_include_confetti') !== null) {
+    document.getElementById('includeConfettiCheck').checked =
+      localStorage.getItem('bingo_include_confetti') === 'true';
   }
 
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    const savedText =
-      localStorage.getItem(
-        'bingo_cell_text_' + i
-      );
-
-    const text =
-      savedText !== null
-        ? savedText
-        : templates.default[i];
-
-    grid.appendChild(
-
-      createNormalCell(
-        i,
-        text
-      )
-
-    );
-
+  for (let i = 0; i < 9; i++) {
+    const savedText = localStorage.getItem('bingo_cell_text_' + i);
+    const text = savedText !== null ? savedText : templates.default[i];
+    grid.appendChild(createNormalCell(i, text));
   }
 
   updateCustomTmplButtons();
-
 }
 
-
 function toggleEditMode() {
+  const grid = document.getElementById('grid');
+  const editBtn = document.getElementById('editBtn');
+  const shareBtn = document.getElementById('shareBtn');
+  const boardShareBtn = document.getElementById('boardShareBtn');
+  const titleElement = document.getElementById('bingoTitle');
+  const commentElement = document.getElementById('metaComment');
+  const metaContainer = document.querySelector('.card-meta');
+  const templateArea = document.getElementById('templateArea');
 
-  const grid =
-    document.getElementById(
-      'grid'
-    );
+  if (!isEditMode) {
+    isEditMode = true;
+    grid.classList.add('edit-mode');
 
-  const editBtn =
-    document.getElementById(
-      'editBtn'
-    );
+    editBtn.innerText = '💾 変更を保存する';
+    editBtn.style.background = '#4ea8de';
+    editBtn.style.color = 'white';
 
-  const shareBtn =
-    document.getElementById(
-      'shareBtn'
-    );
+    shareBtn.disabled = true;
+    boardShareBtn.disabled = true;
+    templateArea.style.display = 'block';
 
-  const boardShareBtn =
-    document.getElementById(
-      'boardShareBtn'
-    );
+    titleElement.innerHTML = `<input type="text" id="titleInput" maxlength="25">`;
+    document.getElementById('titleInput').value =
+      localStorage.getItem('bingo_title') || '❄️ マイ応援BINGO ❄️';
 
-  const titleElement =
-    document.getElementById(
-      'bingoTitle'
-    );
+    metaContainer.style.display = 'flex';
+    commentElement.style.display = 'block';
 
-  const commentElement =
-    document.getElementById(
-      'metaComment'
-    );
-
-  const metaContainer =
-    document.querySelector(
-      '.card-meta'
-    );
-
-  const templateArea =
-    document.getElementById(
-      'templateArea'
-    );
-
-  if (
-    !isEditMode
-  ) {
-
-    isEditMode =
-      true;
-
-    grid.classList.add(
-      'edit-mode'
-    );
-
-    editBtn.innerText =
-      '💾 変更を保存する';
-
-    editBtn.style.background =
-      '#4ea8de';
-
-    editBtn.style.color =
-      'white';
-
-    shareBtn.disabled =
-      true;
-
-    boardShareBtn.disabled =
-      true;
-
-    templateArea.style.display =
-      'block';
-
-    titleElement.innerHTML = `
-      <input
-        type="text"
-        id="titleInput"
-        maxlength="25"
-      >
-    `;
-
-    document.getElementById(
-      'titleInput'
-    ).value =
-      localStorage.getItem(
-        'bingo_title'
-      ) ||
-      '❄️ マイ応援BINGO ❄️';
-
-    metaContainer.style.display =
-      'flex';
-
-    commentElement.style.display =
-      'block';
-
-    const currentDateMode =
-      getDateMode();
-
+    const currentDateMode = getDateMode();
     const currentSavedDate =
-      currentDateMode ===
-        'auto'
+      currentDateMode === 'auto'
         ? getTodayString()
-        : (
-            localStorage.getItem(
-              'bingo_date'
-            ) || ''
-          );
+        : localStorage.getItem('bingo_date') || '';
 
-    document.getElementById(
-      'metaDate'
-    ).innerHTML = `
-      <div
-        style="
-          display:inline-flex;
-          align-items:center;
-          gap:3px;
-        "
-      >
-        <input
-          type="text"
-          id="dateInput"
-          class="meta-input"
-          maxlength="12"
-          placeholder="日付"
-          style="width:78px;"
-        >
-        <button
-          type="button"
-          id="todayMarkBtn"
-          style="
-            font-size:10px;
-            padding:2px 5px;
-          "
-        >
-          今日
-        </button>
+    document.getElementById('metaDate').innerHTML = `
+      <div style="display:inline-flex;align-items:center;gap:3px;">
+        <input type="text" id="dateInput" class="meta-input" maxlength="12"
+               placeholder="日付" style="width:78px;">
+        <button type="button" id="todayMarkBtn"
+                style="font-size:10px;padding:2px 5px;">今日</button>
       </div>
     `;
 
-    const dateInput =
-      document.getElementById(
-        'dateInput'
-      );
-
-    const todayMarkBtn =
-      document.getElementById(
-        'todayMarkBtn'
-      );
-
-    dateInput.value =
-      currentSavedDate;
-
-    dateInput.dataset.dateMode =
-      currentDateMode;
-
-    todayMarkBtn.addEventListener(
-
-      'click',
-
-      () => {
-
-        dateInput.value =
-          getTodayString();
-
-        dateInput.dataset.dateMode =
-          'auto';
-
-      }
-
-    );
-
-    dateInput.addEventListener(
-
-      'input',
-
-      () => {
-
-        dateInput.dataset.dateMode =
-          dateInput.value.trim() === ''
-            ? 'blank'
-            : 'fixed';
-
-      }
-
-    );
-
-    document.getElementById(
-      'metaName'
-    ).innerHTML = `
-      <input
-        type="text"
-        id="nameInput"
-        class="meta-input"
-        maxlength="15"
-        placeholder="名前"
-      >
-    `;
-
-    document.getElementById(
-      'nameInput'
-    ).value =
-      localStorage.getItem(
-        'bingo_name'
-      ) || '';
-
-    commentElement.innerHTML = `
-      <input
-        type="text"
-        id="commentInput"
-        class="meta-input"
-        maxlength="35"
-        placeholder="一言コメント（任意）"
-        style="
-          width:100%;
-          text-align:center;
-        "
-      >
-    `;
-
-    document.getElementById(
-      'commentInput'
-    ).value =
-      localStorage.getItem(
-        'bingo_comment'
-      ) || '';
-
-    for (
-      let i = 0;
-      i < 9;
-      i++
-    ) {
-
-      makeCellEditable(
-        i
-      );
-
-    }
-
-    return;
-
-  }
-
-
-  isEditMode =
-    false;
-
-  grid.classList.remove(
-    'edit-mode'
-  );
-
-  editBtn.innerText =
-    '✏️ マス目・タイトルを編集する';
-
-  editBtn.style.background =
-    '#ffffff';
-
-  editBtn.style.color =
-    '#5b799e';
-
-  shareBtn.disabled =
-    false;
-
-  boardShareBtn.disabled =
-    false;
-
-  templateArea.style.display =
-    'none';
-
-
-  localStorage.setItem(
-
-    'bingo_title',
-
-    document
-      .getElementById(
-        'titleInput'
-      )
-      .value
-      .trim() ||
-    '❄️ マイ応援BINGO ❄️'
-
-  );
-
-
-  const dateInput =
-    document.getElementById(
-      'dateInput'
-    );
-
-  const dateInputValue =
-    dateInput.value.trim();
-
-  let dateMode =
-    dateInput.dataset.dateMode;
-
-  if (
-    dateInputValue === ''
-  ) {
-
-    dateMode =
-      'blank';
-
-  }
-
-  if (
-    ![
-      'auto',
-      'fixed',
-      'blank'
-    ].includes(
-      dateMode
-    )
-  ) {
-
-    dateMode =
-      dateInputValue === ''
-        ? 'blank'
-        : 'fixed';
-
-  }
-
-  if (
-    dateMode ===
-      'auto'
-  ) {
-
-    localStorage.setItem(
-      'bingo_date',
-      getTodayString()
-    );
-
-  } else {
-
-    localStorage.setItem(
-      'bingo_date',
-      dateInputValue
-    );
-
-  }
-
-  localStorage.setItem(
-    'bingo_date_mode',
-    dateMode
-  );
-
-  localStorage.removeItem(
-    'bingo_date_is_auto'
-  );
-
-
-  localStorage.setItem(
-
-    'bingo_name',
-
-    document
-      .getElementById(
-        'nameInput'
-      )
-      .value
-      .trim()
-
-  );
-
-
-  localStorage.setItem(
-
-    'bingo_comment',
-
-    document
-      .getElementById(
-        'commentInput'
-      )
-      .value
-      .trim()
-
-  );
-
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    const cell =
-      document.getElementById(
-        'cell-' + i
-      );
-
-    const textarea =
-      cell.querySelector(
-        'textarea'
-      );
-
-    localStorage.setItem(
-
-      'bingo_cell_text_' + i,
-
-      textarea
-        ? textarea.value.trim()
-        : templates.default[i]
-
-    );
-
-  }
-
-  initBingo();
-
-  scheduleMidnightRefresh();
-
-}
-
-
-function clearAllChecks() {
-
-  if (
-    isEditMode ||
-    !confirm(
-      'すべてのチェックを消しますか？'
-    )
-  ) {
-
-    return;
-
-  }
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    localStorage.setItem(
-      'bingo_checked_' + i,
-      'false'
-    );
-
-    const cell =
-      document.getElementById(
-        'cell-' + i
-      );
-
-    if (
-      cell
-    ) {
-
-      cell.classList.remove(
-        'checked'
-      );
-
-    }
-
-  }
-
-}
-
-
-function resetToDefault() {
-
-  if (
-    !confirm(
-      '初期状態に戻しますか？(マイテンプレートは消えません)'
-    )
-  ) {
-
-    return;
-
-  }
-
-  [
-
-    'bingo_title',
-
-    'bingo_date',
-
-    'bingo_date_mode',
-
-    'bingo_date_is_auto',
-
-    'bingo_name',
-
-    'bingo_comment',
-
-    'bingo_theme_color',
-
-    'bingo_theme_emoji',
-
-    'bingo_include_confetti'
-
-  ].forEach(
-
-    key =>
-      localStorage.removeItem(
-        key
-      )
-
-  );
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    localStorage.removeItem(
-      'bingo_cell_text_' + i
-    );
-
-    localStorage.removeItem(
-      'bingo_checked_' + i
-    );
-
-    localStorage.removeItem(
-      'bingo_cell_link_' + i
-    );
-
-  }
-
-  isEditMode =
-    false;
-
-  initBingo();
-
-  scheduleMidnightRefresh();
-
-}
-
-
-function utf8ToBase64Url(
-  text
-) {
-
-  const bytes =
-    new TextEncoder()
-      .encode(
-        text
-      );
-
-  let binary =
-    '';
-
-  bytes.forEach(
-
-    byte =>
-
-      binary +=
-        String.fromCharCode(
-          byte
-        )
-
-  );
-
-  return btoa(
-    binary
-  )
-    .replace(
-      /\+/g,
-      '-'
-    )
-    .replace(
-      /\//g,
-      '_'
-    )
-    .replace(
-      /=+$/g,
-      ''
-    );
-
-}
-
-
-function base64UrlToUtf8(
-  value
-) {
-
-  const base64 =
-    value
-      .replace(
-        /-/g,
-        '+'
-      )
-      .replace(
-        /_/g,
-        '/'
-      );
-
-  const padded =
-    base64 +
-    '='.repeat(
-
-      (
-        4 -
-        base64.length %
-        4
-      ) % 4
-
-    );
-
-  const binary =
-    atob(
-      padded
-    );
-
-  const bytes =
-    Uint8Array.from(
-
-      binary,
-
-      ch =>
-        ch.charCodeAt(
-          0
-        )
-
-    );
-
-  return new TextDecoder()
-    .decode(
-      bytes
-    );
-
-}
-
-
-function getBoardData() {
-
-  const cells =
-    [];
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
-    cells.push({
-
-      text:
-
-        localStorage.getItem(
-          `bingo_cell_text_${i}`
-        ) ??
-        templates.default[i],
-
-      link:
-
-        getCellLink(
-          i
-        )
-
+    const dateInput = document.getElementById('dateInput');
+    const todayMarkBtn = document.getElementById('todayMarkBtn');
+
+    dateInput.value = currentSavedDate;
+    dateInput.dataset.dateMode = currentDateMode;
+
+    todayMarkBtn.addEventListener('click', () => {
+      dateInput.value = getTodayString();
+      dateInput.dataset.dateMode = 'auto';
     });
 
+    dateInput.addEventListener('input', () => {
+      dateInput.dataset.dateMode =
+        dateInput.value.trim() === '' ? 'blank' : 'fixed';
+    });
+
+    document.getElementById('metaName').innerHTML = `
+      <input type="text" id="nameInput" class="meta-input"
+             maxlength="15" placeholder="名前">
+    `;
+
+    document.getElementById('nameInput').value =
+      localStorage.getItem('bingo_name') || '';
+
+    commentElement.innerHTML = `
+      <input type="text" id="commentInput" class="meta-input"
+             maxlength="35" placeholder="一言コメント（任意）"
+             style="width:100%;text-align:center;">
+    `;
+
+    document.getElementById('commentInput').value =
+      localStorage.getItem('bingo_comment') || '';
+
+    for (let i = 0; i < 9; i++) makeCellEditable(i);
+
+    return;
+  }
+
+  isEditMode = false;
+  grid.classList.remove('edit-mode');
+
+  editBtn.innerText = '✏️ マス目・タイトルを編集する';
+  editBtn.style.background = '#ffffff';
+  editBtn.style.color = '#5b799e';
+
+  shareBtn.disabled = false;
+  boardShareBtn.disabled = false;
+  templateArea.style.display = 'none';
+
+  localStorage.setItem(
+    'bingo_title',
+    document.getElementById('titleInput').value.trim() ||
+      '❄️ マイ応援BINGO ❄️'
+  );
+
+  const dateInput = document.getElementById('dateInput');
+  const dateInputValue = dateInput.value.trim();
+
+  let dateMode = dateInput.dataset.dateMode;
+
+  if (dateInputValue === '') dateMode = 'blank';
+
+  if (!['auto','fixed','blank'].includes(dateMode)) {
+    dateMode = dateInputValue === '' ? 'blank' : 'fixed';
+  }
+
+  if (dateMode === 'auto') {
+    localStorage.setItem('bingo_date', getTodayString());
+  } else {
+    localStorage.setItem('bingo_date', dateInputValue);
+  }
+
+  localStorage.setItem('bingo_date_mode', dateMode);
+  localStorage.removeItem('bingo_date_is_auto');
+
+  localStorage.setItem(
+    'bingo_name',
+    document.getElementById('nameInput').value.trim()
+  );
+
+  localStorage.setItem(
+    'bingo_comment',
+    document.getElementById('commentInput').value.trim()
+  );
+
+  for (let i = 0; i < 9; i++) {
+    const cell = document.getElementById('cell-' + i);
+    const textarea = cell.querySelector('textarea');
+
+    localStorage.setItem(
+      'bingo_cell_text_' + i,
+      textarea ? textarea.value.trim() : templates.default[i]
+    );
+  }
+
+  initBingo();
+  scheduleMidnightRefresh();
+}
+
+function clearAllChecks() {
+  if (isEditMode || !confirm('すべてのチェックを消しますか？')) return;
+
+  for (let i = 0; i < 9; i++) {
+    localStorage.setItem('bingo_checked_' + i, 'false');
+    const cell = document.getElementById('cell-' + i);
+    if (cell) cell.classList.remove('checked');
+  }
+}
+
+function resetToDefault() {
+  if (!confirm('初期状態に戻しますか？(マイテンプレートは消えません)')) return;
+
+  [
+    'bingo_title','bingo_date','bingo_date_mode','bingo_date_is_auto',
+    'bingo_name','bingo_comment','bingo_theme_color','bingo_theme_emoji',
+    'bingo_include_confetti'
+  ].forEach(key => localStorage.removeItem(key));
+
+  for (let i = 0; i < 9; i++) {
+    localStorage.removeItem('bingo_cell_text_' + i);
+    localStorage.removeItem('bingo_checked_' + i);
+    localStorage.removeItem('bingo_cell_link_' + i);
+  }
+
+  isEditMode = false;
+  initBingo();
+  scheduleMidnightRefresh();
+}
+
+function utf8ToBase64Url(text) {
+  const bytes = new TextEncoder().encode(text);
+  let binary = '';
+  bytes.forEach(byte => binary += String.fromCharCode(byte));
+
+  return btoa(binary)
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=+$/g, '');
+}
+
+function base64UrlToUtf8(value) {
+  const base64 = value.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = base64 + '='.repeat((4 - base64.length % 4) % 4);
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
+  return new TextDecoder().decode(bytes);
+}
+
+function getBoardData() {
+  const cells = [];
+
+  for (let i = 0; i < 9; i++) {
+    cells.push({
+      text:
+        localStorage.getItem(`bingo_cell_text_${i}`) ??
+        templates.default[i],
+      link: getCellLink(i)
+    });
   }
 
   return {
-
     v: 1,
-
     title:
-
-      localStorage.getItem(
-        'bingo_title'
-      ) ||
+      localStorage.getItem('bingo_title') ||
       '❄️ マイ応援BINGO ❄️',
-
     themeColor:
-
-      localStorage.getItem(
-        'bingo_theme_color'
-      ) ||
+      localStorage.getItem('bingo_theme_color') ||
       '#ffb703',
-
     themeEmoji:
-
-      localStorage.getItem(
-        'bingo_theme_emoji'
-      ) ||
+      localStorage.getItem('bingo_theme_emoji') ||
       '💪💛',
-
     cells
-
   };
-
 }
-
 
 function makeBoardShareUrl() {
+  const data = getBoardData();
+  const encoded = utf8ToBase64Url(JSON.stringify(data));
 
-  const data =
-    getBoardData();
-
-  const encoded =
-    utf8ToBase64Url(
-
-      JSON.stringify(
-        data
-      )
-
-    );
-
-  const url =
-    new URL(
-      window.location.href
-    );
-
-  url.search =
-    '';
-
-  url.hash =
-    '';
-
-  url.searchParams.set(
-
-    'board',
-
-    encoded
-
-  );
+  const url = new URL(window.location.href);
+  url.search = '';
+  url.hash = '';
+  url.searchParams.set('board', encoded);
 
   return url.toString();
-
 }
 
-
 async function shareBoard() {
+  if (isEditMode) return;
 
-  if (
-    isEditMode
-  ) {
-
-    return;
-
-  }
-
-  const url =
-    makeBoardShareUrl();
-
+  const url = makeBoardShareUrl();
   const title =
-    localStorage.getItem(
-      'bingo_title'
-    ) ||
+    localStorage.getItem('bingo_title') ||
     'マイ応援BINGO';
 
   const text =
@@ -3483,791 +1391,392 @@ async function shareBoard() {
     `リンクから同じ盤面を取り込めます！\n` +
     `#SnowMan #応援タスクBINGO`;
 
-  showBoardShareMenu(
-    text,
-    url
-  );
-
+  showBoardShareMenu(text, url);
 }
 
+function showBoardShareMenu(text, url) {
+  const existing = document.getElementById('boardShareModal');
 
-function showBoardShareMenu(
-  text,
-  url
-) {
-
-  const existing =
-    document.getElementById(
-      'boardShareModal'
-    );
-
-  if (
-    existing
-  ) {
-
+  if (existing) {
     existing.remove();
-
   }
 
-  const modal =
-    document.createElement(
-      'div'
-    );
+  const modal = document.createElement('div');
 
-  modal.id =
-    'boardShareModal';
-
-  modal.className =
-    'modal';
-
-  modal.style.display =
-    'flex';
+  modal.id = 'boardShareModal';
+  modal.className = 'modal';
+  modal.style.display = 'flex';
 
   modal.innerHTML = `
-    <div
-      class="modal-content"
-      onclick="event.stopPropagation()"
-    >
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <h3>この盤面をシェア</h3>
 
-      <h3>
-        この盤面をシェア
-      </h3>
-
-      <p
-        style="
-          font-size:11px;
-          color:#607d9b;
-          line-height:1.6;
-          margin:8px 4px 12px;
-        "
-      >
-        リンクを開いた人は
-        同じ盤面を自分のBINGOに
-        取り込めます♡
+      <p style="font-size:11px;color:#607d9b;line-height:1.6;margin:8px 4px 12px;">
+        リンクを開いた人は同じ盤面を自分のBINGOに取り込めます♡
       </p>
 
       <div class="modal-buttons">
-
-        <button
-          id="boardShareX"
-          class="btn btn-modal-x"
-        >
-          𝕏 に投稿する
-        </button>
-
-        <button
-          id="boardShareThreads"
-          class="btn btn-modal-threads"
-        >
-          Threadsに投稿
-        </button>
-
-        <button
-          id="boardNativeShare"
-          class="btn btn-main"
-          style="margin:0;"
-        >
-          その他のアプリで共有
-        </button>
-
-        <button
-          id="boardCopyUrl"
-          class="btn btn-main"
-          style="margin:0;"
-        >
-          🔗 URLをコピー
-        </button>
-
-        <button
-          class="btn btn-modal-close"
-          onclick="closeBoardShareModal()"
-        >
-          閉じる
-        </button>
-
+        <button id="boardShareX" class="btn btn-modal-x">𝕏 に投稿する</button>
+        <button id="boardShareThreads" class="btn btn-modal-threads">Threadsに投稿</button>
+        <button id="boardNativeShare" class="btn btn-main" style="margin:0;">その他のアプリで共有</button>
+        <button id="boardCopyUrl" class="btn btn-main" style="margin:0;">🔗 URLをコピー</button>
+        <button class="btn btn-modal-close" onclick="closeBoardShareModal()">閉じる</button>
       </div>
-
     </div>
   `;
 
-  modal.onclick =
-    closeBoardShareModal;
+  modal.onclick = closeBoardShareModal;
+  document.body.appendChild(modal);
 
-  document.body.appendChild(
-    modal
-  );
-
-
-  document.getElementById(
-    'boardShareX'
-  ).onclick = () => {
-
+  document.getElementById('boardShareX').onclick = () => {
     window.open(
-
-      `https://twitter.com/intent/tweet?text=${
-        encodeURIComponent(
-          text
-        )
-      }&url=${
-        encodeURIComponent(
-          url
-        )
-      }`,
-
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
       '_blank'
-
     );
-
   };
 
-
-  document.getElementById(
-    'boardShareThreads'
-  ).onclick = () => {
-
+  document.getElementById('boardShareThreads').onclick = () => {
     window.open(
-
-      `https://www.threads.net/intent/post?text=${
-        encodeURIComponent(
-          text +
-          '\n' +
-          url
-        )
-      }`,
-
+      `https://www.threads.net/intent/post?text=${encodeURIComponent(text + '\n' + url)}`,
       '_blank'
-
     );
-
   };
 
-
-  document.getElementById(
-    'boardNativeShare'
-  ).onclick =
-    async () => {
-
-      if (
-        navigator.share
-      ) {
-
-        try {
-
-          await navigator.share({
-
-            title:
-              '応援タスクBINGO',
-
-            text,
-
-            url
-
-          });
-
-        } catch (
-          error
-        ) {
-
-          if (
-            error.name !==
-              'AbortError'
-          ) {
-
-            console.error(
-              error
-            );
-
-          }
-
+  document.getElementById('boardNativeShare').onclick = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: '応援タスクBINGO',
+          text,
+          url
+        });
+      } catch (error) {
+        if (!error || error.name !== 'AbortError') {
+          console.error(error);
         }
-
-        return;
-
       }
+      return;
+    }
 
-      alert(
-        'このブラウザでは共有機能を使えません。URLコピーをご利用ください。'
-      );
+    alert('このブラウザでは共有機能を使えません。URLコピーをご利用ください。');
+  };
 
-    };
-
-
-  document.getElementById(
-    'boardCopyUrl'
-  ).onclick =
-    async () => {
-
-      if (
-        navigator.clipboard &&
-        window.isSecureContext
-      ) {
-
-        try {
-
-          await navigator.clipboard.writeText(
-            url
-          );
-
-          alert(
-            '盤面URLをコピーしました！'
-          );
-
-          return;
-
-        } catch (
-          error
-        ) {
-
-          console.error(
-            error
-          );
-
-        }
-
-      }
-
-      prompt(
-
-        'このURLをコピーしてください。',
-
-        url
-
-      );
-
-    };
-
+  document.getElementById('boardCopyUrl').onclick = async () => {
+    await copyShareUrl(url, '盤面URLをコピーしました！');
+  };
 }
-
 
 function closeBoardShareModal() {
+  const modal = document.getElementById('boardShareModal');
 
-  const modal =
-    document.getElementById(
-      'boardShareModal'
-    );
-
-  if (
-    modal
-  ) {
-
+  if (modal) {
     modal.remove();
-
   }
-
 }
 
-
-function importSharedBoardFromUrl() {
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const encoded =
-    params.get(
-      'board'
-    );
-
-  if (
-    !encoded
-  ) {
-
-    return;
-
+async function copyShareUrl(url, successMessage) {
+  if (navigator.clipboard && window.isSecureContext) {
+    try {
+      await navigator.clipboard.writeText(url);
+      alert(successMessage);
+      return;
+    } catch (error) {
+      console.error(error);
+    }
   }
 
+  prompt('このURLをコピーしてください。', url);
+}
+
+function importSharedBoardFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const encoded = params.get('board');
+
+  if (!encoded) return;
+
   try {
-
-    const data =
-      JSON.parse(
-
-        base64UrlToUtf8(
-          encoded
-        )
-
-      );
+    const data = JSON.parse(base64UrlToUtf8(encoded));
 
     if (
       !data ||
       data.v !== 1 ||
-      !Array.isArray(
-        data.cells
-      ) ||
+      !Array.isArray(data.cells) ||
       data.cells.length !== 9
     ) {
-
-      throw new Error(
-        'invalid board'
-      );
-
+      throw new Error('invalid board');
     }
 
-    const ok =
-      confirm(
+    const ok = confirm(
+      '共有されたBINGO盤面を取り込みますか？\n\n' +
+      '・現在の9マスとリンクは置き換わります\n' +
+      '・チェック状態はリセットされます\n' +
+      '・あなたの名前・日付・コメントはそのまま残ります'
+    );
 
-        '共有されたBINGO盤面を取り込みますか？\n\n' +
-        '・現在の9マスとリンクは置き換わります\n' +
-        '・チェック状態はリセットされます\n' +
-        '・あなたの名前・日付・コメントはそのまま残ります'
-
-      );
-
-    if (
-      ok
-    ) {
-
+    if (ok) {
       localStorage.setItem(
-
         'bingo_title',
-
-        typeof data.title ===
-          'string'
-          ? data.title.slice(
-              0,
-              25
-            )
+        typeof data.title === 'string'
+          ? data.title.slice(0, 25)
           : '❄️ マイ応援BINGO ❄️'
-
       );
 
       const color =
-        typeof data.themeColor ===
-          'string' &&
-        /^#[0-9a-fA-F]{6}$/.test(
-          data.themeColor
-        )
+        typeof data.themeColor === 'string' &&
+        /^#[0-9a-fA-F]{6}$/.test(data.themeColor)
           ? data.themeColor
           : '#ffb703';
 
+      localStorage.setItem('bingo_theme_color', color);
       localStorage.setItem(
-        'bingo_theme_color',
-        color
-      );
-
-      localStorage.setItem(
-
         'bingo_theme_emoji',
-
-        typeof data.themeEmoji ===
-          'string'
+        typeof data.themeEmoji === 'string'
           ? data.themeEmoji
           : '✨'
-
       );
 
-      for (
-        let i = 0;
-        i < 9;
-        i++
-      ) {
-
-        const item =
-          data.cells[i] ||
-          {};
-
+      for (let i = 0; i < 9; i++) {
+        const item = data.cells[i] || {};
         const text =
-          typeof item.text ===
-            'string'
-            ? item.text.slice(
-                0,
-                25
-              )
+          typeof item.text === 'string'
+            ? item.text.slice(0, 25)
             : '';
 
-        localStorage.setItem(
+        localStorage.setItem(`bingo_cell_text_${i}`, text);
+        localStorage.setItem(`bingo_checked_${i}`, 'false');
 
-          `bingo_cell_text_${i}`,
+        const normalized = normalizeUrl(item.link || '');
 
-          text
-
-        );
-
-        localStorage.setItem(
-
-          `bingo_checked_${i}`,
-
-          'false'
-
-        );
-
-        const normalized =
-          normalizeUrl(
-            item.link || ''
-          );
-
-        if (
-          normalized
-        ) {
-
-          localStorage.setItem(
-
-            `bingo_cell_link_${i}`,
-
-            normalized
-
-          );
-
+        if (normalized) {
+          localStorage.setItem(`bingo_cell_link_${i}`, normalized);
         } else {
-
-          localStorage.removeItem(
-            `bingo_cell_link_${i}`
-          );
-
+          localStorage.removeItem(`bingo_cell_link_${i}`);
         }
+      }
+    }
+  } catch (error) {
+    console.error(error);
+    alert('共有された盤面データを読み込めませんでした。');
+  } finally {
+    const cleanUrl = new URL(window.location.href);
+    cleanUrl.searchParams.delete('board');
+    history.replaceState(null, '', cleanUrl.pathname + cleanUrl.search + cleanUrl.hash);
+  }
+}
 
+function canvasToShareFile(canvas) {
+  return new Promise(resolve => {
+    canvas.toBlob(blob => {
+      if (!blob) {
+        resolve(null);
+        return;
       }
 
-    }
-
-  } catch (
-    error
-  ) {
-
-    console.error(
-      error
-    );
-
-    alert(
-      '共有された盤面データを読み込めませんでした。'
-    );
-
-  } finally {
-
-    const cleanUrl =
-      new URL(
-        window.location.href
+      resolve(
+        new File(
+          [blob],
+          'ouen-bingo.png',
+          { type: 'image/png' }
+        )
       );
-
-    cleanUrl.searchParams.delete(
-      'board'
-    );
-
-    history.replaceState(
-
-      null,
-
-      '',
-
-      cleanUrl.pathname +
-      cleanUrl.search +
-      cleanUrl.hash
-
-    );
-
-  }
-
+    }, 'image/png');
+  });
 }
-
 
 function shareOnX() {
+  if (isEditMode) return;
 
-  if (
-    isEditMode
-  ) {
+  const card = document.getElementById('bingoCard');
+  let checkedCount = 0;
 
-    return;
-
-  }
-
-  const card =
-    document.getElementById(
-      'bingoCard'
-    );
-
-  let checkedCount =
-    0;
-
-  for (
-    let i = 0;
-    i < 9;
-    i++
-  ) {
-
+  for (let i = 0; i < 9; i++) {
     if (
-
       document
-        .getElementById(
-          'cell-' + i
-        )
-        .classList
-        .contains(
-          'checked'
-        )
-
+        .getElementById('cell-' + i)
+        .classList.contains('checked')
     ) {
-
       checkedCount++;
-
     }
-
   }
 
-  html2canvas(
+  html2canvas(card, {
+    backgroundColor: '#ffffff',
+    scale: 2.5,
+    logging: false,
+    useCORS: true,
+    allowTaint: true,
 
-    card,
+    onclone: clonedDocument => {
+      const clonedCard =
+        clonedDocument.getElementById('bingoCard');
 
-    {
+      if (!clonedCard) return;
 
-      backgroundColor:
-        '#ffffff',
+      clonedCard.style.width = '330px';
+      clonedCard.style.margin = '0 auto';
 
-      scale:
-        2.5,
+      clonedDocument
+        .querySelectorAll('.cell-link-btn')
+        .forEach(btn => {
+          btn.style.display = 'none';
+        });
 
-      logging:
-        false,
+      clonedDocument
+        .querySelectorAll('.cell')
+        .forEach(cell => {
+          cell.style.height = '94px';
+          cell.style.boxSizing = 'border-box';
 
-      useCORS:
-        true,
+          if (cell.classList.contains('checked')) {
+            cell.style.border =
+              '1px solid transparent';
+          }
+        });
 
-      allowTaint:
-        true,
+      if (
+        checkedCount === 9 &&
+        document.getElementById(
+          'includeConfettiCheck'
+        ).checked
+      ) {
+        for (let i = 0; i < 65; i++) {
+          const item =
+            clonedDocument.createElement('div');
 
-      onclone:
-        clonedDocument => {
+          item.className = 'fake-confetti';
 
-          const clonedCard =
-            clonedDocument.getElementById(
-              'bingoCard'
-            );
+          item.style.backgroundColor =
+            snowmanColors[
+              Math.floor(
+                Math.random() *
+                snowmanColors.length
+              )
+            ];
 
-          if (
-            !clonedCard
-          ) {
+          item.style.left =
+            Math.random() * 90 + 5 + '%';
 
-            return;
+          item.style.top =
+            Math.random() * 90 + 5 + '%';
 
+          const size =
+            Math.random() * 6 + 6 + 'px';
+
+          item.style.width = size;
+          item.style.height = size;
+
+          if (Math.random() > 0.5) {
+            item.classList.add('circle');
+          } else {
+            item.style.transform =
+              `rotate(${Math.random() * 360}deg)`;
           }
 
-          clonedCard.style.width =
-            '330px';
-
-          clonedCard.style.margin =
-            '0 auto';
-
-          clonedDocument
-            .querySelectorAll(
-              '.cell-link-btn'
-            )
-            .forEach(
-              btn => {
-
-                btn.style.display =
-                  'none';
-
-              }
-            );
-
-          clonedDocument
-            .querySelectorAll(
-              '.cell'
-            )
-            .forEach(
-              cell => {
-
-                cell.style.height =
-                  '94px';
-
-                cell.style.boxSizing =
-                  'border-box';
-
-                if (
-                  cell.classList.contains(
-                    'checked'
-                  )
-                ) {
-
-                  cell.style.border =
-                    '1px solid transparent';
-
-                }
-
-              }
-            );
-
-          if (
-
-            checkedCount === 9 &&
-
-            document.getElementById(
-              'includeConfettiCheck'
-            ).checked
-
-          ) {
-
-            for (
-              let i = 0;
-              i < 65;
-              i++
-            ) {
-
-              const item =
-                clonedDocument.createElement(
-                  'div'
-                );
-
-              item.className =
-                'fake-confetti';
-
-              item.style.backgroundColor =
-                snowmanColors[
-                  Math.floor(
-                    Math.random() *
-                    snowmanColors.length
-                  )
-                ];
-
-              item.style.left =
-                Math.random() *
-                90 + 5 + '%';
-
-              item.style.top =
-                Math.random() *
-                90 + 5 + '%';
-
-              const size =
-                Math.random() *
-                6 + 6 + 'px';
-
-              item.style.width =
-                size;
-
-              item.style.height =
-                size;
-
-              if (
-                Math.random() >
-                0.5
-              ) {
-
-                item.classList.add(
-                  'circle'
-                );
-
-              } else {
-
-                item.style.transform =
-                  `rotate(${
-                    Math.random() *
-                    360
-                  }deg)`;
-
-              }
-
-              clonedCard.appendChild(
-                item
-              );
-
-            }
-
-          }
-
+          clonedCard.appendChild(item);
         }
-
+      }
     }
+  }).then(async canvas => {
+    document.getElementById(
+      'modalImage'
+    ).src =
+      canvas.toDataURL('image/png');
 
-  ).then(
+    const text =
+      `🎧 ${
+        localStorage.getItem(
+          'bingo_title'
+        ) || 'マイ応援BINGO'
+      } 🎧\n` +
+      `【${checkedCount}/9 クリア！】\n` +
+      `マイビンゴで楽しく応援中⛄️✨\n` +
+      `#SnowMan #応援タスクBINGO`;
 
-    canvas => {
+    const pageUrl =
+      window.location.origin +
+      window.location.pathname;
 
-      document.getElementById(
-        'modalImage'
-      ).src =
-        canvas.toDataURL(
-          'image/png'
+    const shareFile =
+      await canvasToShareFile(canvas);
+
+    document.getElementById(
+      'modalShareBtn'
+    ).onclick = () => {
+      window.open(
+        `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(pageUrl)}`,
+        '_blank'
+      );
+    };
+
+    document.getElementById(
+      'modalShareThreadsBtn'
+    ).onclick = () => {
+      window.open(
+        `https://www.threads.net/intent/post?text=${encodeURIComponent(text + '\n' + pageUrl)}`,
+        '_blank'
+      );
+    };
+
+    document.getElementById(
+      'modalNativeShareBtn'
+    ).onclick = async () => {
+      if (!navigator.share) {
+        alert(
+          'このブラウザでは共有機能を使えません。画像を長押しで保存してご利用ください。'
         );
+        return;
+      }
 
-
-      const text =
-        `🎧 ${
-          localStorage.getItem(
-            'bingo_title'
-          ) ||
-          'マイ応援BINGO'
-        } 🎧\n` +
-        `【${checkedCount}/9 クリア！】\n` +
-        `マイビンゴで楽しく応援中⛄️✨\n` +
-        `#SnowMan #応援タスクBINGO`;
-
-
-      document.getElementById(
-        'modalShareBtn'
-      ).onclick = () => {
-
-        window.open(
-
-          `https://twitter.com/intent/tweet?text=${
-            encodeURIComponent(
-              text
-            )
-          }&url=${
-            encodeURIComponent(
-              window.location.origin +
-              window.location.pathname
-            )
-          }`,
-
-          '_blank'
-
-        );
-
+      const data = {
+        title: '応援タスクBINGO',
+        text,
+        url: pageUrl
       };
 
+      if (
+        shareFile &&
+        navigator.canShare &&
+        navigator.canShare({
+          files: [shareFile]
+        })
+      ) {
+        data.files = [shareFile];
+      }
 
-      document.getElementById(
-        'modalShareThreadsBtn'
-      ).onclick = () => {
+      try {
+        await navigator.share(data);
+      } catch (error) {
+        if (!error || error.name !== 'AbortError') {
+          console.error(error);
+        }
+      }
+    };
 
-        window.open(
+    document.getElementById(
+      'modalCopyUrlBtn'
+    ).onclick = async () => {
+      await copyShareUrl(
+        pageUrl,
+        'BINGOのURLをコピーしました！'
+      );
+    };
 
-          `https://www.threads.net/intent/post?text=${
-            encodeURIComponent(
-              text +
-              '\n' +
-              window.location.origin +
-              window.location.pathname
-            )
-          }`,
-
-          '_blank'
-
-        );
-
-      };
-
-
-      document.getElementById(
-        'shareModal'
-      ).style.display =
-        'flex';
-
-    }
-
-  );
-
+    document.getElementById(
+      'shareModal'
+    ).style.display = 'flex';
+  });
 }
-
 
 function closeModal() {
-
   document.getElementById(
     'shareModal'
-  ).style.display =
-    'none';
-
+  ).style.display = 'none';
 }
 
-
 importSharedBoardFromUrl();
-
 initBingo();
-
 refreshAutoDate();
-
 scheduleMidnightRefresh();
-
 </script>
-
 </body>
 </html>
