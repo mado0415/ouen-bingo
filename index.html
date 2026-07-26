@@ -521,6 +521,23 @@
     </button>
 
     <div id="templateArea" class="template-area" style="display:none;">
+
+      <div style="text-align:center;margin:0 0 10px;">
+        <button
+          type="button"
+          class="link-btn"
+          onclick="cancelEditMode()"
+          style="
+            font-size:11px;
+            color:#7fa0c0;
+            text-decoration:none;
+            padding:2px 8px;
+          "
+        >
+          ← 編集をやめて戻る
+        </button>
+      </div>
+
       <p class="edit-help">
         各マスの 🎲 でその1マスだけランダム変更<br>
         🔗 でそのマスから開くURLを設定できます
@@ -618,6 +635,7 @@ let isEditMode = false;
 let currentColor = '#ffb703';
 let currentEmoji = '💪💛';
 let dateRefreshTimer = null;
+let editSnapshot = null;
 
 const templates = {
   default: [
@@ -1147,6 +1165,298 @@ function initBingo() {
   updateCustomTmplButtons();
 }
 
+
+function captureEditSnapshot() {
+  const cells = [];
+
+  for (let i = 0; i < 9; i++) {
+    cells.push({
+      text:
+        localStorage.getItem(`bingo_cell_text_${i}`) ??
+        templates.default[i],
+      link:
+        localStorage.getItem(`bingo_cell_link_${i}`) || ''
+    });
+  }
+
+  return {
+    title:
+      localStorage.getItem('bingo_title') ||
+      '❄️ マイ応援BINGO ❄️',
+    date:
+      localStorage.getItem('bingo_date'),
+    dateMode:
+      localStorage.getItem('bingo_date_mode'),
+    oldDateAuto:
+      localStorage.getItem('bingo_date_is_auto'),
+    name:
+      localStorage.getItem('bingo_name') || '',
+    comment:
+      localStorage.getItem('bingo_comment') || '',
+    cells
+  };
+}
+
+function getSnapshotDateState(snapshot) {
+  let mode = snapshot.dateMode;
+
+  if (!['auto', 'fixed', 'blank'].includes(mode)) {
+    if (snapshot.oldDateAuto === 'true') {
+      mode = 'auto';
+    } else if (snapshot.date === '') {
+      mode = 'blank';
+    } else if (snapshot.date !== null) {
+      mode = 'fixed';
+    } else {
+      mode = 'auto';
+    }
+  }
+
+  let date = snapshot.date;
+
+  if (mode === 'auto' && date === null) {
+    date = getTodayString();
+  }
+
+  if (mode === 'blank') {
+    date = '';
+  }
+
+  return {
+    mode,
+    date: date || ''
+  };
+}
+
+function getCurrentEditState() {
+  const cells = [];
+
+  for (let i = 0; i < 9; i++) {
+    const textarea =
+      document.querySelector(`#cell-${i} textarea`);
+
+    cells.push({
+      text:
+        textarea
+          ? textarea.value.trim()
+          : (
+              localStorage.getItem(`bingo_cell_text_${i}`) ??
+              templates.default[i]
+            ),
+      link:
+        localStorage.getItem(`bingo_cell_link_${i}`) || ''
+    });
+  }
+
+  const titleInput =
+    document.getElementById('titleInput');
+
+  const dateInput =
+    document.getElementById('dateInput');
+
+  const nameInput =
+    document.getElementById('nameInput');
+
+  const commentInput =
+    document.getElementById('commentInput');
+
+  return {
+    title:
+      titleInput
+        ? (
+            titleInput.value.trim() ||
+            '❄️ マイ応援BINGO ❄️'
+          )
+        : (
+            localStorage.getItem('bingo_title') ||
+            '❄️ マイ応援BINGO ❄️'
+          ),
+    date:
+      dateInput
+        ? dateInput.value.trim()
+        : (
+            localStorage.getItem('bingo_date') || ''
+          ),
+    dateMode:
+      dateInput
+        ? dateInput.dataset.dateMode
+        : getDateMode(),
+    name:
+      nameInput
+        ? nameInput.value.trim()
+        : (
+            localStorage.getItem('bingo_name') || ''
+          ),
+    comment:
+      commentInput
+        ? commentInput.value.trim()
+        : (
+            localStorage.getItem('bingo_comment') || ''
+          ),
+    cells
+  };
+}
+
+function hasUnsavedEditChanges() {
+  if (!editSnapshot) {
+    return false;
+  }
+
+  const current =
+    getCurrentEditState();
+
+  const originalDate =
+    getSnapshotDateState(editSnapshot);
+
+  if (
+    current.title !== editSnapshot.title ||
+    current.date !== originalDate.date ||
+    current.dateMode !== originalDate.mode ||
+    current.name !== editSnapshot.name ||
+    current.comment !== editSnapshot.comment
+  ) {
+    return true;
+  }
+
+  for (let i = 0; i < 9; i++) {
+    if (
+      current.cells[i].text !== editSnapshot.cells[i].text ||
+      current.cells[i].link !== editSnapshot.cells[i].link
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function restoreEditSnapshot() {
+  if (!editSnapshot) {
+    return;
+  }
+
+  const snapshot =
+    editSnapshot;
+
+  if (
+    snapshot.title === '❄️ マイ応援BINGO ❄️' &&
+    localStorage.getItem('bingo_title') === null
+  ) {
+    localStorage.removeItem('bingo_title');
+  } else {
+    localStorage.setItem(
+      'bingo_title',
+      snapshot.title
+    );
+  }
+
+  if (snapshot.date === null) {
+    localStorage.removeItem('bingo_date');
+  } else {
+    localStorage.setItem(
+      'bingo_date',
+      snapshot.date
+    );
+  }
+
+  if (snapshot.dateMode === null) {
+    localStorage.removeItem('bingo_date_mode');
+  } else {
+    localStorage.setItem(
+      'bingo_date_mode',
+      snapshot.dateMode
+    );
+  }
+
+  if (snapshot.oldDateAuto === null) {
+    localStorage.removeItem('bingo_date_is_auto');
+  } else {
+    localStorage.setItem(
+      'bingo_date_is_auto',
+      snapshot.oldDateAuto
+    );
+  }
+
+  localStorage.setItem(
+    'bingo_name',
+    snapshot.name
+  );
+
+  localStorage.setItem(
+    'bingo_comment',
+    snapshot.comment
+  );
+
+  for (let i = 0; i < 9; i++) {
+    localStorage.setItem(
+      `bingo_cell_text_${i}`,
+      snapshot.cells[i].text
+    );
+
+    if (snapshot.cells[i].link) {
+      localStorage.setItem(
+        `bingo_cell_link_${i}`,
+        snapshot.cells[i].link
+      );
+    } else {
+      localStorage.removeItem(
+        `bingo_cell_link_${i}`
+      );
+    }
+  }
+}
+
+function cancelEditMode() {
+  if (!isEditMode) {
+    return;
+  }
+
+  if (
+    hasUnsavedEditChanges() &&
+    !confirm('編集中の変更を破棄して戻りますか？')
+  ) {
+    return;
+  }
+
+  restoreEditSnapshot();
+
+  isEditMode = false;
+  editSnapshot = null;
+
+  const grid =
+    document.getElementById('grid');
+
+  const editBtn =
+    document.getElementById('editBtn');
+
+  const shareBtn =
+    document.getElementById('shareBtn');
+
+  const boardShareBtn =
+    document.getElementById('boardShareBtn');
+
+  const templateArea =
+    document.getElementById('templateArea');
+
+  grid.classList.remove('edit-mode');
+
+  editBtn.innerText =
+    '✏️ マス目・タイトルを編集する';
+
+  editBtn.style.background =
+    '#ffffff';
+
+  editBtn.style.color =
+    '#5b799e';
+
+  shareBtn.disabled = false;
+  boardShareBtn.disabled = false;
+  templateArea.style.display = 'none';
+
+  initBingo();
+  scheduleMidnightRefresh();
+}
+
 function toggleEditMode() {
   const grid = document.getElementById('grid');
   const editBtn = document.getElementById('editBtn');
@@ -1158,6 +1468,10 @@ function toggleEditMode() {
   const templateArea = document.getElementById('templateArea');
 
   if (!isEditMode) {
+    if (!editSnapshot) {
+      editSnapshot = captureEditSnapshot();
+    }
+
     isEditMode = true;
     grid.classList.add('edit-mode');
 
@@ -1285,6 +1599,8 @@ function toggleEditMode() {
       textarea ? textarea.value.trim() : templates.default[i]
     );
   }
+
+  editSnapshot = null;
 
   initBingo();
   scheduleMidnightRefresh();
