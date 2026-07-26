@@ -520,18 +520,24 @@
       ✏️ マス目・タイトルを編集する
     </button>
 
-    <div id="cancelEditWrap" style="display:none;text-align:center;margin:-4px 0 12px;">
-      <button
-        type="button"
-        class="link-btn"
-        onclick="cancelEditMode()"
-        style="font-size:11px;text-decoration:none;"
-      >
-        ← 編集をやめて戻る
-      </button>
-    </div>
-
     <div id="templateArea" class="template-area" style="display:none;">
+
+      <div style="text-align:center;margin:0 0 10px;">
+        <button
+          type="button"
+          class="link-btn"
+          onclick="cancelEditMode()"
+          style="
+            font-size:11px;
+            color:#7fa0c0;
+            text-decoration:none;
+            padding:2px 8px;
+          "
+        >
+          ← 編集をやめて戻る
+        </button>
+      </div>
+
       <p class="edit-help">
         各マスの 🎲 でその1マスだけランダム変更<br>
         🔗 でそのマスから開くURLを設定できます
@@ -1432,9 +1438,6 @@ function cancelEditMode() {
   const templateArea =
     document.getElementById('templateArea');
 
-  const cancelEditWrap =
-    document.getElementById('cancelEditWrap');
-
   grid.classList.remove('edit-mode');
 
   editBtn.innerText =
@@ -1450,10 +1453,6 @@ function cancelEditMode() {
   boardShareBtn.disabled = false;
   templateArea.style.display = 'none';
 
-  if (cancelEditWrap) {
-    cancelEditWrap.style.display = 'none';
-  }
-
   initBingo();
   scheduleMidnightRefresh();
 }
@@ -1467,9 +1466,6 @@ function toggleEditMode() {
   const commentElement = document.getElementById('metaComment');
   const metaContainer = document.querySelector('.card-meta');
   const templateArea = document.getElementById('templateArea');
-
-  const cancelEditWrap =
-    document.getElementById('cancelEditWrap');
 
   if (!isEditMode) {
     if (!editSnapshot) {
@@ -1486,10 +1482,6 @@ function toggleEditMode() {
     shareBtn.disabled = true;
     boardShareBtn.disabled = true;
     templateArea.style.display = 'block';
-
-    if (cancelEditWrap) {
-      cancelEditWrap.style.display = 'block';
-    }
 
     titleElement.innerHTML = `<input type="text" id="titleInput" maxlength="25">`;
     document.getElementById('titleInput').value =
@@ -1561,10 +1553,6 @@ function toggleEditMode() {
   shareBtn.disabled = false;
   boardShareBtn.disabled = false;
   templateArea.style.display = 'none';
-
-  if (cancelEditWrap) {
-    cancelEditWrap.style.display = 'none';
-  }
 
   localStorage.setItem(
     'bingo_title',
