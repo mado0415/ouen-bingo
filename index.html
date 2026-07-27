@@ -950,9 +950,21 @@ function saveMyTemplate(slot) {
     links.push(getCellLink(i));
   }
 
+  const title =
+    (
+      document.getElementById('titleInput')?.value.trim() ||
+      localStorage.getItem('bingo_title') ||
+      '❄️ マイ応援BINGO ❄️'
+    );
+
   localStorage.setItem(
     `bingo_my_tmpl_${slot}`,
-    JSON.stringify({ version: 2, texts, links })
+    JSON.stringify({
+      version: 3,
+      title,
+      texts,
+      links
+    })
   );
 
   saveSlotName(slot);
@@ -968,6 +980,18 @@ function loadMyTemplate(slot) {
     const parsed = JSON.parse(saved);
     const texts = Array.isArray(parsed) ? parsed : (parsed.texts || []);
     const links = Array.isArray(parsed) ? [] : (parsed.links || []);
+    const savedTitle =
+      !Array.isArray(parsed) &&
+      typeof parsed.title === 'string'
+        ? parsed.title.trim()
+        : '';
+
+    if (savedTitle) {
+      localStorage.setItem(
+        'bingo_title',
+        savedTitle.slice(0, 25)
+      );
+    }
 
     for (let i = 0; i < 9; i++) {
       const text = texts[i] !== undefined ? texts[i] : '';
