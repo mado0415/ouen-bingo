@@ -447,6 +447,47 @@
       margin-top: 7px;
     }
 
+    /* 報告・シェア：Chromeなど高さが狭い画面でも収まりやすく */
+    #shareModal .modal-content {
+      max-width: 310px;
+      max-height: 92vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 14px;
+    }
+
+    #shareModal .modal-image-wrapper {
+      width: 76%;
+      margin: 0 auto;
+      padding: 3px;
+    }
+
+    #shareModal .modal-image-wrapper img {
+      max-height: 38vh;
+    }
+
+    #shareModal .modal-content h3 {
+      margin-bottom: 6px;
+    }
+
+    #shareModal .modal-buttons {
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    #shareModal .share-save-note {
+      margin-top: 4px !important;
+      font-size: 10px !important;
+      line-height: 1.4 !important;
+    }
+
+    #shareModal .share-warning {
+      margin: 6px 2px 2px !important;
+      font-size: 10.5px !important;
+      line-height: 1.45 !important;
+      padding: 0 2px !important;
+    }
+
     .modal-image-wrapper {
       background: #f1f5f9;
       border-radius: 12px;
@@ -634,11 +675,11 @@
       <img id="modalImage" src="" alt="BINGOカード画像">
     </div>
 
-    <p style="font-size:10.5px;color:#7fa0c0;margin-top:6px;text-align:center;line-height:1.5;padding:0 4px;">
+    <p style="font-size:10.5px;color:#7fa0c0;margin-top:6px;text-align:center;line-height:1.5;padding:0 4px;" class="share-save-note">
       画像は長押しで保存できます
     </p>
 
-    <p style="font-size:11px;color:#ef4444;margin:8px 4px 2px;text-align:center;font-weight:700;line-height:1.55;padding:0 4px;">
+    <p style="font-size:11px;color:#ef4444;margin:8px 4px 2px;text-align:center;font-weight:700;line-height:1.55;padding:0 4px;" class="share-warning">
       ⚠️ X・Threadsへの投稿には画像は自動で付きません。<br>
       上の画像を保存して、投稿画面で添付してください。
     </p>
