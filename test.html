@@ -1736,6 +1736,8 @@ function getBoardData() {
     title:
       localStorage.getItem('bingo_title') ||
       '❄️ マイ応援BINGO ❄️',
+    comment:
+      localStorage.getItem('bingo_comment') || '',
     themeColor:
       localStorage.getItem('bingo_theme_color') ||
       '#ffb703',
@@ -2123,9 +2125,9 @@ function importSharedBoardFromUrl() {
 
     const ok = confirm(
       '共有されたBINGO盤面を取り込みますか？\n\n' +
-      '・現在の9マスとリンクは置き換わります\n' +
+      '・カード名・一言コメント・9マス・リンクが反映されます\n' +
       '・チェック状態はリセットされます\n' +
-      '・あなたの名前・日付・コメントはそのまま残ります'
+      '・あなたの名前・日付はそのまま残ります'
     );
 
     if (ok) {
@@ -2134,6 +2136,13 @@ function importSharedBoardFromUrl() {
         typeof data.title === 'string'
           ? data.title.slice(0, 25)
           : '❄️ マイ応援BINGO ❄️'
+      );
+
+      localStorage.setItem(
+        'bingo_comment',
+        typeof data.comment === 'string'
+          ? data.comment.slice(0, 35)
+          : ''
       );
 
       const color =
