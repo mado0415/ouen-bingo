@@ -424,6 +424,29 @@
       color: #1f2937;
     }
 
+    .board-share-content {
+      max-width: 310px;
+      max-height: 92vh;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      padding: 12px 14px;
+    }
+
+    .board-share-content .modal-image-wrapper {
+      width: 76%;
+      margin: 0 auto;
+      padding: 3px;
+    }
+
+    .board-share-content .modal-image-wrapper img {
+      max-height: 38vh;
+    }
+
+    .board-share-content .modal-buttons {
+      gap: 5px;
+      margin-top: 7px;
+    }
+
     .modal-image-wrapper {
       background: #f1f5f9;
       border-radius: 12px;
@@ -1844,11 +1867,11 @@ function showBoardShareMenu(
 
         <p
           style="
-            font-size:10.5px;
+            font-size:10px;
             color:#7fa0c0;
-            margin-top:6px;
+            margin-top:4px;
             text-align:center;
-            line-height:1.5;
+            line-height:1.4;
             padding:0 4px;
           "
         >
@@ -1857,17 +1880,17 @@ function showBoardShareMenu(
 
         <p
           style="
-            font-size:11px;
+            font-size:10.5px;
             color:#ef4444;
-            margin:8px 4px 2px;
+            margin:6px 2px 2px;
             text-align:center;
             font-weight:700;
-            line-height:1.55;
-            padding:0 4px;
+            line-height:1.45;
+            padding:0 2px;
           "
         >
-          ⚠️ X・Threadsへの投稿には画像は自動で付きません。<br>
-          上の画像を保存して、投稿画面で添付してください。
+          ⚠️ X・Threadsでは画像は自動添付されません。<br>
+          保存した画像を投稿画面で添付してください。
         </p>
       `
       : `
@@ -1885,7 +1908,7 @@ function showBoardShareMenu(
 
   modal.innerHTML = `
     <div
-      class="modal-content"
+      class="modal-content board-share-content"
       onclick="event.stopPropagation()"
     >
       <h3>この盤面をシェア</h3>
@@ -1894,13 +1917,13 @@ function showBoardShareMenu(
 
       <p
         style="
-          font-size:11px;
+          font-size:10.5px;
           color:#607d9b;
-          line-height:1.6;
-          margin:8px 4px 10px;
+          line-height:1.5;
+          margin:6px 4px 8px;
         "
       >
-        リンクを開いた人は同じ盤面を自分のBINGOに取り込めます♡
+        URLから同じ盤面を取り込めます♡
       </p>
 
       <div class="modal-buttons">
