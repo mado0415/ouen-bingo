@@ -1708,78 +1708,312 @@ async function shareBoard() {
     `リンクから同じ盤面を取り込めます！\n` +
     `#SnowMan #応援タスクBINGO`;
 
-  showBoardShareMenu(text, url);
+  const card =
+    document.getElementById('bingoCard');
+
+  try {
+    const canvas = await html2canvas(card, {
+      backgroundColor: '#ffffff',
+      scale: 2.5,
+      logging: false,
+      useCORS: true,
+      allowTaint: true,
+
+      onclone: clonedDocument => {
+        const clonedCard =
+          clonedDocument.getElementById('bingoCard');
+
+        if (!clonedCard) return;
+
+        clonedCard.style.width = '330px';
+        clonedCard.style.margin = '0 auto';
+
+        /*
+         * 盤面共有は「テンプレートの見本」なので
+         * チェック状況は画像に含めない。
+         */
+        clonedDocument
+          .querySelectorAll('.cell')
+          .forEach(cell => {
+            cell.classList.remove('checked');
+            cell.style.height = '94px';
+            cell.style.boxSizing = 'border-box';
+            cell.style.background = '#ffffff';
+            cell.style.color = '#2b4260';
+            cell.style.border = '1px solid #eef4f9';
+          });
+
+        /*
+         * 名前・日付・コメントは盤面データとして共有しないため、
+         * 見本画像にも含めない。
+         */
+        const meta =
+          clonedDocument.querySelector('.card-meta');
+
+        const comment =
+          clonedDocument.getElementById('metaComment');
+
+        const clonedTitle =
+          clonedDocument.getElementById('bingoTitle');
+
+        if (meta) {
+          meta.style.display = 'none';
+        }
+
+        if (comment) {
+          comment.style.display = 'none';
+        }
+
+        if (clonedTitle) {
+          clonedTitle.style.marginBottom = '16px';
+        }
+
+        /*
+         * 🔗マークは残す。
+         * 画像だけ見てもリンク付きのマスだと分かるようにする。
+         */
+        clonedDocument
+          .querySelectorAll('.cell-link-btn')
+          .forEach(btn => {
+            btn.style.display = 'flex';
+          });
+      }
+    });
+
+    const shareFile =
+      await canvasToShareFile(canvas);
+
+    showBoardShareMenu(
+      text,
+      url,
+      canvas.toDataURL('image/png'),
+      shareFile
+    );
+
+  } catch (error) {
+    console.error(error);
+
+    /*
+     * 万一画像生成だけ失敗しても、
+     * 盤面URL自体は共有できるようにする。
+     */
+    showBoardShareMenu(
+      text,
+      url,
+      '',
+      null
+    );
+  }
 }
 
-function showBoardShareMenu(text, url) {
-  const existing = document.getElementById('boardShareModal');
+function showBoardShareMenu(
+  text,
+  url,
+  imageDataUrl,
+  shareFile
+) {
+  const existing =
+    document.getElementById('boardShareModal');
 
   if (existing) {
     existing.remove();
   }
 
-  const modal = document.createElement('div');
+  const modal =
+    document.createElement('div');
 
-  modal.id = 'boardShareModal';
-  modal.className = 'modal';
-  modal.style.display = 'flex';
+  modal.id =
+    'boardShareModal';
+
+  modal.className =
+    'modal';
+
+  modal.style.display =
+    'flex';
+
+  const imageBlock =
+    imageDataUrl
+      ? `
+        <div class="modal-image-wrapper">
+          <img
+            id="boardShareImage"
+            src="${imageDataUrl}"
+            alt="共有するBINGO盤面画像"
+          >
+        </div>
+
+        <p
+          style="
+            font-size:10.5px;
+            color:#7fa0c0;
+            margin-top:6px;
+            text-align:center;
+            line-height:1.5;
+            padding:0 4px;
+          "
+        >
+          画像は長押しで保存できます
+        </p>
+
+        <p
+          style="
+            font-size:11px;
+            color:#ef4444;
+            margin:8px 4px 2px;
+            text-align:center;
+            font-weight:700;
+            line-height:1.55;
+            padding:0 4px;
+          "
+        >
+          ⚠️ X・Threadsへの投稿には画像は自動で付きません。<br>
+          上の画像を保存して、投稿画面で添付してください。
+        </p>
+      `
+      : `
+        <p
+          style="
+            font-size:11px;
+            color:#ef4444;
+            line-height:1.6;
+            margin:8px 4px 10px;
+          "
+        >
+          画像の生成に失敗しましたが、盤面URLは共有できます。
+        </p>
+      `;
 
   modal.innerHTML = `
-    <div class="modal-content" onclick="event.stopPropagation()">
+    <div
+      class="modal-content"
+      onclick="event.stopPropagation()"
+    >
       <h3>この盤面をシェア</h3>
 
-      <p style="font-size:11px;color:#607d9b;line-height:1.6;margin:8px 4px 12px;">
+      ${imageBlock}
+
+      <p
+        style="
+          font-size:11px;
+          color:#607d9b;
+          line-height:1.6;
+          margin:8px 4px 10px;
+        "
+      >
         リンクを開いた人は同じ盤面を自分のBINGOに取り込めます♡
       </p>
 
       <div class="modal-buttons">
-        <button id="boardShareX" class="btn btn-modal-x">𝕏 に投稿する</button>
-        <button id="boardShareThreads" class="btn btn-modal-threads">Threadsに投稿</button>
-        <button id="boardNativeShare" class="btn btn-main" style="margin:0;">その他のアプリで共有</button>
-        <button id="boardCopyUrl" class="btn btn-main" style="margin:0;">🔗 URLをコピー</button>
-        <button class="btn btn-modal-close" onclick="closeBoardShareModal()">閉じる</button>
+        <button
+          id="boardShareX"
+          class="btn btn-modal-x"
+        >
+          𝕏 に投稿する
+        </button>
+
+        <button
+          id="boardShareThreads"
+          class="btn btn-modal-threads"
+        >
+          Threadsに投稿
+        </button>
+
+        <button
+          id="boardNativeShare"
+          class="btn btn-main"
+          style="margin:0;"
+        >
+          その他のアプリで共有
+        </button>
+
+        <button
+          id="boardCopyUrl"
+          class="btn btn-main"
+          style="margin:0;"
+        >
+          🔗 URLをコピー
+        </button>
+
+        <button
+          class="btn btn-modal-close"
+          onclick="closeBoardShareModal()"
+        >
+          閉じる
+        </button>
       </div>
     </div>
   `;
 
-  modal.onclick = closeBoardShareModal;
-  document.body.appendChild(modal);
+  modal.onclick =
+    closeBoardShareModal;
 
-  document.getElementById('boardShareX').onclick = () => {
+  document.body.appendChild(
+    modal
+  );
+
+  document.getElementById(
+    'boardShareX'
+  ).onclick = () => {
     window.open(
       `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`,
       '_blank'
     );
   };
 
-  document.getElementById('boardShareThreads').onclick = () => {
+  document.getElementById(
+    'boardShareThreads'
+  ).onclick = () => {
     window.open(
       `https://www.threads.net/intent/post?text=${encodeURIComponent(text + '\n' + url)}`,
       '_blank'
     );
   };
 
-  document.getElementById('boardNativeShare').onclick = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: '応援タスクBINGO',
-          text,
-          url
-        });
-      } catch (error) {
-        if (!error || error.name !== 'AbortError') {
-          console.error(error);
-        }
-      }
+  document.getElementById(
+    'boardNativeShare'
+  ).onclick = async () => {
+    if (!navigator.share) {
+      alert(
+        'このブラウザでは共有機能を使えません。画像を長押しで保存するか、URLコピーをご利用ください。'
+      );
       return;
     }
 
-    alert('このブラウザでは共有機能を使えません。URLコピーをご利用ください。');
+    const data = {
+      title: '応援タスクBINGO',
+      text,
+      url
+    };
+
+    if (
+      shareFile &&
+      navigator.canShare &&
+      navigator.canShare({
+        files: [shareFile]
+      })
+    ) {
+      data.files = [shareFile];
+    }
+
+    try {
+      await navigator.share(data);
+    } catch (error) {
+      if (
+        !error ||
+        error.name !== 'AbortError'
+      ) {
+        console.error(error);
+      }
+    }
   };
 
-  document.getElementById('boardCopyUrl').onclick = async () => {
-    await copyShareUrl(url, '盤面URLをコピーしました！');
+  document.getElementById(
+    'boardCopyUrl'
+  ).onclick = async () => {
+    await copyShareUrl(
+      url,
+      '盤面URLをコピーしました！'
+    );
   };
 }
 
